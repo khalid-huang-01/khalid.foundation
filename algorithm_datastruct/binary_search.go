@@ -56,7 +56,7 @@ func testWithoutRecursion() {
 func searchLowBoundary(nums []int, target int) int {
 	low := 0
 	high := len(nums)
-	for low < high {
+	for low <= high {
 		middle := low + (high-low)/2
 		if target == nums[middle] && (middle == 0 || nums[middle-1] != nums[middle]) {
 			return middle
@@ -70,12 +70,12 @@ func searchLowBoundary(nums []int, target int) int {
 	return -1
 }
 
-func searchHighBoundary() {
+func searchHighBoundary(nums []int, target int) int {
 	low := 0
 	high := len(nums)
-	for low < high {
+	for low <= high {
 		middle := low + (high-low)/2
-		if target == nums[middle] && (middle == len(nums) || nums[middle+1] != nums[middle]) {
+		if target == nums[middle] && (middle == len(nums)-1 || nums[middle+1] != nums[middle]) {
 			return middle
 		}
 		if target < nums[middle] {
