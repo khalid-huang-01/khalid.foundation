@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 // 每次都把最大的数据冒到坐标最大的位置
 func bubbleSort(data []int) {
@@ -32,10 +35,94 @@ func insertSort(data []int) {
 	}
 }
 
+func _mergeSort(data []int, low int, high int) {
+	//合法性检查和终止条件
+	if low >= high {
+		return
+	}
+	//分解，归并小解答案
+	middle := low + (high-low)/2
+	_mergeSort(data, low, middle)
+	_mergeSort(data, middle+1, high)
+	merge(data, low, middle, high)
+}
+
+//赋值的手法高明
+func merge(data []int, low int, middle int, high int) {
+	tmp := make([]int, len(data))
+	copy(tmp, data)
+	k, i, j := low, low, middle+1
+	//k代表需要为当data赋值的下标
+	for k <= high {
+		if i > middle {
+			data[k] = tmp[j]
+			j++
+		} else if j > high {
+			data[k] = tmp[i]
+			i++
+		} else if tmp[i] > tmp[j] {
+			data[k] = tmp[j]
+			j++
+		} else {
+			data[k] = tmp[i]
+			i++
+		}
+		k++
+	}
+}
+
+func mergeSort(data []int) {
+	low := 0
+	high := len(data) - 1
+	_mergeSort(data, low, high)
+}
+
+func _quickSort(data []int, low int, high int) {
+	//终止条件
+	if low >= high {
+		return
+	}
+	//划分
+	index := partition(data, low, high)
+
+	_quickSort(data, low, index-1)
+	_quickSort(data, index+1, high)
+
+}
+
+func partition(data []int, low int, high int) int {
+	//随机选择一个数做为基准值，并与high位置交互 => high作为一个基准值了
+	swap(data, low+rand.Intn(high-low+1), high)
+
+	//换位,双指针
+	var i, j int
+	for i, j = low, low; j < high; j++ {
+		if data[j] < data[high] {
+			swap(data, i, j)
+			i++
+		}
+	}
+
+	swap(data, i, high)
+	return i
+
+}
+
+func swap(data []int, i int, j int) {
+	data[i], data[j] = data[j], data[i]
+}
+
+func quickSort(data []int) {
+	low := 0
+	high := len(data) - 1
+	_quickSort(data, low, high)
+}
+
 func main() {
 	data := []int{4, 1, 2, 6, 8, 3}
 	// bubbleSort(data)
-	insertSort(data)
+	// insertSort(data)
+	// mergeSort(data)
+	quickSort(data)
 	fmt.Println(data)
-
 }
