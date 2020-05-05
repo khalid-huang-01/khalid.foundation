@@ -26,3 +26,26 @@ func inorder(root *TreeNode, result *[]int) {
 	*result = append(*result, root.Val)
 	inorder(root.Right, result)
 }
+
+// 100. Same Tree
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+func isSameTree(p *TreeNode, q *TreeNode) bool {
+	if p == nil && q == nil {
+		return true
+	}
+	if p == nil || q == nil {
+		return false
+	}
+	//前序判断
+	if p.Val == q.Val && isSameTree(p.Left, q.Left) && isSameTree(p.Right, q.Right) {
+		return true
+	}
+	return false
+}
