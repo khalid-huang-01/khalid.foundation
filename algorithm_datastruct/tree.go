@@ -80,6 +80,7 @@ func travel(root *TreeNode, result *int, flag int) {
  */
 // 在层搜索上，可以使用广度搜索+nil的方法，也可以使用记录层级的方式
 //  广度搜索
+// 学习下https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/solution/ncha-shu-de-ceng-xu-bian-li-by-leetcode/
 func levelOrder(root *Node) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
@@ -104,4 +105,72 @@ func levelOrder(root *Node) [][]int {
 		result = append(result, tmp)
 	}
 	return result
+}
+
+// leetcode 105
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
+//  遍历前序建立根节点，利用中序建立关系
+var pCurIdx int
+
+func buildTree(preorder []int, inorder []int) *TreeNode {
+	pCurIdx = 0
+	return helper(preorder, inorder, 0, len(inorder)-1)
+}
+
+func helper(preorder []int, inorder []int, iStartIdx int, iEndIdx int) *TreeNode {
+	if iStartIdx > iEndIdx {
+		return nil
+	}
+
+	root := &TreeNode{Val: preorder[pCurIdx]}
+	pCurIdx++
+
+	//切分左树和右树
+	var idx int
+	for idx = iStartIdx; idx <= iEndIdx; idx++ {
+		if inorder[idx] == root.Val {
+			break
+		}
+	}
+
+	root.Left = helper(preorder, inorder, iStartIdx, idx-1)
+	root.Right = helper(preorder, inorder, idx+1, iEndIdx)
+
+	return root
+}
+
+// 根据中序和后序重建树
+// 核心在于后序的倒序就是中右左，与前序的中左右是差不多的
+var pCurIdx int
+
+func buildTree(inorder []int, postorder []int) *TreeNode {
+	pCurIndex = len(postorder) - 1
+	return helper(inorder, postorder, 0, len(inorder)-1)
+}
+
+func helper(inorder []int, postorder []int, iStartIdx int, iEndIdx int) {
+	if iStartIdx > iEndIdx {
+		return nil
+	}
+	//根节点
+	root := &TreeNode{Val: postorder[pCurIdx]}
+	pCurIdx--
+
+	//查找root的位置
+	var idx int
+	for idx = iStartIdx; idx <= iEndIdx; i++ {
+		if inorder[idx] == root.Val {
+			break
+		}
+	}
+	//右树
+	root.Right = helper(inorder, postorer, idx+1, iEndIdx)
+	root.Left = helper(inorder, postorder, iStartIdx, idx-1)
 }

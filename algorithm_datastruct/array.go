@@ -29,16 +29,27 @@ func subarraysDivByK(A []int, K int) int {
 func subarraysDivByK(A []int, K int) int {
 	remainMap := make(map[int]int, 0)
 	var sum, remain, result int
+	remainMap[0] = 1 //s[-1] = 0
 	for i := 0; i < len(A); i++ {
 		sum += A[i]
-		remainMap[0] = 1
-		// remain = sum % K
 		remain = ((sum % K) + K) % K
 		if val, ok := remainMap[remain]; ok {
 			result += val
-			remainMap[remain] = val + 1
 		}
-		remainMap[remain] = 1
+		remainMap[remain] = remainMap[remain] + 1
 	}
 	return result
+}
+
+// 在数组的处理中，一般都需要用于map来缩小运算时间
+func majorityElement(nums []int) int {
+	count := make(map[int]int, 0)
+	majority := len(nums) / 2
+	for _, val := range nums {
+		count[val] = count[val] + 1
+		if count[val] > n {
+			return v
+		}
+	}
+	return -1
 }
