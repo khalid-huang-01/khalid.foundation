@@ -39,13 +39,14 @@ func cloneGraph(node *Node) *Node {
 
 // leetcode 785
 // 二部图判断，使用bfs为基础，添加着色法
-// 可以是有分划的，孤岛
+// 可以是有分划的，孤岛, 比方说1与3相连，2与4相连，其实也是符合的
 func isBipartitle(graph [][]int) bool {
 	// 变量初始化
 	nums := len(graph)
 	color := make([]int, nums) //-1 红色，0 未着色，1 蓝色
 	q := make([]int, 0)        //队列
-	for index := range graph { //处理分划与孤岛的情况
+	for index := range graph { //处理分划与孤岛的情况，也就是1只与3连接，2只与4连接
+		// 表明已经属于一个区域，不用再区分了
 		if color[index] != 0 {
 			continue
 		}

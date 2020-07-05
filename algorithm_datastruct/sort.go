@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 )
 
 // 每次都把最大的数据冒到坐标最大的位置
@@ -96,6 +97,8 @@ func partition(data []int, low int, high int) int {
 
 	//换位,双指针
 	var i, j int
+	// i是第一个比基准值大的数
+	// j是用于判断的数
 	for i, j = low, low; j < high; j++ {
 		if data[j] < data[high] {
 			swap(data, i, j)
@@ -118,11 +121,46 @@ func quickSort(data []int) {
 	_quickSort(data, low, high)
 }
 
+// 堆排序：https://www.cnblogs.com/xingyunshizhe/p/11311754.html
+
+// 使用内置的排序算法 https://www.jianshu.com/p/4bf3c94a15a6
+type person struct {
+	Name string
+	Age  int
+}
+
 func main() {
-	data := []int{4, 1, 2, 6, 8, 3}
+	// data := []int{4, 1, 2, 6, 8, 3}
 	// bubbleSort(data)
 	// insertSort(data)
 	// mergeSort(data)
-	quickSort(data)
-	fmt.Println(data)
+	// quickSort(data)
+	// fmt.Println(data)
+	a := []person{
+		{
+			Name: "AAA",
+			Age:  55,
+		},
+		{
+			Name: "BBB",
+			Age:  22,
+		},
+		{
+			Name: "CCC",
+			Age:  0,
+		},
+		{
+			Name: "DDD",
+			Age:  22,
+		},
+		{
+			Name: "EEE",
+			Age:  11,
+		},
+	}
+	sort.Slice(a, func(i, j int) bool {
+		return a[i].Age < a[j].Age
+	})
+	fmt.Println(a)
+
 }

@@ -148,14 +148,22 @@ func helper(preorder []int, inorder []int, iStartIdx int, iEndIdx int) *TreeNode
 
 // 根据中序和后序重建树
 // 核心在于后序的倒序就是中右左，与前序的中左右是差不多的
+/**
+ * Definition for a binary tree node.
+ * type TreeNode struct {
+ *     Val int
+ *     Left *TreeNode
+ *     Right *TreeNode
+ * }
+ */
 var pCurIdx int
 
 func buildTree(inorder []int, postorder []int) *TreeNode {
-	pCurIndex = len(postorder) - 1
+	pCurIdx = len(postorder) - 1
 	return helper(inorder, postorder, 0, len(inorder)-1)
 }
 
-func helper(inorder []int, postorder []int, iStartIdx int, iEndIdx int) {
+func helper(inorder []int, postorder []int, iStartIdx int, iEndIdx int) *TreeNode {
 	if iStartIdx > iEndIdx {
 		return nil
 	}
@@ -165,12 +173,62 @@ func helper(inorder []int, postorder []int, iStartIdx int, iEndIdx int) {
 
 	//查找root的位置
 	var idx int
-	for idx = iStartIdx; idx <= iEndIdx; i++ {
+	for idx = iStartIdx; idx <= iEndIdx; idx++ {
 		if inorder[idx] == root.Val {
 			break
 		}
 	}
 	//右树
-	root.Right = helper(inorder, postorer, idx+1, iEndIdx)
+	root.Right = helper(inorder, postorder, idx+1, iEndIdx)
 	root.Left = helper(inorder, postorder, iStartIdx, idx-1)
+
+	return root
+}
+
+//  tries 820
+//  s
+func minimumLengthEncoding(words []string) int {
+	nodes := make(map[*TrieNode]int, 0) // 记录每个树叶子结点及其对应的words里面的下标
+	// 输入每个words，构建前缀树
+	// 根结点
+	root := NewTrieNode()
+	for index, word := range words {
+		bytes := []byte(word)
+		cur := root
+		// 反向插入
+		for i := len(bytes) - 1; i >= 0; i-- {
+			cur = cur.getOrInsert(bytes[i])
+		}
+		// 记录单词和对应的下标，方便后面记录
+		nodes[cur] = index
+	}
+	// 统计叶子中不会成为前缀的,也就是count为0
+	var result int
+	for key, value := range nodes {
+		if key.count == 0 {
+			result = result + len(words[value]) + 1
+		}
+	}
+	return result
+}
+
+type TrieNode struct {
+	children []*TrieNode // 为26个字母，如果为空的话，表示没有这个字母
+	// isEnd bool
+	count int // 用count来代表end，方便处理
+}
+
+func NewTrieNode() *TrieNode {
+	return &TrieNode{
+		count:    0,
+		children: make([]*TrieNode, 26),
+	}
+}
+
+func (t *TrieNode) getOrInsert(char byte) *TrieNode {
+	if t.children[char-'a'] == nil {
+		t.children[char-'a'] = NewTrieNode()
+		t.count++
+	}
+	return t.children[char-'a']
 }

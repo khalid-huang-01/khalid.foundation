@@ -1,3 +1,4 @@
+package main
 // subarray
 // leetcode 974
 // 暴力直接找, 接近O(n^2)
@@ -24,7 +25,7 @@ func subarraysDivByK(A []int, K int) int {
 //通过规律, O(n)
 // % is remainder operator in C++ (and not a proper modulus). To get a positive number, we have to add by the base: a mod b = ((a % b) + b) % b.
 // Look for anytime S[j] % k == S[i-1] % k and you know everything in between [i...j] must be divisible by K!!
-// 上面的公式无法适用于i == 0的时候，所以需要额外需要判断有s[j] % K == 0，但是为了统一算法，我们可以定下s[-1] = 0，这时是可以符合条件的
+// 上面的公式无法适用于模为0的时候，模为0的时候，自身就是一个结果了，所以需要额外需要判断有s[j] % K == 0，但是为了统一算法，我们可以定下s[-1] = 0，这时是可以符合条件的
 // https://leetcode.com/problems/subarray-sums-divisible-by-k/discuss/584722/C%2B%2B-O(N)-Explained
 func subarraysDivByK(A []int, K int) int {
 	remainMap := make(map[int]int, 0)

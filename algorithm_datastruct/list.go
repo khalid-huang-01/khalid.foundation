@@ -1,9 +1,12 @@
 //leetcode 25
+package main
 
 type ListNode struct {
 	Val  int
 	Next *ListNode
 }
+
+
 
 //快慢指针+递归
 /**
