@@ -1,10 +1,14 @@
-import "fmt"
+package main
+
+import (
+	"fmt"
+)
 
 // bfs
 // leetcode 133
 type Node struct {
-	Val        int
-	Neightbors []*Node
+	Val       int
+	Neighbors []*Node
 }
 
 func cloneGraph(node *Node) *Node {
@@ -153,9 +157,9 @@ func getDistance(graph [][]int, cost [][]int, from int, target int) int {
 	return -1
 }
 
-//距离表下标为i的值j表示到当前为止从K到i的距离为j
+// 距离表下标为i的值j表示到当前为止从K到i的距离为j
 // 使用距离表，距离表的更新依赖于与邻居的距离，用邻居的距离更新完成之后，就可以把邻居放入队列中
-func networkDelayTime(times [][]int, N int, K int) int {
+func networkDelayTime_2(times [][]int, N int, K int) int {
 	graph := make([][]int, N+1)
 	cost := make([][]int, N+1)
 	for _, value := range times {
@@ -163,7 +167,7 @@ func networkDelayTime(times [][]int, N int, K int) int {
 		cost[value[0]] = append(cost[value[0]], value[2])
 	}
 
-	q := make([]int)
+	q := make([]int, 0)
 	distance := make([]int, N+1)
 	for i := 1; i <= N; i++ {
 		distance[i] = -1
@@ -177,8 +181,8 @@ func networkDelayTime(times [][]int, N int, K int) int {
 		q = q[1:]
 
 		//根据当前邻居的信息+当前距离表的信息来更新距离表
-		for index, neighbor := graph[cur] {
-			if distance[neighbor] == -1 || distance[neighbor] > distance[cur] + cost[cur][index] {
+		for index, neighbor := range graph[cur] {
+			if distance[neighbor] == -1 || distance[neighbor] > distance[cur]+cost[cur][index] {
 				//distance[cur] : K -> cur 
 				//cost[cur][neighbor]: cur->neighbor
 				distance[neighbor] = distance[cur] + cost[cur][index]
@@ -193,4 +197,103 @@ func networkDelayTime(times [][]int, N int, K int) int {
 		}
 	}
 	return result
+}
+
+// 按上面的方式构建一个：https://zhuanlan.zhihu.com/p/33162490
+
+// 输入一个邻接矩阵，返回一个全局最短路径图，如果不存在路径，使用-1表示
+func floyd(graph [][]int) [][]int {
+	n := len(graph)
+	// 复制出来
+	dist := make([][]int, n)
+	for key := range graph {
+		dist[key] = make([]int, n)
+		copy(dist[key], graph[key])
+	}
+	for k := 0; k < n; k++ {
+		for i := 0; i < n; i++ {
+			for j := 0; j < n; j++ {
+				if dist[i][k] == -1 || dist[k][j] == -1 {
+					continue
+				}
+				// 如果是无穷大距离/没有通路，或者有通路但是值更小就更新
+				if dist[i][j] == -1 || dist[i][j] > dist[i][k]+dist[k][j] {
+					dist[i][j] = dist[i][k] + dist[k][j]
+				}
+			}
+		}
+	}
+	return dist
+}
+
+// 传入一个邻接矩阵和起始坐标，求从起始坐标到其他顶点的最短距离
+func dijkstra(graph [][]int, source int) []int {
+	n := len(graph)
+	finished := make([]bool, n) // 用于标记是否已经完成最短距离寻找
+	dist := make([]int, n)
+	// 自身先标记为完成，并更新距离
+	finished[source] = true
+	copy(dist, graph[source]) // 更新距离
+
+	// 进行迭代n-1轮，其实最后一轮可以不迭代的，也就是只要n-2
+	for i := 1; i < n; i++ {
+		// 寻找还没有找到最短距离且当前距离最短的
+		minIndex := -1
+		minDis := -1
+		for j := 0; j < n; j++ {
+			// 只从没有找到最短距离的里面找，如果当前minIndex还没有赋值，或者是出现小于的情况
+			if finished[j] == false && (minIndex == -1 ||  (dist[j] != -1 && minDis > dist[j])) {
+				minIndex = j
+				minDis = dist[j]
+			}
+		}
+		finished[minIndex] = true
+		// 根据获取到的当前最短距离的点，作为中间点，进行更新
+		for j := 0; j < n; j++ {
+			// 已经找到的不再找，如果那个中间点到目标的距离本身就是无穷大，就不用再继续了
+			if finished[j] == true || graph[minIndex][j] == -1{
+				continue
+			}
+			if dist[j] == -1 || dist[j] > dist[minIndex] + graph[minIndex][j] {
+				dist[j] = dist[minIndex] + graph[minIndex][j]
+			}
+		}
+	}
+	return dist
+}
+
+func main() {
+	// 构造邻接矩阵
+	n := 5
+	graph := make([][]int, n)
+	for i := 0; i < n; i++ {
+		graph[i] = make([]int, n)
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < n; j++ {
+			if i == j {
+				graph[i][j] = 0
+			} else {
+				graph[i][j] = -1 // 怎么表示无穷大呢
+			}
+		}
+	}
+	graph[0][1] = 10
+	graph[1][0] = 10
+	graph[0][3] = 30
+	graph[3][0] = 30
+	graph[0][4] = 100
+	graph[4][0] = 100
+	graph[1][2] = 50
+	graph[2][1] = 50
+	graph[2][3] = 20
+	graph[3][2] = 20
+	graph[2][4] = 10
+	graph[4][2] = 10
+	graph[3][4] = 60
+	graph[4][3] = 60
+	//fmt.Println(graph)
+	fmt.Println(floyd(graph))
+	fmt.Println(dijkstra(graph, 0))
+
 }
