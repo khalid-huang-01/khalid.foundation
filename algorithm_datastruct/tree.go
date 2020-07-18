@@ -1,13 +1,14 @@
+//package main
 // 遍历
 // leetcode 94
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+// Definition for a binary tree node.
+
+//type TreeNode struct {
+//    Val int
+//    Left *TreeNode
+//    Right *TreeNode
+//}
+
 //  中序遍历
 func inorderTraversal(root *TreeNode) []int {
 	if root == nil {

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 // bfs
@@ -199,6 +200,92 @@ func networkDelayTime_2(times [][]int, N int, K int) int {
 	return result
 }
 
+
+type Edge struct {
+	src int
+	dest int
+	weight int
+}
+
+type Graph struct {
+	v int // 顶点的数量
+	e int // 边的数量
+	edges []*Edge
+}
+
+// 使用边信息创建一个图
+func CreateGraphWithEdgeForTestCase() *Graph {
+	graph := &Graph{
+		v:     5,
+		e:     7,
+		edges: make([]*Edge, 7),
+	}
+	graph.edges[0] = &Edge{
+		src:    0,
+		dest:   1,
+		weight: 10,
+	}
+	graph.edges[1] = &Edge{
+		src:    0,
+		dest:   3,
+		weight: 30,
+	}
+	graph.edges[2] = &Edge{
+		src:    0,
+		dest:   4,
+		weight: 100,
+	}
+	graph.edges[3] = &Edge{
+		src:    1,
+		dest:   2,
+		weight: 50,
+	}
+	graph.edges[4] = &Edge{
+		src:    2,
+		dest:   4,
+		weight: 10,
+	}
+	graph.edges[5] = &Edge{
+		src:    3,
+		dest:   2,
+		weight: 20,
+	}
+	graph.edges[6] = &Edge{
+		src:    4,
+		dest:   3,
+		weight: 60,
+	}
+	return graph
+}
+
+// 使用顶点信息创建一个图
+func CreateGraphWithVertexForTestCase() [][]int {
+	// 构造邻接矩阵
+	n := 5
+	graph := make([][]int, n)
+	for i := 0; i < n; i++ {
+		graph[i] = make([]int, n)
+	}
+	for i := 0; i < n; i++ {
+		for j := 0; j < n; j++ {
+			if i == j {
+				graph[i][j] = 0
+			} else {
+				graph[i][j] = -1
+			}
+		}
+	}
+	graph[0][1] = 10
+	graph[0][3] = 30
+	graph[0][4] = 100
+	graph[1][2] = 50
+	graph[3][2] = 20
+	graph[2][4] = 10
+	graph[4][3] = 60
+	return graph
+}
+
+
 // 按上面的方式构建一个：https://zhuanlan.zhihu.com/p/33162490
 
 // 输入一个邻接矩阵，返回一个全局最短路径图，如果不存在路径，使用-1表示
@@ -262,38 +349,89 @@ func dijkstra(graph [][]int, source int) []int {
 	return dist
 }
 
-func main() {
-	// 构造邻接矩阵
-	n := 5
-	graph := make([][]int, n)
-	for i := 0; i < n; i++ {
-		graph[i] = make([]int, n)
+
+// 使用bellmandFord算法的时候，其实应该按边来构建数据结构的
+// 返回一个从起始顶点到其他顶点的最短距离，并判断是否有负环
+// https://juejin.im/post/5ed082da51882542e30229ef
+// https://blog.csdn.net/sms0101/article/details/73088422
+// 输入一个带权值有有向图，输出是否有负环，并判断出单源最短路径表
+func bellmanFord(graph *Graph, source int) ([]int, bool) {
+	// 目标结果
+	dist := make([]int, graph.v)
+	var negativeCircle bool
+	for i := 0; i < graph.v; i++ {
+		if i == source {
+			dist[i] = 0
+		} else {
+			dist[i] = -1
+		}
 	}
-	for i := 0; i < n; i++ {
-		for j := 0; j < n; j++ {
-			if i == j {
-				graph[i][j] = 0
-			} else {
-				graph[i][j] = -1 // 怎么表示无穷大呢
+
+	// 迭代v - 1轮
+	var src, dest, weight int
+	for i := 1; i < graph.v; i++ {
+		// 每轮对e条边进行松弛
+		// dist[dest] = min(dist[dest], dist[src] + weight(src, dest))， 要不等于本身，不要等于先到v，再从v到u
+		for j := 0; j < graph.e; j++ {
+			// 如果是确保有通路才可以进行
+			src = graph.edges[j].src
+			dest = graph.edges[j].dest
+			weight = graph.edges[j].weight
+			if dist[src] != -1 && (dist[dest] == -1 || dist[dest] > dist[src] + weight) {
+				dist[dest] = dist[src] + weight
 			}
 		}
 	}
-	graph[0][1] = 10
-	graph[1][0] = 10
-	graph[0][3] = 30
-	graph[3][0] = 30
-	graph[0][4] = 100
-	graph[4][0] = 100
-	graph[1][2] = 50
-	graph[2][1] = 50
-	graph[2][3] = 20
-	graph[3][2] = 20
-	graph[2][4] = 10
-	graph[4][2] = 10
-	graph[3][4] = 60
-	graph[4][3] = 60
-	//fmt.Println(graph)
+	// 迭代一轮，判断有负环
+	for j :=0; j < graph.e; j++ {
+		src = graph.edges[j].src
+		dest = graph.edges[j].dest
+		weight = graph.edges[j].weight
+		if dist[src] != -1 && (dist[dest] == -1 || dist[dest] > dist[src] + weight) {
+			negativeCircle = true
+		}
+	}
+	return dist, negativeCircle
+}
+
+// 传入一个前序队列和中序队列，输出一个后序队列
+func build(preOrder string, inOrder string) string {
+	//var postOrder string = preOrder // 初始化同等长度的
+	size := len(preOrder)
+	postOrder := make([]string, size)
+	_build(size, preOrder, inOrder, postOrder)
+	fmt.Println(postOrder)
+	return strings.Join(postOrder, "")
+}
+
+// 只要把整个树构造出来就可以了
+// 先把前序的第一个点拿出来，找到它在中序中的位置，就可以知道以前序第一个点为root的，左子树和右子树的范围了，然后再按相同的方式递归下去，直到没有字符
+// 每次都把前序的root放到此时后序的最后一个字符位置上即可
+// _build里面的三个字符串表示同一个树的前序，中序和后序的字符串，对应关系
+func _build(size int, preOrder string, inOrder string, postOrder []string) {
+	if size == 0 {
+		return
+	}
+	root := string(preOrder[0])
+	index := strings.Index(inOrder, root)
+	fmt.Println("root: ", root, " index: ", index)
+	_build(index, preOrder[1:index+1], inOrder[:index], postOrder[:index]) // 此时左子树对应的长度为index，它的前序和中序以及后序与原本的母串的关系是其一部分字符
+	_build(size - index - 1, preOrder[index+1:], inOrder[index+1:], postOrder[index:size-1])
+	postOrder[size-1] = root
+}
+
+
+func main() {
+	// 前序和中序得后序
+	//preOrder := "DBACEGF"
+	//postOrder := "ABCDEFG"
+	//fmt.Println(build(preOrder,postOrder))
+	graph := CreateGraphWithVertexForTestCase()
 	fmt.Println(floyd(graph))
-	fmt.Println(dijkstra(graph, 0))
+	source := 0
+	fmt.Println(dijkstra(graph, source))
+
+	graphEdge := CreateGraphWithEdgeForTestCase()
+	fmt.Println(bellmanFord(graphEdge, source))
 
 }
