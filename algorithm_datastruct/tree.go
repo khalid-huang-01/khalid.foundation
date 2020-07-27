@@ -214,9 +214,10 @@ func minimumLengthEncoding(words []string) int {
 }
 
 type TrieNode struct {
-	children []*TrieNode // 为26个字母，如果为空的话，表示没有这个字母
+	val byte // 该节点所代表的字符，val - 'a'其实就等于这个节点在父节点的儿子列表中的下标
+	children []*TrieNode // 为26个字母，如果为空的话，表示没有这个字母，每个下标对应1个字母，比如下标1就代表a
 	// isEnd bool
-	count int // 用count来代表end，方便处理
+	count int // 用count来代表end，方便处理，count == len(children)
 }
 
 func NewTrieNode() *TrieNode {

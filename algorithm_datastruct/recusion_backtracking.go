@@ -55,9 +55,9 @@ func backtracking(solution []int, candidates []int, sum int, target int, result 
 	}
 	//添加所有可能情况,只可能添加当前和后面的数字，不能添加前面的数字，防止重合
 	for index := range candidates {
-		solution = append(solution, candidates[index]) //加入数字
+		solution = append(solution, candidates[index]) //加入数字进行尝试
 		backtracking(solution, candidates[index:], sum+candidates[index], target, result)
-		solution = solution[:len(solution)-1] //没有结束弹出
+		solution = solution[:len(solution)-1] //弹出数字
 	}
 }
 
