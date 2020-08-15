@@ -17,7 +17,7 @@ func Init() {
 		logrus.Fatal(err)
 	}
 	//orm.RegisterModel(new(Object))
-	orm.RegisterModel(new(Container), new(Pod))
+	orm.RegisterModel(new(Container), new(Pod), new(Request))
 	err := orm.RunSyncdb("default", false, true)
 	if err != nil {
 		logrus.Error("ERROR: Init create tables failed, err: ", err)

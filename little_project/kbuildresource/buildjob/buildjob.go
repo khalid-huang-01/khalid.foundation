@@ -12,7 +12,7 @@ import (
 func CreateBuildJob(buildJobDTO *dto.BuildJobDTO) error {
 	fmt.Println("Before executing buildJob")
 	// 对于DTO的参数校验
-	err := verifyBuildJobDTO(buildJobDTO)
+	err := VerifyBuildJobDTO(buildJobDTO)
 	if err != nil {
 		return err
 	}
@@ -23,9 +23,9 @@ func CreateBuildJob(buildJobDTO *dto.BuildJobDTO) error {
 	return nil
 }
 
-func verifyBuildJobDTO(buildJobDTO *dto.BuildJobDTO) error {
+func VerifyBuildJobDTO(buildJobDTO *dto.BuildJobDTO) error {
 	logrus.Info("INFO: verifyBuildJobDTO")
-	time.Sleep(1 * time.Second)
+	//time.Sleep(1 * time.Second)
 	return nil
 }
 
