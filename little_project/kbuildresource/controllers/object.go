@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"bryson.foundation/little_project/kbuildresource/models"
+	"bryson.foundation/kbuildresource/models"
 	"encoding/json"
 
 	"github.com/astaxie/beego"

@@ -1,5 +1,0 @@
-package buildjob
-
-func CreateBuildJob() {
-
-}

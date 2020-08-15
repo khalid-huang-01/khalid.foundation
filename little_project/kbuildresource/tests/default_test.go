@@ -6,7 +6,7 @@ import (
 	"testing"
 	"runtime"
 	"path/filepath"
-	_ "bryson.foundation/little_project/kbuildresource/routers"
+	_ "bryson.foundation/kbuildresource/routers"
 
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"
