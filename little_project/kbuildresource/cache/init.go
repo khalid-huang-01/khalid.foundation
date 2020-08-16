@@ -6,11 +6,11 @@ import (
 )
 
 var (
-	redisClient *redis.Client
+	RedisClient *redis.Client
 )
 
 func init() {
-	redisClient = redis.NewClient(&redis.Options{
+	RedisClient = redis.NewClient(&redis.Options{
 		Addr: "127.0.0.1:6379",
 		Password: "",
 		DialTimeout: time.Minute,

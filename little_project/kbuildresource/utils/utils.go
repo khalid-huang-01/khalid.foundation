@@ -24,3 +24,4 @@ func CreateRandomString(len int) string {
 	}
 	return result
 }
+

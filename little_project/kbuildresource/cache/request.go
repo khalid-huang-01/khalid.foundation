@@ -22,7 +22,7 @@ func AddRequest(m *models.Request) error {
 		log.Error("ERROR: ", err)
 		return err
 	}
-	err = redisClient.HSet(requestKey, GenFieldByRequest(m), requestJsonData).Err()
+	err = RedisClient.HSet(requestKey, GenFieldByRequest(m), requestJsonData).Err()
 	if err != nil {
 		return err
 	}
@@ -34,12 +34,12 @@ func UpdateRequest(m *models.Request) error {
 }
 
 func DeleteRequest(m *models.Request) error{
-	return redisClient.HDel(requestKey, GenFieldByRequest(m)).Err()
+	return RedisClient.HDel(requestKey, GenFieldByRequest(m)).Err()
 }
 
 func DeleteRequestOfInstance(instanceName string, m *models.Request) error {
 	requestKey2 := GenRequestKey(common.BuildJobPrefix, instanceName)
-	return redisClient.HDel(requestKey2, GenFieldByRequest(m)).Err()
+	return RedisClient.HDel(requestKey2, GenFieldByRequest(m)).Err()
 }
 
 // 查询某个特定的请求，需要从全局查询
@@ -58,9 +58,34 @@ func GetRequestByNameAndRequestType(name string, requestType string) (*models.Re
 	return nil, err
 }
 
+func GetAllRequestByInstanceName(instanceName string) ([]*models.Request, error) {
+	requestKey2 := GenRequestKey(common.BuildJobPrefix, instanceName)
+	requestMap, err := RedisClient.HGetAll(requestKey2).Result()
+	if err != nil {
+		return nil, err
+	}
+	requestList := make([]*models.Request, len(requestMap))
+	i := 0
+	for _, requestJsonData := range requestMap {
+		m := &models.Request{}
+		err = json.Unmarshal([]byte(requestJsonData), m)
+		if err != nil {
+			return nil,err
+		}
+		requestList[i] = m
+		i += 1
+	}
+	return requestList, nil
+}
+
+func DeleteRequestByInstanceName(m *models.Request, instanceName string) error {
+	requestKey2 := GenRequestKey(common.BuildJobPrefix, instanceName)
+	return RedisClient.HDel(requestKey2, GenFieldByRequest(m)).Err()
+}
+
 func GetRequestByNameAndRequestTypeAndInstanceName(name string, requestType string, instanceName string) (*models.Request, error){
 	requestKey2 := GenRequestKey(common.BuildJobPrefix, instanceName)
-	requestJsonData, err := redisClient.HGet(requestKey2, GenFieldByRequestTypeAndName(requestType, name)).Result()
+	requestJsonData, err := RedisClient.HGet(requestKey2, GenFieldByRequestTypeAndName(requestType, name)).Result()
 	if err != nil {
 		return nil, err
 	}
@@ -73,7 +98,7 @@ func GetRequestByNameAndRequestTypeAndInstanceName(name string, requestType stri
 }
 
 func GetInstanceNameList() ([]string, error) {
-	instanceNameListJsonData, err := redisClient.Get(instanceNameListKey).Result()
+	instanceNameListJsonData, err := RedisClient.Get(instanceNameListKey).Result()
 	instanceNameList := make([]string, 0)
 	// 不存在，不用操作
 	if err == redis.Nil {

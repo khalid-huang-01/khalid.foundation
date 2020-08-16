@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bryson.foundation/kbuildresource/instance"
 	"bryson.foundation/kbuildresource/models"
 	_ "bryson.foundation/kbuildresource/routers"
 	"github.com/astaxie/beego/context"
@@ -21,5 +22,6 @@ func main() {
 	beego.Get("/healthz", func(context *context.Context) {
 		context.Output.Body([]byte("hello kbuildresource!\n"))
 	})
-	beego.Run()
+	go beego.Run()
+	instance.BeeInstance.StartUp()
 }

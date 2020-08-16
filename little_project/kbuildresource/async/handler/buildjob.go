@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"sync"
+	"time"
 )
 
 type BuildJobHandler struct {
@@ -71,6 +72,7 @@ func (b *BuildJobHandler) MakeRequest(requestDTO interface{}, requestType string
 }
 
 func (b *BuildJobHandler) AsyncExec(request *models.Request, limitChan <-chan struct{}, wg *sync.WaitGroup) {
+	time.Sleep(10 * time.Second)
 	defer func() {
 		<-limitChan
 		wg.Done()

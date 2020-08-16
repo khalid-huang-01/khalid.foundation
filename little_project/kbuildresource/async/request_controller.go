@@ -2,6 +2,7 @@ package async
 
 import (
 	"bryson.foundation/kbuildresource/async/handler"
+	"bryson.foundation/kbuildresource/cache"
 	"bryson.foundation/kbuildresource/common"
 	"bryson.foundation/kbuildresource/models"
 	"github.com/sirupsen/logrus"
@@ -24,7 +25,7 @@ func init() {
 		stopCh:         make(chan struct{}),
 		requestChannel: make(chan *models.Request, 2000),
 	}
-	go r.StartUp()
+	//go r.StartUp()
 }
 
 func GetRequestController() *RequestController {
@@ -82,10 +83,39 @@ func (r *RequestController) sendRequestToChannel(request *models.Request) {
 	r.requestChannel <- request
 }
 
-//func (r *RequestController) TakeOverRequest(deadInstanceName string, newInstanceName string) error {
-//	log.Infof("INFO: start takeover request of %s", deadInstanceName)
-//	request, err :=
-//}
+func (r *RequestController) TakeOverRequest(deadInstanceName string, newInstanceName string) error {
+	logrus.Infof("INFO: start takeover request of instance %s", deadInstanceName)
+	requests, err := cache.GetAllRequestByInstanceName(deadInstanceName)
+	if err != nil {
+		return err
+	}
+	for _, request := range requests {
+		logrus.Infof("INFO: take over instance-%s request %s which status is %s", deadInstanceName, request.Name, request.Status)
+		// 如果重启状态为pending，直接放入队列中，等待执行
+		// 先判断是否需要重新进入，这里假设所有所有的Execting中都是需要重新执行的
+		if request.Status == common.RequestStatusPending {
+			if err := handleCacheDataForTakeOver(deadInstanceName, request); err != nil {
+				continue
+			}
+			r.requestChannel <- request
+		}
+	}
+	return nil
+}
+
+func handleCacheDataForTakeOver(deadInstanceName string, request *models.Request) error {
+	// 在原本的instance里面删除，再加入到新的里面
+	err := cache.DeleteRequestByInstanceName(request, deadInstanceName)
+	if err != nil {
+		return err
+	}
+	request.Status = common.RequestStatusPending // 这里简单假设，所有的都是需要重新执行的
+	err = cache.AddRequest(request)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 func getHandlerFromRequestType(requestType string) handler.RequestHandler {
 	s := strings.Split(requestType, "_")
