@@ -15,17 +15,18 @@ type RequestController struct {
 	limitChan chan struct{} //用于控制并发，可以用协程池来做
 	stopCh chan struct{} // 控制器停止通道
 	requestChannel chan *models.Request
+	instanceName string // 对应的实例的名字
 }
 
 var r *RequestController
 
-func init() {
+func NewRequestController() *RequestController {
 	r = &RequestController{
 		limitChan:      make(chan struct{}, 2000),
 		stopCh:         make(chan struct{}),
 		requestChannel: make(chan *models.Request, 2000),
 	}
-	//go r.StartUp()
+	return r
 }
 
 func GetRequestController() *RequestController {
@@ -94,7 +95,7 @@ func (r *RequestController) TakeOverRequest(deadInstanceName string, newInstance
 		// 如果重启状态为pending，直接放入队列中，等待执行
 		// 先判断是否需要重新进入，这里假设所有所有的Execting中都是需要重新执行的
 		if request.Status == common.RequestStatusPending {
-			if err := handleCacheDataForTakeOver(deadInstanceName, request); err != nil {
+			if err := handleCacheDataForTakeOver(request, newInstanceName); err != nil {
 				continue
 			}
 			r.requestChannel <- request
@@ -103,12 +104,13 @@ func (r *RequestController) TakeOverRequest(deadInstanceName string, newInstance
 	return nil
 }
 
-func handleCacheDataForTakeOver(deadInstanceName string, request *models.Request) error {
+func handleCacheDataForTakeOver(request *models.Request, newInstanceName string) error {
 	// 在原本的instance里面删除，再加入到新的里面
-	err := cache.DeleteRequestByInstanceName(request, deadInstanceName)
+	err := cache.DeleteRequest(request)
 	if err != nil {
 		return err
 	}
+	request.InstanceName = newInstanceName
 	request.Status = common.RequestStatusPending // 这里简单假设，所有的都是需要重新执行的
 	err = cache.AddRequest(request)
 	if err != nil {

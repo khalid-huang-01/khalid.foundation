@@ -4,7 +4,7 @@ import (
 	"bryson.foundation/kbuildresource/async"
 	"bryson.foundation/kbuildresource/cache"
 	"bryson.foundation/kbuildresource/common"
-	"bryson.foundation/kbuildresource/conf"
+	"bryson.foundation/kbuildresource/utils"
 	"context"
 	"encoding/json"
 	"github.com/astaxie/beego"
@@ -22,7 +22,7 @@ const (
 )
 
 var (
-	instanceKeyOfSelf = cache.GenInstanceKey(common.BuildJobPrefix, conf.Conf.InstanceName)
+	instanceKeyOfSelf = ""
 	distributeLockKey = cache.GenMetaDistributeKey(common.BuildJobPrefix)
 	instanceNameListKey = cache.GenInstanceNameListKey(common.BuildJobPrefix)
 )
@@ -59,13 +59,15 @@ func init() {
 }
 
 func newInstance() Instance {
+	instanceName := utils.CreateRandomString(8)
 	instance := &instanceWithRedis{
-		name:              conf.Conf.InstanceName,
+		name:              instanceName,
 		stopCh:            make(chan struct{}),
 		signalCh:          make(chan os.Signal),
 		liveCh:            make(chan struct{}),
-		requestController: async.GetRequestController(),
+		requestController: async.NewRequestController(),
 	}
+	instanceKeyOfSelf = cache.GenInstanceKey(common.BuildJobPrefix, instance.name)
 	return instance
 }
 
@@ -114,8 +116,7 @@ func (instance *instanceWithRedis) postStart() {
 		}
 		liveInstances := make([]string, 0)
 		for _, instanceName := range instanceNameList {
-			instanceKey := cache.GenInstanceKey(common.BuildJobPrefix, instanceName)
-			if !checkLive(instanceKey) {
+			if !checkLive(instanceName) {
 				err := instance.requestController.TakeOverRequest(instanceName, instance.name)
 				if err != nil {
 					logrus.Error("ERROR: ", err)

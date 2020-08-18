@@ -12,6 +12,7 @@ type Request struct {
 	Status string `json:"status"orm:"column(status)"`
 	RequestType string `json:"requestType"orm:"column(request_type)"`
 	RequestDTO string `json:"request_dto"orm:"column(request);type(text)"`
+	InstanceName string `json:"instance_name"orm:"-"`
 }
 
 func (t *Request) TableName() string {

@@ -46,6 +46,14 @@ func (b *BuildJobHandler) PreExec(requestDTO interface{}, requestType string, va
 	}
 }
 
+func (b *BuildJobHandler) SetInstanceName(requestDTO interface{}, instanceName string) {
+	buildJobDTO, ok := requestDTO.(*dto.BuildJobDTO)
+	if !ok {
+		logrus.Error("ERROR: BuildJobHandler setInstanceName requestDTO is not a type of dto.BuildJobDTO")
+	}
+	buildJobDTO.InstanceName = instanceName
+}
+
 func (b *BuildJobHandler) MakeRequest(requestDTO interface{}, requestType string, values map[string]interface{}) (*models.Request, error) {
 	buildJobDTO, ok := requestDTO.(*dto.BuildJobDTO)
 	if !ok {
@@ -60,6 +68,7 @@ func (b *BuildJobHandler) MakeRequest(requestDTO interface{}, requestType string
 		Name:        buildJobDTO.Name,
 		Status:      common.RequestStatusPending,
 		RequestType: requestType,
+		InstanceName: buildJobDTO.InstanceName,
 		RequestDTO:   string(buildJobDTOJsonData),
 	}
 	// 放入cache中并返回

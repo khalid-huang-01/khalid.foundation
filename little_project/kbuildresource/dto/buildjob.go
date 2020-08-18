@@ -12,6 +12,7 @@ type BuildJobDTO struct {
 	Namespace string `json:"namespace" description:"命名空间"`
 	Tuning bool `json:"tuning" description:"是否接受资源参数优化"`
 	Containers []*models.Container `json:"containers" description:"容器配置"`
+	InstanceName string `json:"instance_name"`
 }
 
 //type ContainerDTO struct {

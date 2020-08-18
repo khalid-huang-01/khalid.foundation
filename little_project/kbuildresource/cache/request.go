@@ -2,7 +2,6 @@ package cache
 
 import (
 	"bryson.foundation/kbuildresource/common"
-	"bryson.foundation/kbuildresource/conf"
 	"bryson.foundation/kbuildresource/models"
 	"encoding/json"
 	"fmt"
@@ -11,12 +10,12 @@ import (
 )
 
 var (
-	requestKey = GenRequestKey(common.BuildJobPrefix, conf.Conf.InstanceName)
 	instanceNameListKey = GenInstanceNameListKey(common.BuildJobPrefix)
 )
 
 // 添加一个请求到当前实例的缓存列表中
 func AddRequest(m *models.Request) error {
+	requestKey := GenRequestKey(common.BuildJobPrefix, m.InstanceName)
 	requestJsonData, err := json.Marshal(m)
 	if err != nil {
 		log.Error("ERROR: ", err)
@@ -34,12 +33,8 @@ func UpdateRequest(m *models.Request) error {
 }
 
 func DeleteRequest(m *models.Request) error{
+	requestKey := GenRequestKey(common.BuildJobPrefix, m.InstanceName)
 	return RedisClient.HDel(requestKey, GenFieldByRequest(m)).Err()
-}
-
-func DeleteRequestOfInstance(instanceName string, m *models.Request) error {
-	requestKey2 := GenRequestKey(common.BuildJobPrefix, instanceName)
-	return RedisClient.HDel(requestKey2, GenFieldByRequest(m)).Err()
 }
 
 // 查询某个特定的请求，需要从全局查询
@@ -76,11 +71,6 @@ func GetAllRequestByInstanceName(instanceName string) ([]*models.Request, error)
 		i += 1
 	}
 	return requestList, nil
-}
-
-func DeleteRequestByInstanceName(m *models.Request, instanceName string) error {
-	requestKey2 := GenRequestKey(common.BuildJobPrefix, instanceName)
-	return RedisClient.HDel(requestKey2, GenFieldByRequest(m)).Err()
 }
 
 func GetRequestByNameAndRequestTypeAndInstanceName(name string, requestType string, instanceName string) (*models.Request, error){
