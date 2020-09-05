@@ -33,42 +33,27 @@ func RedisGetLock(lockName string, acquireTimeout time.Duration, lockTimeout tim
 }
 
 func RedisReleaseLock(lockName string) bool {
-	txf := func(tx *redis.Tx) error {
-		if _, err := tx.Get(lockName).Result(); err != nil && err != redis.Nil {
-			return err
-		} else {
-			_, err := tx.Pipelined(func(pipe redis.Pipeliner) error {
-				pipe.Del(lockName)
-				return nil
-			})
-			return err
-		}
+	_, err := RedisClient.Del(lockName).Result()
+	if err != nil && err != redis.Nil {
+		return false
 	}
-
-	for {
-		if err := RedisClient.Watch(txf, lockName); err == nil {
-			return true
-		} else if err == redis.TxFailedErr {
-			logrus.Errorf("ERROR: watch key is modified, try to release lock. err : ", err)
-		} else {
-			logrus.Errorf("ERROR: ", err)
-			return false
-		}
-	}
+	return true
 }
 
 func IsExpire(key string) bool {
 	// 过期或不存在都返回这个
+	// TTL 方法，不存在返回-2， 过期返回-1
 	return RedisClient.TTL(key).Val() == -2 * time.Second || RedisClient.TTL(key).Val() == -1 * time.Second
 }
 
-func LockKey(key string, lockLeaseTime time.Duration) error {
-	_, err := RedisClient.SetNX(key, "1", lockLeaseTime).Result()
+// 获取锁，非阻塞
+func LockKey(key string, lockLeaseTime time.Duration) (bool, error) {
+	success, err := RedisClient.SetNX(key, "1", lockLeaseTime).Result()
 	if err != nil {
-		return err
+		return success, err
 	}
 	logrus.Info("INFO: lock key %s success", key)
-	return nil
+	return success, nil
 }
 
 func RenewExpiration(key string, lockLeaseTime time.Duration) error {
@@ -79,7 +64,7 @@ func RenewExpiration(key string, lockLeaseTime time.Duration) error {
 	// 不存在或者没有续期成功
 	if !success && IsExpire(key) {
 		log.Info("INFO: instance %s retry get lock", key)
-		err := LockKey(key, lockLeaseTime)
+		_, err := LockKey(key, lockLeaseTime)
 		if err != nil {
 			return err
 		}

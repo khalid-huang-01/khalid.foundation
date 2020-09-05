@@ -8,8 +8,8 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/astaxie/beego"
-	"github.com/go-redis/redis"
 	"github.com/sirupsen/logrus"
+	"math/rand"
 	"os"
 	"os/signal"
 	"syscall"
@@ -72,61 +72,63 @@ func newInstance() Instance {
 }
 
 func (instance *instanceWithRedis) postStart() {
-	signal.Notify(instance.signalCh, syscall.SIGINT, syscall.SIGTERM)
+	// 确保把自己添加到实例列表中
+	result := RetrieveAccessOfUpdateInstanceNameList()
+	if !result {
+		logrus.Infof("INFO: RetrieveAccessOfUpdateInstanceNameList failed")
+		return
+	}
+	instanceNameList, err := cache.GetInstanceNameList()
+	if err != nil {
+		return
+	}
+	instanceNameList = append(instanceNameList, instance.name)
+	instanceNameListJsonData, err := json.Marshal(instanceNameList)
+	if err != nil {
+		logrus.Error("ERROR: ", err)
+		return
+	}
+	err = cache.RedisClient.Set(instanceNameListKey, instanceNameListJsonData,0).Err()
+	if err != nil {
+		logrus.Error("ERROR: update instanceNameList failed")
+		return
+	}
+	ReturnAccessOfUpdateInstanceNameList()
 
 	// 启动requestController
 	go instance.requestController.StartUp()
 
 	// 接收其他崩溃的instance的job任务
 	// 获取同步锁
+	// 如果有多个同时在获取，只有一个成功即可
 	go func() {
 		logrus.Info("INFO: start takeover job of other instance")
-		isNeed := true // 默认需要接收
-		// 尝试获取同步锁
-		for i := 0; i < 3; i++ {
-			isSuccess, err := cache.RedisGetLock(distributeLockKey, 10 *time.Second, 2 * time.Minute)
-			if err != nil {
-				logrus.Error("ERROR: lock distribute key failed, err: ", err)
-				continue
-			}
-			// 锁已被占用
-			if !isSuccess {
-				logrus.Info("INFO: lock distribute key faield, which is already be lock")
-				isNeed = false
-			}
-			break
-		}
-		if !isNeed {
+		isSuccess := RetrieveAccessOfTakeOver()
+		if !isSuccess {
 			return
 		}
-		//获取锁成功，开始检索任务，并把自己添加到实例列表里面
-		instanceNameListVal, err := cache.RedisClient.Get(instanceNameListKey).Result()
-		instanceNameList := make([]string, 0)
-		if err != nil && err != redis.Nil {
-			logrus.Errorf("ERROR: get instanceNameListKey failed, error: ", err)
+		defer ReturnAccessOfTakeOver()
+
+
+		//获取锁成功，开始检索任务，
+		instanceNameList, err := cache.GetInstanceNameList()
+		if err != nil {
 			return
-		} else if err == redis.Nil{
-			//如果不存在，不操作
-		} else {
-			err = json.Unmarshal([]byte(instanceNameListVal), &instanceNameList)
-			if err != nil {
-				logrus.Error("ERROR: unmarshal failed")
-				return
-			}
 		}
+
 		liveInstances := make([]string, 0)
 		for _, instanceName := range instanceNameList {
 			if !checkLive(instanceName) {
-				err := instance.requestController.TakeOverRequest(instanceName, instance.name)
-				if err != nil {
-					logrus.Error("ERROR: ", err)
-				}
+				go func(instanceName string) {
+					err := instance.requestController.TakeOverRequest(instanceName, instance.name)
+					if err != nil {
+						logrus.Error("ERROR: ", err)
+					}
+				}(instanceName)
 			} else {
 				liveInstances = append(liveInstances, instanceName)
 			}
 		}
-		// 把自己添加到instance-list里
-		liveInstances = append(liveInstances, instance.name)
 		instanceNameListJsonData, err := json.Marshal(liveInstances)
 		if err != nil {
 			logrus.Error("ERROR: ", err)
@@ -136,14 +138,6 @@ func (instance *instanceWithRedis) postStart() {
 		if err != nil {
 			logrus.Error("ERROR: update instanceNameList failed")
 			return
-		}
-
-		//释放锁
-		isRelease := cache.RedisReleaseLock(distributeLockKey)
-		if isRelease {
-			logrus.Info("INFO: release distribute lock success")
-		} else {
-			logrus.Info("INFO: release distribute lock failed")
 		}
 	}()
 }
@@ -167,7 +161,11 @@ func (instance *instanceWithRedis) Shutdown() {
 	close(instance.stopCh)
 }
 
+// 这个函数需要传入一个finishCh来通知外部调用者，内部已经初始化完成
 func (instance *instanceWithRedis) StartUp() {
+	//监听信号
+	signal.Notify(instance.signalCh, syscall.SIGINT, syscall.SIGTERM)
+
 	// 做存活性探针的相关工作
 	instance.prepare()
 	defer instance.clear()
@@ -194,7 +192,7 @@ func (instance *instanceWithRedis) StartUp() {
 // 基于redis 来实现存活性验证
 func (instance *instanceWithRedis) prepare() {
 	// 不断续期，直到死亡
-	err := cache.LockKey(instanceKeyOfSelf, lockLeasTime)
+	_, err := cache.LockKey(instanceKeyOfSelf, lockLeasTime)
 	if err != nil {
 		logrus.Errorf("ERROR: instance %s get lock failed, err: ", instance.name, err)
 		return
@@ -236,4 +234,52 @@ func (instance *instanceWithRedis) isLive() bool {
 func checkLive(instanceName string) bool {
 	key := cache.GenInstanceKey(common.BuildJobPrefix, instanceName)
 	return !cache.IsExpire(key)
+}
+
+// 获取分布式锁，如果占用需要等待
+func RetrieveAccessOfUpdateInstanceNameList() bool {
+	result := true
+	var err error
+	for i := 0; i < 10; i++ {
+		result, err = cache.LockKey(distributeLockKey, time.Minute)
+		// 网络问题进行重试
+		if err != nil {
+			logrus.Error("ERROR: ", err)
+			continue
+		} else if !result {
+			// 获取不到，重新随机等待，再重新获取
+			time.Sleep(time.Duration(200 + rand.Int63n(1000)) * time.Millisecond)
+			continue
+		}
+		// 成功直接break
+		break
+	}
+	return result
+}
+
+func ReturnAccessOfUpdateInstanceNameList() bool {
+	return releaseDistributeKey()
+}
+
+// 获取 分布式锁，非网络原因，直接返回结果
+func RetrieveAccessOfTakeOver() bool {
+	result := true
+	var err error
+	for i := 0; i < 3; i++ {
+		result, err = cache.LockKey(distributeLockKey, time.Minute)
+		// 网络问题进行重试
+		if err != nil {
+			continue
+		}
+		break
+	}
+	return result
+}
+
+func ReturnAccessOfTakeOver() bool {
+	return releaseDistributeKey()
+}
+
+func releaseDistributeKey() bool {
+	return cache.RedisReleaseLock(distributeLockKey)
 }

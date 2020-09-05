@@ -119,7 +119,7 @@ func handleCacheDataForTakeOver(request *models.Request, newInstanceName string)
 	return nil
 }
 
-func getHandlerFromRequestType(requestType string) handler.RequestHandler {
+func getHandlerFromRequestType(requestType string) RequestHandler {
 	s := strings.Split(requestType, "_")
 	switch s[0] {
 	case common.BuildJobPrefix:
