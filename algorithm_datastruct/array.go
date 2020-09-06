@@ -1,4 +1,7 @@
 package main
+
+import "container/heap"
+
 // subarray
 // leetcode 974
 // 暴力直接找, 接近O(n^2)
@@ -90,3 +93,52 @@ func topKFrequent(nums []int, k int) []int {
 	}
 	return result
 }
+
+// 利用container/heap提供的能力
+func topKFrequent1(nums []int, k int) []int {
+	countMap := map[int]int{}
+	for _, num := range nums {
+		countMap[num]++
+	}
+	h := &CountNodeHeap{}
+	heap.Init(h)
+	for key, value := range countMap {
+		heap.Push(h, &CountNode{key:key, value:value})
+		if h.Len() > k {
+			heap.Pop(h)
+		}
+	}
+	result := make([]int, k)
+	for i := 0; i < k; i++ {
+		result[k-i-1] = heap.Pop(h).(*CountNode).key
+	}
+	return result
+}
+// 实现需要提供的函数
+type CountNode struct {
+	key int
+	value int
+}
+
+type CountNodeHeap []*CountNode
+
+func (h CountNodeHeap) Len() int {
+	return len(h)
+}
+func (h CountNodeHeap) Less(i, j int) bool {
+	return h[i].value < h[j].value // 小于号是大根堆
+}
+func (h CountNodeHeap) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+func (h *CountNodeHeap) Push(x interface{}) {
+	*h = append(*h, x.(*CountNode))
+}
+func (h *CountNodeHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0:n-1]
+	return x
+}
+
