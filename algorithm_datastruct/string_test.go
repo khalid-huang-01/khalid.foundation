@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"sort"
 	"strings"
 )
@@ -73,7 +72,3 @@ func reverseStrings(s string) string {
 	return string(bytes)
 }
 
-func main() {
-	s := "aveade"
-	fmt.Println(reverseStrings(s))
-}

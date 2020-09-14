@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"testing"
 )
 
 // bfs
@@ -421,7 +422,7 @@ func _build(size int, preOrder string, inOrder string, postOrder []string) {
 }
 
 
-func main() {
+func TestConstructor(t *testing.T) {
 	// 前序和中序得后序
 	//preOrder := "DBACEGF"
 	//postOrder := "ABCDEFG"

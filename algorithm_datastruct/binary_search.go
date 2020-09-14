@@ -99,8 +99,3 @@ func leetcode_34() {
 	fmt.Println(searchRange(arr, target))
 }
 
-func main() {
-	// testWithoutRecursion()
-	// testWithRecursion()
-	leetcode_34()
-}

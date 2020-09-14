@@ -1,3 +1,5 @@
+package main
+
 import "strconv"
 
 // leetcode 228

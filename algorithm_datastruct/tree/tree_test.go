@@ -1,13 +1,13 @@
-//package main
+package tree
 // 遍历
 // leetcode 94
 // Definition for a binary tree node.
 
-//type TreeNode struct {
-//    Val int
-//    Left *TreeNode
-//    Right *TreeNode
-//}
+type TreeNode struct {
+   Val int
+   Left *TreeNode
+   Right *TreeNode
+}
 
 //  中序遍历
 func inorderTraversal(root *TreeNode) []int {
@@ -73,12 +73,12 @@ func travel(root *TreeNode, result *int, flag int) {
 
 // leetcode 429
 /**
- * Definition for a Node.
- * type Node struct {
- *     Val int
- *     Children []*Node
- * }
- */
+* Definition for a Node.
+*/
+type Node struct {
+    Val int
+    Children []*Node
+}
 // 在层搜索上，可以使用广度搜索+nil的方法，也可以使用记录层级的方式
 //  广度搜索
 // 学习下https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/solution/ncha-shu-de-ceng-xu-bian-li-by-leetcode/
@@ -118,7 +118,7 @@ func levelOrder(root *Node) [][]int {
  * }
  */
 //  遍历前序建立根节点，利用中序建立关系
-var pCurIdx int
+//var pCurIdx int
 
 func buildTree(preorder []int, inorder []int) *TreeNode {
 	pCurIdx = 0
@@ -159,12 +159,12 @@ func helper(preorder []int, inorder []int, iStartIdx int, iEndIdx int) *TreeNode
  */
 var pCurIdx int
 
-func buildTree(inorder []int, postorder []int) *TreeNode {
+func buildTree1(inorder []int, postorder []int) *TreeNode {
 	pCurIdx = len(postorder) - 1
-	return helper(inorder, postorder, 0, len(inorder)-1)
+	return helper1(inorder, postorder, 0, len(inorder)-1)
 }
 
-func helper(inorder []int, postorder []int, iStartIdx int, iEndIdx int) *TreeNode {
+func helper1(inorder []int, postorder []int, iStartIdx int, iEndIdx int) *TreeNode {
 	if iStartIdx > iEndIdx {
 		return nil
 	}
@@ -180,15 +180,15 @@ func helper(inorder []int, postorder []int, iStartIdx int, iEndIdx int) *TreeNod
 		}
 	}
 	//右树
-	root.Right = helper(inorder, postorder, idx+1, iEndIdx)
-	root.Left = helper(inorder, postorder, iStartIdx, idx-1)
+	root.Right = helper1(inorder, postorder, idx+1, iEndIdx)
+	root.Left = helper1(inorder, postorder, iStartIdx, idx-1)
 
 	return root
 }
 
 //  tries 820
 //  s
-func minimumLengthEncoding(words []string) int {
+func minimumLengthEncoding1(words []string) int {
 	nodes := make(map[*TrieNode]int, 0) // 记录每个树叶子结点及其对应的words里面的下标
 	// 输入每个words，构建前缀树
 	// 根结点

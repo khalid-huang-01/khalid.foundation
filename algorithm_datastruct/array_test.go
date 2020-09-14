@@ -1,6 +1,9 @@
 package main
 
-import "container/heap"
+import (
+	"container/heap"
+	"testing"
+)
 
 // subarray
 // leetcode 974
@@ -140,5 +143,30 @@ func (h *CountNodeHeap) Pop() interface{} {
 	x := old[n-1]
 	*h = old[0:n-1]
 	return x
+}
+
+
+// 输入一个长度为n的数组，元素的大小都在0 ~ n-1之间，返回其中重复的数字
+// 下面的作法可以利用题目中的数字大小信息来优化空间复杂度
+func duplicateList(nums []int) (bool, int) {
+	exist := false
+	value := -1
+	for i := 0; i < len(nums); i++ {
+		for nums[i] != i { //如果的数字不等于自己的下标，那么要找到自己的下标，也就是nums[i]
+			if nums[i] == nums[nums[i]] { //下标nums[i]等于自身下标的值，表明这个数字已经重复了
+				value = nums[i]
+				exist = true
+				return exist, value
+			}
+			// 交换
+			nums[i], nums[nums[i]] = nums[nums[i]],nums[i]
+		}
+	}
+	return exist, value
+}
+
+func TestDuplicateList(t *testing.T) {
+	nums := []int {2,3,1,1,2,5,3,0}
+	t.Log(duplicateList(nums))
 }
 

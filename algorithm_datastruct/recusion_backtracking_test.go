@@ -61,6 +61,3 @@ func backtracking(solution []int, candidates []int, sum int, target int, result 
 	}
 }
 
-func main() {
-
-}
