@@ -185,7 +185,7 @@ func networkDelayTime_2(times [][]int, N int, K int) int {
 		//根据当前邻居的信息+当前距离表的信息来更新距离表
 		for index, neighbor := range graph[cur] {
 			if distance[neighbor] == -1 || distance[neighbor] > distance[cur]+cost[cur][index] {
-				//distance[cur] : K -> cur 
+				//distance[cur] : K -> cur
 				//cost[cur][neighbor]: cur->neighbor
 				distance[neighbor] = distance[cur] + cost[cur][index]
 				q = append(q, neighbor)
@@ -201,16 +201,15 @@ func networkDelayTime_2(times [][]int, N int, K int) int {
 	return result
 }
 
-
 type Edge struct {
-	src int
-	dest int
+	src    int
+	dest   int
 	weight int
 }
 
 type Graph struct {
-	v int // 顶点的数量
-	e int // 边的数量
+	v     int // 顶点的数量
+	e     int // 边的数量
 	edges []*Edge
 }
 
@@ -286,7 +285,6 @@ func CreateGraphWithVertexForTestCase() [][]int {
 	return graph
 }
 
-
 // 按上面的方式构建一个：https://zhuanlan.zhihu.com/p/33162490
 
 // 输入一个邻接矩阵，返回一个全局最短路径图，如果不存在路径，使用-1表示
@@ -330,7 +328,7 @@ func dijkstra(graph [][]int, source int) []int {
 		minDis := -1
 		for j := 0; j < n; j++ {
 			// 只从没有找到最短距离的里面找，如果当前minIndex还没有赋值，或者是出现小于的情况
-			if finished[j] == false && (minIndex == -1 ||  (dist[j] != -1 && minDis > dist[j])) {
+			if finished[j] == false && (minIndex == -1 || (dist[j] != -1 && minDis > dist[j])) {
 				minIndex = j
 				minDis = dist[j]
 			}
@@ -339,17 +337,16 @@ func dijkstra(graph [][]int, source int) []int {
 		// 根据获取到的当前最短距离的点，作为中间点，进行更新
 		for j := 0; j < n; j++ {
 			// 已经找到的不再找，如果那个中间点到目标的距离本身就是无穷大，就不用再继续了
-			if finished[j] == true || graph[minIndex][j] == -1{
+			if finished[j] == true || graph[minIndex][j] == -1 {
 				continue
 			}
-			if dist[j] == -1 || dist[j] > dist[minIndex] + graph[minIndex][j] {
+			if dist[j] == -1 || dist[j] > dist[minIndex]+graph[minIndex][j] {
 				dist[j] = dist[minIndex] + graph[minIndex][j]
 			}
 		}
 	}
 	return dist
 }
-
 
 // 使用bellmandFord算法的时候，其实应该按边来构建数据结构的
 // 返回一个从起始顶点到其他顶点的最短距离，并判断是否有负环
@@ -378,17 +375,17 @@ func bellmanFord(graph *Graph, source int) ([]int, bool) {
 			src = graph.edges[j].src
 			dest = graph.edges[j].dest
 			weight = graph.edges[j].weight
-			if dist[src] != -1 && (dist[dest] == -1 || dist[dest] > dist[src] + weight) {
+			if dist[src] != -1 && (dist[dest] == -1 || dist[dest] > dist[src]+weight) {
 				dist[dest] = dist[src] + weight
 			}
 		}
 	}
 	// 迭代一轮，判断有负环
-	for j :=0; j < graph.e; j++ {
+	for j := 0; j < graph.e; j++ {
 		src = graph.edges[j].src
 		dest = graph.edges[j].dest
 		weight = graph.edges[j].weight
-		if dist[src] != -1 && (dist[dest] == -1 || dist[dest] > dist[src] + weight) {
+		if dist[src] != -1 && (dist[dest] == -1 || dist[dest] > dist[src]+weight) {
 			negativeCircle = true
 		}
 	}
@@ -417,10 +414,9 @@ func _build(size int, preOrder string, inOrder string, postOrder []string) {
 	index := strings.Index(inOrder, root)
 	fmt.Println("root: ", root, " index: ", index)
 	_build(index, preOrder[1:index+1], inOrder[:index], postOrder[:index]) // 此时左子树对应的长度为index，它的前序和中序以及后序与原本的母串的关系是其一部分字符
-	_build(size - index - 1, preOrder[index+1:], inOrder[index+1:], postOrder[index:size-1])
+	_build(size-index-1, preOrder[index+1:], inOrder[index+1:], postOrder[index:size-1])
 	postOrder[size-1] = root
 }
-
 
 func TestConstructor(t *testing.T) {
 	// 前序和中序得后序

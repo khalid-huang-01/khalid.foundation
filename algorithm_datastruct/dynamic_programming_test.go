@@ -13,12 +13,10 @@ func maxNotAdjacentNumsSum(nums []int) int {
 	f[1] = max(f[0], nums[1])
 	for i := 2; i < len(nums); i++ {
 		v := max(0, nums[i])
-		f[i] = max(f[i-1], f[i-2] + v)
+		f[i] = max(f[i-1], f[i-2]+v)
 	}
 	return f[len(nums)-1]
 }
-
-
 
 func max(a, b int) int {
 	if a > b {
@@ -44,7 +42,7 @@ func zeroOnePackage(n int, x int, values []int, costs []int) int {
 			}
 			// 比较使用的情况，要满足剩余的天数大于消耗的天数
 			if j >= costs[i] && f[i][j] < f[i-1][j-costs[i]]+values[i] {
-				f[i][j] = f[i-1][j-costs[i]]+values[i]
+				f[i][j] = f[i-1][j-costs[i]] + values[i]
 			}
 		}
 	}
@@ -57,7 +55,7 @@ func TestZeroOnePackage(t *testing.T) {
 
 	n := 2
 	x := 2
-	values := []int {0, 10, 20}
-	costs := []int {0, 1,2}
+	values := []int{0, 10, 20}
+	costs := []int{0, 1, 2}
 	fmt.Println(zeroOnePackage(n, x, values, costs))
 }

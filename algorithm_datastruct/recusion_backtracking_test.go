@@ -60,4 +60,3 @@ func backtracking(solution []int, candidates []int, sum int, target int, result 
 		solution = solution[:len(solution)-1] //弹出数字
 	}
 }
-

@@ -98,4 +98,3 @@ func leetcode_34() {
 	target := 8
 	fmt.Println(searchRange(arr, target))
 }
-

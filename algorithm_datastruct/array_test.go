@@ -66,10 +66,10 @@ func subarraysDivByK(A []int, K int) int {
 // 这个的算法是利用了两个map，互为反向，数字到个数是用于查询当前数字的个数，个数到数字是为了输出答案
 func topKFrequent(nums []int, k int) []int {
 	val2Freq := make(map[int]int, 0)
-	freq2Vals := make(map[int][]int,0)
+	freq2Vals := make(map[int][]int, 0)
 	maxFreq := 0
 	freq := 0
-	for i := 0;i < len(nums); i++ {
+	for i := 0; i < len(nums); i++ {
 		val2Freq[nums[i]] += 1
 		freq = val2Freq[nums[i]]
 		if freq2Vals[freq] == nil {
@@ -90,7 +90,7 @@ func topKFrequent(nums []int, k int) []int {
 			i += 1
 		}
 		freq2Vals[maxFreq] = freq2Vals[maxFreq][:last]
-		for len(freq2Vals[maxFreq]) == 0 && maxFreq >= 0{
+		for len(freq2Vals[maxFreq]) == 0 && maxFreq >= 0 {
 			maxFreq -= 1
 		}
 	}
@@ -106,7 +106,7 @@ func topKFrequent1(nums []int, k int) []int {
 	h := &CountNodeHeap{}
 	heap.Init(h)
 	for key, value := range countMap {
-		heap.Push(h, &CountNode{key:key, value:value})
+		heap.Push(h, &CountNode{key: key, value: value})
 		if h.Len() > k {
 			heap.Pop(h)
 		}
@@ -117,9 +117,10 @@ func topKFrequent1(nums []int, k int) []int {
 	}
 	return result
 }
+
 // 实现需要提供的函数
 type CountNode struct {
-	key int
+	key   int
 	value int
 }
 
@@ -141,10 +142,9 @@ func (h *CountNodeHeap) Pop() interface{} {
 	old := *h
 	n := len(old)
 	x := old[n-1]
-	*h = old[0:n-1]
+	*h = old[0 : n-1]
 	return x
 }
-
 
 // 输入一个长度为n的数组，元素的大小都在0 ~ n-1之间，返回其中重复的数字
 // 下面的作法可以利用题目中的数字大小信息来优化空间复杂度
@@ -159,14 +159,13 @@ func duplicateList(nums []int) (bool, int) {
 				return exist, value
 			}
 			// 交换
-			nums[i], nums[nums[i]] = nums[nums[i]],nums[i]
+			nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
 		}
 	}
 	return exist, value
 }
 
 func TestDuplicateList(t *testing.T) {
-	nums := []int {2,3,1,1,2,5,3,0}
+	nums := []int{2, 3, 1, 1, 2, 5, 3, 0}
 	t.Log(duplicateList(nums))
 }
-

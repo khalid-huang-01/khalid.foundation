@@ -6,8 +6,6 @@ type ListNode struct {
 	Next *ListNode
 }
 
-
-
 //快慢指针+递归
 /**
  * Definition for singly-linked list.

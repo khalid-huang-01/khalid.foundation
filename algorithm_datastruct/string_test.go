@@ -38,16 +38,16 @@ func addStrings(num1 string, num2 string) string {
 // 这个题目可以使用排序也可以使用字典树
 // 主要目标是为了查出是否有单词是另一个单词的后缀（前缀反过来就可以了），然后排除掉是的，对剩下的进行计算
 func minimumLengthEncoding(words []string) int {
-//	进行反转
+	//	进行反转
 	for i := 0; i < len(words); i++ {
 		words[i] = reverseStrings(words[i])
 	}
-//  进行升序排序
+	//  进行升序排序
 	sort.Strings(words)
 	words = append(words, "*") //保证全部遍历
 	res := 0
-//  进行判断是否是前缀
-	for i := 0; i < len(words) - 1; i++ {
+	//  进行判断是否是前缀
+	for i := 0; i < len(words)-1; i++ {
 		if strings.HasPrefix(words[i+1], words[i]) {
 			continue
 		}
@@ -66,9 +66,8 @@ func reverseStrings(s string) string {
 	//return string(runes)
 	//使用bytes，一般来说string的char操作，转成byte好操作
 	bytes := []byte(s)
-	for from, to := 0, len(bytes) - 1; from < to; from, to = from + 1, to -1 {
+	for from, to := 0, len(bytes)-1; from < to; from, to = from+1, to-1 {
 		bytes[from], bytes[to] = bytes[to], bytes[from]
 	}
 	return string(bytes)
 }
-

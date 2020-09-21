@@ -48,14 +48,14 @@ func solution_6_1_2(num int, target []int) bool {
 // 输入7： val2Freq(5:1, 7:1) freq2Vals(1:[5,7]) //出栈的顺序其实就是里面列表的反序了
 // 输入5： val2Freq(5:2, 7:1) freq2Vals(1:[5,7], 2:[5]) // 这样把5弹出去的时候，就需要恢复到上面的一步
 type FreqStack struct {
-	val2Freq map[int]int
+	val2Freq  map[int]int
 	freq2Vals map[int][]int
-	maxFreq int
+	maxFreq   int
 }
 
 func Constructor() FreqStack {
 	f := FreqStack{
-		val2Freq:  make(map[int]int,0), // 用于知道当前添加进来的数字在栈里有几个，好放到合适的freq2Vals里面
+		val2Freq:  make(map[int]int, 0), // 用于知道当前添加进来的数字在栈里有几个，好放到合适的freq2Vals里面
 		freq2Vals: make(map[int][]int, 0),
 		maxFreq:   0,
 	}
@@ -86,6 +86,6 @@ func (f *FreqStack) Pop() int {
 
 func main() {
 	num := 6
-	target := []int{6,5,4,3,2,1}
+	target := []int{6, 5, 4, 3, 2, 1}
 	fmt.Println(solution_6_1_2(num, target))
 }

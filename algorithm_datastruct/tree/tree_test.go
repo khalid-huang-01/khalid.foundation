@@ -1,12 +1,13 @@
 package tree
+
 // 遍历
 // leetcode 94
 // Definition for a binary tree node.
 
 type TreeNode struct {
-   Val int
-   Left *TreeNode
-   Right *TreeNode
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 //  中序遍历
@@ -74,11 +75,12 @@ func travel(root *TreeNode, result *int, flag int) {
 // leetcode 429
 /**
 * Definition for a Node.
-*/
+ */
 type Node struct {
-    Val int
-    Children []*Node
+	Val      int
+	Children []*Node
 }
+
 // 在层搜索上，可以使用广度搜索+nil的方法，也可以使用记录层级的方式
 //  广度搜索
 // 学习下https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/solution/ncha-shu-de-ceng-xu-bian-li-by-leetcode/
@@ -214,7 +216,7 @@ func minimumLengthEncoding1(words []string) int {
 }
 
 type TrieNode struct {
-	val byte // 该节点所代表的字符，val - 'a'其实就等于这个节点在父节点的儿子列表中的下标
+	val      byte        // 该节点所代表的字符，val - 'a'其实就等于这个节点在父节点的儿子列表中的下标
 	children []*TrieNode // 为26个字母，如果为空的话，表示没有这个字母，每个下标对应1个字母，比如下标1就代表a
 	// isEnd bool
 	count int // 用count来代表end，方便处理，count == len(children)
