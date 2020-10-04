@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="233b84bb-850f-47c2-abac-a3483f815584" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/async/handler/buildjob.go" beforeDir="false" afterPath="$PROJECT_DIR$/async/handler/buildjob.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/async/request_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/async/request_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/async/type.go" beforeDir="false" afterPath="$PROJECT_DIR$/async/type.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cache/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/cache/util.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/instance.go" beforeDir="false" afterPath="$PROJECT_DIR$/instance/instance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
