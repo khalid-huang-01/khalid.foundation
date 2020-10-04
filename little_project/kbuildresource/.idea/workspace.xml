@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="233b84bb-850f-47c2-abac-a3483f815584" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/async/handler/buildjob.go" beforeDir="false" afterPath="$PROJECT_DIR$/async/handler/buildjob.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/async/request_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/async/request_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/async/type.go" beforeDir="false" afterPath="$PROJECT_DIR$/async/type.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/util.go" beforeDir="false" afterPath="$PROJECT_DIR$/cache/util.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/instance.go" beforeDir="false" afterPath="$PROJECT_DIR$/instance/instance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,13 +106,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/async/request_controller.go</url>
-          <line>63</line>
+          <line>71</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/instance/instance.go</url>
-          <line>120</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/async/request_controller.go</url>
+          <line>95</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/async/type.go</url>
+          <line>13</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

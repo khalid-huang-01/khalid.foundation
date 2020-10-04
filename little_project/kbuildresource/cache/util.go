@@ -52,7 +52,7 @@ func LockKey(key string, lockLeaseTime time.Duration) (bool, error) {
 	if err != nil {
 		return success, err
 	}
-	logrus.Info("INFO: lock key %s success", key)
+	logrus.Infof("INFO: lock key %s success", key)
 	return success, nil
 }
 

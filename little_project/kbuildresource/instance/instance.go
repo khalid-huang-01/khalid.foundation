@@ -12,12 +12,13 @@ import (
 	"math/rand"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 	"time"
 )
 
 const (
-	lockLeasTime = 6 * time.Second // 每次续期6s
+	lockLeaseTime = 6 * time.Second // 每次续期6s
 	renewInterval = 3 * time.Second // 每3秒续期一次
 )
 
@@ -65,7 +66,7 @@ func newInstance() Instance {
 		stopCh:            make(chan struct{}),
 		signalCh:          make(chan os.Signal),
 		liveCh:            make(chan struct{}),
-		requestController: async.NewRequestController(),
+		requestController: async.NewRequestController(instanceName),
 	}
 	instanceKeyOfSelf = cache.GenInstanceKey(common.BuildJobPrefix, instance.name)
 	return instance
@@ -73,9 +74,9 @@ func newInstance() Instance {
 
 func (instance *instanceWithRedis) postStart() {
 	// 确保把自己添加到实例列表中
-	result := RetrieveAccessOfUpdateInstanceNameList()
+	result := retrieveAccessOfUpdateInstanceNameList()
 	if !result {
-		logrus.Infof("INFO: RetrieveAccessOfUpdateInstanceNameList failed")
+		logrus.Infof("INFO: retrieveAccessOfUpdateInstanceNameList failed")
 		return
 	}
 	instanceNameList, err := cache.GetInstanceNameList()
@@ -83,61 +84,30 @@ func (instance *instanceWithRedis) postStart() {
 		return
 	}
 	instanceNameList = append(instanceNameList, instance.name)
-	instanceNameListJsonData, err := json.Marshal(instanceNameList)
-	if err != nil {
-		logrus.Error("ERROR: ", err)
-		return
-	}
-	err = cache.RedisClient.Set(instanceNameListKey, instanceNameListJsonData,0).Err()
+	err = setInstanceNameListToCache(instanceNameList)
 	if err != nil {
 		logrus.Error("ERROR: update instanceNameList failed")
 		return
 	}
-	ReturnAccessOfUpdateInstanceNameList()
+	logrus.Info("INFO: add self to instanceNameList successful")
+	returnAccessOfUpdateInstanceNameList()
 
 	// 启动requestController
 	go instance.requestController.StartUp()
 
-	// 接收其他崩溃的instance的job任务
-	// 获取同步锁
-	// 如果有多个同时在获取，只有一个成功即可
+	// 启动一个协程，周期性获取kbuildresource/meta锁，如果成功，进行扫描接收其他崩溃的instance的job任务
 	go func() {
-		logrus.Info("INFO: start takeover job of other instance")
-		isSuccess := RetrieveAccessOfTakeOver()
-		if !isSuccess {
-			return
-		}
-		defer ReturnAccessOfTakeOver()
-
-
-		//获取锁成功，开始检索任务，
-		instanceNameList, err := cache.GetInstanceNameList()
-		if err != nil {
-			return
-		}
-
-		liveInstances := make([]string, 0)
-		for _, instanceName := range instanceNameList {
-			if !checkLive(instanceName) {
-				go func(instanceName string) {
-					err := instance.requestController.TakeOverRequest(instanceName, instance.name)
-					if err != nil {
-						logrus.Error("ERROR: ", err)
-					}
-				}(instanceName)
-			} else {
-				liveInstances = append(liveInstances, instanceName)
+		interval := time.Duration(30+rand.Int63n(20)) * time.Second
+		t := time.NewTicker(interval)
+		for {
+			select {
+			case <-t.C:
+				instance.startClearDeadInstances()
+			case <-instance.stopCh:
+				logrus.Info("INFO: receive instance.stop, break loop for startcleardeadinstances")
+				t.Stop()
+				return
 			}
-		}
-		instanceNameListJsonData, err := json.Marshal(liveInstances)
-		if err != nil {
-			logrus.Error("ERROR: ", err)
-			return
-		}
-		err = cache.RedisClient.Set(instanceNameListKey, instanceNameListJsonData,0).Err()
-		if err != nil {
-			logrus.Error("ERROR: update instanceNameList failed")
-			return
 		}
 	}()
 }
@@ -172,6 +142,8 @@ func (instance *instanceWithRedis) StartUp() {
 
 	instance.postStart()
 	// 监控各种信号
+
+	t := time.NewTicker(60 * time.Second) // 每隔60s打印一些信息
 	for {
 		select {
 		// 监控stopCh信号， 执行程序退出 前处理操作，是结束实例的唯一入口
@@ -183,8 +155,12 @@ func (instance *instanceWithRedis) StartUp() {
 		case signalVal := <- instance.signalCh:
 			logrus.Infof("INFO: shutting down the sever beacause signalCh %v,", signalVal)
 			instance.Shutdown()
-		case <-instance.liveCh:
-			logrus.Infof("INFO: %s instance is live ", instance.name)
+		case <-t.C:
+			if instance.isLive() {
+				logrus.Infof("INFO: %s instance is live", instance.name)
+			} else {
+				logrus.Infof("INFO: %s instance is dead", instance.name)
+			}
 		}
 	}
 }
@@ -192,7 +168,7 @@ func (instance *instanceWithRedis) StartUp() {
 // 基于redis 来实现存活性验证
 func (instance *instanceWithRedis) prepare() {
 	// 不断续期，直到死亡
-	_, err := cache.LockKey(instanceKeyOfSelf, lockLeasTime)
+	_, err := cache.LockKey(instanceKeyOfSelf, lockLeaseTime)
 	if err != nil {
 		logrus.Errorf("ERROR: instance %s get lock failed, err: ", instance.name, err)
 		return
@@ -203,12 +179,11 @@ func (instance *instanceWithRedis) prepare() {
 		for {
 			select {
 			case t := <-ticker.C:
-				err := cache.RenewExpiration(instanceKeyOfSelf, lockLeasTime)
+				err := cache.RenewExpiration(instanceKeyOfSelf, lockLeaseTime)
 				if err != nil {
 					logrus.Infof("INFO: instance %s renew lock failed at %s", instance.name, t)
 					continue
 				}
-				instance.liveCh <- struct{}{}
 			case <-instance.stopCh:
 				return
 
@@ -227,6 +202,49 @@ func (instance *instanceWithRedis) clear() {
 	logrus.Infof("INFO: clear instanceKeyOfSelf %s success", instanceKeyOfSelf)
 }
 
+func (instance *instanceWithRedis) startClearDeadInstances() {
+	logrus.Info("INFO: start to retrieve access of takeover job of other instance")
+	isSuccess := retrieveAccessOfTakeOver()
+	if !isSuccess {
+		logrus.Infof("INFO: retrieveAccessOfTakeOver failed, skip clearDeadInstances")
+		return
+	}
+	// 释放锁
+	defer returnAccessOfTakeOver()
+
+	// 获取没成功，开始检索任务
+	logrus.Infof("INFO: retrieveAccessOfTakeOver successful, start clearDeadInstance")
+	instanceNameList, err := cache.GetInstanceNameList()
+	if err != nil {
+		return
+	}
+	liveInstances := make([]string, 0)
+	wg := sync.WaitGroup{} // 用于保存老实例的任务全部接管完毕后才更新instance列表
+	for _, instanceName := range instanceNameList {
+		// 不存活需要重新提取出它的job
+		if instanceName != instance.name && !checkLive(instanceName) {
+			wg.Add(1)
+			logrus.Infof("INFO: instance %s is dead", instanceName)
+			go func(instanceName string) {
+				defer wg.Done()
+				err := instance.requestController.TakeOverRequest(instanceName, instance.name)
+				if err != nil {
+					logrus.Error("ERROR: ", err)
+				}
+			}(instanceName)
+		} else {
+			liveInstances = append(liveInstances, instanceName)
+		}
+	}
+	wg.Wait()
+	err = setInstanceNameListToCache(liveInstances)
+	if err != nil {
+		logrus.Error("ERROR: update instance name list failed")
+		return
+	}
+	logrus.Info("INFO: finish clearDeadInstance Job")
+}
+
 func (instance *instanceWithRedis) isLive() bool {
 	return !cache.IsExpire(instanceKeyOfSelf)
 }
@@ -237,7 +255,7 @@ func checkLive(instanceName string) bool {
 }
 
 // 获取分布式锁，如果占用需要等待
-func RetrieveAccessOfUpdateInstanceNameList() bool {
+func retrieveAccessOfUpdateInstanceNameList() bool {
 	result := true
 	var err error
 	for i := 0; i < 10; i++ {
@@ -257,12 +275,12 @@ func RetrieveAccessOfUpdateInstanceNameList() bool {
 	return result
 }
 
-func ReturnAccessOfUpdateInstanceNameList() bool {
+func returnAccessOfUpdateInstanceNameList() bool {
 	return releaseDistributeKey()
 }
 
 // 获取 分布式锁，非网络原因，直接返回结果
-func RetrieveAccessOfTakeOver() bool {
+func retrieveAccessOfTakeOver() bool {
 	result := true
 	var err error
 	for i := 0; i < 3; i++ {
@@ -276,10 +294,21 @@ func RetrieveAccessOfTakeOver() bool {
 	return result
 }
 
-func ReturnAccessOfTakeOver() bool {
+func returnAccessOfTakeOver() bool {
 	return releaseDistributeKey()
 }
 
 func releaseDistributeKey() bool {
 	return cache.RedisReleaseLock(distributeLockKey)
 }
+
+func setInstanceNameListToCache(liveInstances []string) error {
+	instanceNameListJsonData, err := json.Marshal(liveInstances)
+	if err != nil {
+		logrus.Error("ERROR: setInstanceNameListToCache unmarshal failed")
+		return err
+	}
+	return cache.RedisClient.Set(instanceNameListKey, instanceNameListJsonData,0).Err()
+}
+
+

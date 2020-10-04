@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"bryson.foundation/kbuildresource/async"
 	"bryson.foundation/kbuildresource/buildjob"
 	"bryson.foundation/kbuildresource/cache"
 	"bryson.foundation/kbuildresource/common"
@@ -10,22 +11,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/sirupsen/logrus"
-	"sync"
 	"time"
 )
 
 type BuildJobHandler struct {
-
 }
-
-var handler *BuildJobHandler
 
 func init() {
-	handler = &BuildJobHandler{}
-}
+	async.RegisterRequestHandler(common.BuildJobPrefix, &BuildJobHandler{})
 
-func GetBuildJobHandler() *BuildJobHandler {
-	return handler
 }
 
 func (b *BuildJobHandler) PreExec(requestDTO interface{}, requestType string, values map[string]interface{}) error {
@@ -64,6 +58,7 @@ func (b *BuildJobHandler) MakeRequest(requestDTO interface{}, requestType string
 	if err != nil {
 		return nil, fmt.Errorf("marshal requestDTO failed")
 	}
+
 	request := &models.Request{
 		Name:        buildJobDTO.Name,
 		Status:      common.RequestStatusPending,
@@ -80,11 +75,10 @@ func (b *BuildJobHandler) MakeRequest(requestDTO interface{}, requestType string
 	return request, nil
 }
 
-func (b *BuildJobHandler) AsyncExec(request *models.Request, limitChan <-chan struct{}, wg *sync.WaitGroup) {
+func (b *BuildJobHandler) AsyncExec(request *models.Request, limitChan <-chan struct{}) {
 	time.Sleep(10 * time.Second)
 	defer func() {
 		<-limitChan
-		wg.Done()
 	}()
 	switch request.RequestType {
 	case common.BuildJobCreateRequestType:
@@ -134,6 +128,16 @@ func (b *BuildJobHandler) SyncExec(requestDTO interface{}, requestType string, v
 		return nil, err
 	}
 	return buildJobDTO, nil
+}
+
+func (b *BuildJobHandler) MakeAsyncResponse(requestDTO interface{}, requestType string, values map[string]interface{}) interface{}{
+	return requestDTO
+}
+
+//  要根据请求当前所处的状态（executing和pending）进行区分处理，这里为方便，统一都接管
+func (b *BuildJobHandler) HandleTakeOverRequest(request *models.Request, newInstanceName string) error {
+	request.Status = common.RequestStatusPending
+	return async.HandleCacheDataForTakeOverPendingRequest(request, newInstanceName)
 }
 
 func transferRequestStatus(request *models.Request, status string) error {
