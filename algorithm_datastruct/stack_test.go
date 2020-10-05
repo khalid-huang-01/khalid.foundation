@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 // leetcode 739
 func dailyTemperatures(T []int) []int {
@@ -82,6 +85,67 @@ func (f *FreqStack) Pop() int {
 		f.maxFreq -= 1 // 当前最大的已经没有了，往第二频率梯队找
 	}
 	return result
+}
+
+
+
+/*
+题目描述：
+给一个数组，返回一个大小相同的数组。返回的数组的第i个位置的值应当是，对于原数组中的第i个元素，至少往右走多少步，才能遇到一个比自己大的元素（如果之后没有比自己大的元素，或者已经是最后一个元素，则在返回数组的对应位置放上-1）。
+简单的例子：
+input: 5,3,1,2,4
+return: -1 3 1 1 -1
+ */
+func nexExceed(array []int) []int {
+	result := make([]int, len(array))
+	monoStack := make([]int,0)
+	for i, v := range array {
+		// monoStack[len(monoStack-1)] 表示栈顶元素
+		for len(monoStack) != 0 && (array[monoStack[len(monoStack)-1]] < v ) {
+			result[monoStack[len(monoStack)-1]] = i - monoStack[len(monoStack)-1]
+			monoStack = monoStack[:len(monoStack)-1]
+		}
+		monoStack = append(monoStack, i)
+	}
+	for len(monoStack) != 0 {
+		result[monoStack[len(monoStack)-1]] = -1
+		monoStack = monoStack[:len(monoStack)-1]
+	}
+	return result
+}
+
+func TestNextExceed(t *testing.T) {
+	array := []int{5,3,1,2,4}
+	result := nexExceed(array) // 结果应该是-1，3，1，1，-1
+	t.Log(result)
+}
+
+//-------------------
+// leetcode 84
+func largestRectangleArea(array []int) int {
+	monoStack := make([]int, 0)
+	result := 0
+	array = append(array, 0) // 放入一个0，保证全部的都可以计算到，特别是以1的顶为上边框的
+	for i, v := range array {
+		// 进一个元素，要弹出可以由这个元素得到结果的前面的元素
+		for len(monoStack) != 0 && array[monoStack[len(monoStack)-1]] > v {
+			// 计算长度
+			top := len(monoStack) - 1
+			diff := i - monoStack[top]
+			// 计算面积
+			result = max(result, diff * array[top])
+			// 弹出元素
+			monoStack = monoStack[:len(monoStack) - 1]
+		}
+		monoStack = append(monoStack, i)
+	}
+	return result
+}
+
+func TestLargestRectangleArea(t *testing.T) {
+	array := []int{2,1,5,6,2,3}
+	result := largestRectangleArea(array) // 答案为10
+	t.Log(result)
 }
 
 func main() {
