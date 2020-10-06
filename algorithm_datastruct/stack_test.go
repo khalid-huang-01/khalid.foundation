@@ -122,20 +122,30 @@ func TestNextExceed(t *testing.T) {
 
 //-------------------
 // leetcode 84
-func largestRectangleArea(array []int) int {
+func largestRectangleArea(heights []int) int {
 	monoStack := make([]int, 0)
 	result := 0
-	array = append(array, 0) // 放入一个0，保证全部的都可以计算到，特别是以1的顶为上边框的
-	for i, v := range array {
+	heights = append(heights, 0) // 放入一个0，保证全部的都可以计算到，特别是以1的顶为上边框的
+	for i, v := range heights {
 		// 进一个元素，要弹出可以由这个元素得到结果的前面的元素
-		for len(monoStack) != 0 && array[monoStack[len(monoStack)-1]] > v {
-			// 计算长度
+		for len(monoStack) != 0 && heights[monoStack[len(monoStack)-1]] > v {
 			top := len(monoStack) - 1
-			diff := i - monoStack[top]
+			// 确定高度
+			height := heights[monoStack[top]]
+			// 不断弹出相同元素
+			for len(monoStack) != 0 && heights[monoStack[len(monoStack)-1]] == height {
+				monoStack = monoStack[:len(monoStack) - 1]
+			}
+			// 计算长度，分两种情况，一种是栈里没有元素了，表明这个栈里面没有比它要小的左边界，那么它的宽度就是从0到自己的下标位置； 另
+			// 另一个种是栈里面有比它小的左边界，也就是栈顶的元素，因为比它大的都被弹出去了
+			var width int
+			if len(monoStack) == 0 {
+				width = i
+			} else {
+				width = i - monoStack[len(monoStack)-1] - 1
+			}
 			// 计算面积
-			result = max(result, diff * array[top])
-			// 弹出元素
-			monoStack = monoStack[:len(monoStack) - 1]
+			result = max(result, width * height)
 		}
 		monoStack = append(monoStack, i)
 	}
@@ -143,8 +153,9 @@ func largestRectangleArea(array []int) int {
 }
 
 func TestLargestRectangleArea(t *testing.T) {
-	array := []int{2,1,5,6,2,3}
-	result := largestRectangleArea(array) // 答案为10
+	//array := []int{2,1,5,6,2,3} // 答案是10
+	array := []int{6,5,6} // 答案是15
+	result := largestRectangleArea(array)
 	t.Log(result)
 }
 
