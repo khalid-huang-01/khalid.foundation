@@ -159,8 +159,51 @@ func TestLargestRectangleArea(t *testing.T) {
 	t.Log(result)
 }
 
+func nextGreaterElements(nums []int) []int {
+	size := len(nums)
+	result := make([]int, size)
+	// 先全部初始化为-1，后面没有设置到的，就使用默认仁
+	for i := 0; i < size; i++ {
+		result[i] = -1
+	}
+	if len(nums) == 0 {
+		return result
+	}
+	count := size * 2 - 1
+	monoStack := make([]int,0)
+	var value int
+	for i := 0; i < count; i++ {
+		value = nums[i%size]
+		for len(monoStack) != 0 && nums[front(monoStack)] < value {
+			result[front(monoStack)] = value
+			monoStack = monoStack[:len(monoStack)-1]
+		}
+		monoStack = append(monoStack, i%size)
+	}
+	return result
+}
+
+func front(stack []int) int {
+	return stack[len(stack)-1]
+}
+
+func TestTextGreaterElements(t *testing.T) {
+	nums := []int{1,2,1}
+	t.Log(nextGreaterElements(nums))
+}
+
+//-------------------
+// leetcode 503
+
+
 func main() {
 	num := 6
 	target := []int{6, 5, 4, 3, 2, 1}
 	fmt.Println(solution_6_1_2(num, target))
+}
+
+func TestIncrease(t *testing.T) {
+	a := 2
+	a++
+	fmt.Println(a)
 }
