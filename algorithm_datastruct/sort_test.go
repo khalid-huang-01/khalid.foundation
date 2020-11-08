@@ -163,5 +163,192 @@ func TestSort(t *testing.T) {
 		return a[i].Age < a[j].Age
 	})
 	fmt.Println(a)
+}
 
+// 拓扑排序 210
+// Topological Order，拓扑排序
+func findOrder(numCourses int, prerequisites [][]int) []int {
+	// 入度表和出边表
+	inDegree := make([]int, numCourses)
+	outEdges := make([][]int, numCourses)
+
+	// 根据prerequisites进行根据入度表和出边表
+	for _, v := range prerequisites {
+		inDegree[v[0]]++
+		outEdges[v[1]] = append(outEdges[v[1]], v[0])
+	}
+
+	queue := make([]int, 0)
+	rsl := make([]int , 0)
+	// 获取入度为0的点，加入队列
+	for i, v := range inDegree {
+		if v == 0 {
+			queue = append(queue, i)
+		}
+	}
+
+	var node int
+	for len(queue) != 0 {
+		node = queue[0]
+		queue = queue[1:] // 将队头出队
+		// 消除以队头为源点的边
+		for _, v := range outEdges[node] {
+			inDegree[v]--
+			if inDegree[v] == 0 {
+				queue = append(queue, v)
+			}
+		}
+		// 添加结果
+		rsl = append(rsl, node)
+	}
+	// 检查有没有成环，如果成环，直接返回空
+	if len(rsl) != numCourses {
+		rsl = []int{}
+	}
+	return rsl
+}
+
+type Group struct {
+	items map[int]int // 建立原始数据到表中的下标映射关系
+	items2 map[int]int //建立上面的反向关系
+	count int //计数
+	inDegree []int
+	outEdges [][]int
+}
+
+func (g *Group) Add(num int) {
+	g.items[num] = g.count
+	g.count++
+}
+
+// 拓扑排序 1203
+// nums节点数量， inDegree每个节点的入度，outEdges每个节点的出边
+func topologicalSort(nums int, inDegree []int, outEdges [][]int) []int {
+	queue := make([]int, 0)
+	for i, v := range inDegree {
+		if v == 0 {
+			queue = append(queue, i)
+		}
+	}
+	var node int
+	rsl := make([]int,0)
+	for len(queue) != 0 {
+		node = queue[0]
+		rsl = append(rsl, node)
+		queue = queue[1:]
+		// 删除以这个为出发点的边
+		for _, v := range outEdges[node] {
+			inDegree[v]--
+			if inDegree[v] == 0 {
+				queue = append(queue, v)
+			}
+		}
+	}
+	if len(rsl) != nums {
+		rsl = []int{}
+	}
+	return rsl
+}
+
+func sortItems(n int, m int, group []int, beforeItems [][]int) []int {
+	// 使用 group建立组别，为-1的，都给新的组号
+	groups := make(map[int]*Group)
+	maxGroupIndex := m - 1
+	for i, v := range group {
+		if v == -1 {
+			maxGroupIndex++
+			groups[maxGroupIndex] = &Group{
+				items: map[int]int{},
+			}
+			groups[maxGroupIndex].Add(i)
+			group[i] = maxGroupIndex // 建立反向查找
+		} else {
+			_, ok := groups[v]
+			// 没有初始化过的话，要进行初始化
+			if !ok {
+				groups[v] = &Group{
+					items: map[int]int{},
+				}
+			}
+			groups[v].Add(i)
+		}
+	}
+	// 根据上述情况对inDegress等进行初始化
+	for _, g := range groups {
+		if len(g.items) > 1 {
+			g.inDegree = make([]int, len(g.items))
+			g.outEdges = make([][]int, len(g.items))
+		}
+	}
+
+
+	// 使用beforeItems建立group与group之间，和group内的拓扑连接
+	groupInDegree := make([]int, maxGroupIndex)
+	groupOutEdges := make([][]int, maxGroupIndex)
+	// 2.1 使用beforeItem进行建立组之间和组与组之间的拓扑关系
+	var endGroup, startGroup int
+	var endNode, startNode int
+	for end, items := range beforeItems {
+		for _, start := range items {
+			endGroup = group[end]
+			startGroup = group[start]
+			fmt.Println(start, " ", startGroup)
+			fmt.Println(end, " ", endGroup)
+
+			// 建立组之间的关系
+			if endGroup != startGroup {
+				groupInDegree[endGroup]++
+				groupOutEdges[startGroup] = append(groupOutEdges[startGroup], endGroup)
+			} else {
+				// 建立节点之间的关系
+				endNode = groups[startGroup].items[end]
+				startNode = groups[startGroup].items[start]
+				groups[startGroup].inDegree[endNode]++
+				groups[startGroup].outEdges[startNode] = append(groups[startGroup].outEdges[startNode], endNode)
+
+			}
+		}
+	}
+	// 2.2 对组与组之间进行拓扑排序
+	groupTopological := topologicalSort(len(groups), groupInDegree, groupOutEdges)
+	// 2.2 针对每组再进行拓扑排序
+	rsl := make([]int ,0)
+	for _, v := range groupTopological {
+		if len(groups[v].items) == 1 {
+			rsl = append(rsl, groups[v].items[0])
+		} else {
+			tmp := topologicalSort(len(groups[v].items), groups[v].inDegree, groups[v].outEdges)
+			if len(tmp) == 0 {
+				rsl = []int{}
+				break
+			} else {
+				rsl = append(rsl, tmp...)
+			}
+		}
+	}
+	return  rsl
+}
+
+
+func TestSortItems(t *testing.T) {
+	n := 8
+	m := 2
+	group := []int{-1,-1,1,0,0,1,0,-1}
+	beforeItems := [][]int{
+		[]int{},
+		[]int{6},
+		[]int{5},
+		[]int{6},
+		[]int{3,6},
+		[]int{},
+		[]int{},
+		[]int{},
+	}
+	t.Log(sortItems(n,m,group,beforeItems))
+}
+func TestRange(t *testing.T) {
+	arr := make([][]int, 2)
+	for _, v := range arr[0] {
+		fmt.Println(v)
+	}
 }

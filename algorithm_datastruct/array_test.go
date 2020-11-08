@@ -2,6 +2,7 @@ package main
 
 import (
 	"container/heap"
+	"math"
 	"testing"
 )
 
@@ -169,3 +170,34 @@ func TestDuplicateList(t *testing.T) {
 	nums := []int{2, 3, 1, 1, 2, 5, 3, 0}
 	t.Log(duplicateList(nums))
 }
+
+// ----------滑动窗口----
+// leetcode209
+func minSubArrayLen(s int, nums []int) int {
+	start, end := 0, 0
+	size := len(nums)
+	ans, sum := math.MaxInt64, 0
+	for end < size {
+		sum += nums[end]
+		for sum >= s {
+			if ans > end - start + 1 {
+				ans = end- start + 1
+			}
+			sum -= nums[start]
+			start++
+		}
+		end++
+	}
+	if ans == math.MaxInt64 {
+		// fmt.Println("no")
+		ans = 0
+	}
+	return ans
+}
+
+func TestMinSubArrayLen(t *testing.T) {
+	s := 7
+	nums := []int{2,3,1,2,4,3}
+	t.Log(minSubArrayLen(s, nums))
+}
+
