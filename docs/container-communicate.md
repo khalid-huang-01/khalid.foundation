@@ -220,6 +220,12 @@ wget -O - nginx-server-service.default # <service-name>.<namespace-name> 正常�
 ## k8s 集群外访问pod容器服务（ingress）
 ### 实践
 segmentfault.com/a/1190000019908991部署
+首先我们需要安装一下ingress-controller，
+```shell
+# 创建ingress-controller
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.20.0/deploy/mandatory.yaml
+# 将ingress服务暴露出来
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.20.0/deploy/provider/baremetal/service-nodeport.yaml
 
 ### 原理
 后续补充
