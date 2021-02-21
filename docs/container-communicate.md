@@ -226,6 +226,29 @@ segmentfault.com/a/1190000019908991部署
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.20.0/deploy/mandatory.yaml
 # 将ingress服务暴露出来
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.20.0/deploy/provider/baremetal/service-nodeport.yaml
-
+# 为前面的nginx服务配置ingress规则
+kubectl apply -f  <<EOF
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  rules:
+  - host: k8s.example.com
+    http:
+      paths:
+      - path: /nginx
+        backend:
+          serviceName: nginx-server-service
+          servicePort: 80
+EOF          
+# 获取下ingress-nginx的nodeport，可以得到nginx-ingress的入口为<NodeIP>:<NodePort>，其中NodeIP表示任意一台宿主机的地址
+kubectl get svc -n ingress-nginx
+# 进行访问
+curl --resolve k8s.example.com:<NodeIP>:<NodePort> http://k8s.example.com:<NodePort>/nginx
 ### 原理
-后续补充
+为什么在有了Service之后，会需要Ingress呢？因为我们知道Service都要有一个负载均衡服务,这种做法成本高，作为用户，其实我们更希望看到k8s为我内置一个全局的负载均衡器，然后我们通过访问的URL，把请求转发给不同的后端Service。另外一方面也是因为Service提供的外部访问方式NodePort和LoadBalancer存在各种限制
+- NodePort类型的Service要求集群内Node有对外访问IP，而且有些性能问题
+- LoadBalancer要求在特定的云服务上运行Kubernetes，而且Service只提供L4负载均衡功能，一些高级的L7转发功能就做不到
+总之，Ingress服务是k8s里面全局的，为了代理不同后端Service而设置的负载均衡服务，（Service的Service）  
+当我们在集群里面部署了nginx-ingress-controller之后，这个控制器会根据Ingress对象里面的内容，生成一份对应的Nginx配置文件，并使用这个文件启动一个Nginx服务，而且通过ingress的informer对其进行监听，一旦Ingress对象被更新，nginx-ingress-controller也会同步更新这个配置文件。**所以一个Nginx Ingress Controller提供的其实是一个可以根据Ingress对象和被代理后端Service的变化，来自动进行更新的Nginx负载均衡器**
