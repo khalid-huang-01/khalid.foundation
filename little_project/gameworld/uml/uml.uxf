@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>248</x>
+      <y>0</y>
+      <w>208</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Hero
+--
+- healthPoint: int
+- location: int
+--
++ isDead(): bool
++ attack(LevelOneMonster): void
++ attack(LevelTwoMonster): void
++ isReachable(LevelOneMonster): bool
++ isReachable(LevelTwoMonster): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>528</x>
+      <y>232</y>
+      <w>216</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>BattleField
+--
+- levelOneMonsters: LevelOneMonster[]
+- levelTwoMonsters: levelTwoMonster[]
+- numOfRemainMonsters: int
+--
++ start(Hero)
++ monsterAttack(Hero)
++ heroAttack(Hero)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>496</x>
+      <y>0</y>
+      <w>208</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>LevelOneMonster
+--
+- healthPoint: int
+- location: int
+--
++ isDead(): bool
++ attack(Hero): void
++ isReachable(Hero): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>0</y>
+      <w>208</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>LevelTwoMonster
+--
+- healthPoint: int
+- location: int
+--
++ isDead(): bool
++ attack(Hero): void
++ isReachable(Hero): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>584</x>
+      <y>112</y>
+      <w>248</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>584</x>
+      <y>120</y>
+      <w>32</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>112</y>
+      <w>264</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;310.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>576</y>
+      <w>208</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Hero
+--
+- healthPoint: int
+- location: int
+--
++ isDead(): bool
++ attack(BaseMonster): void
++ isReachable(BaseMonster): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>440</y>
+      <w>208</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>LevelOneMonster
+--
++ attack(Hero): void
++ isReachable(Hero): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>536</x>
+      <y>432</y>
+      <w>208</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>LevelTwoMonster
+--
++ attack(Hero): void
++ isReachable(Hero): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>696</y>
+      <w>64</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>344</x>
+      <y>792</y>
+      <w>216</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>BattleField
+--
+- Monsters: BaseMonster[]
+- numOfRemainMonsters: int
+--
++ start(Hero)
++ monsterAttack(Hero)
++ heroAttack(Hero)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>208</x>
+      <y>688</y>
+      <w>224</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>584</y>
+      <w>208</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>BaseMonster
+--
+- healthPoint: int
+- location: int
+--
++ isDead(): bool
++ attack(Hero): void
++ isReachable(Hero): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>488</y>
+      <w>168</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>488</y>
+      <w>104</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+</diagram>
