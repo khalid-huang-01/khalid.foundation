@@ -27,7 +27,7 @@ func (hero *Hero) String() string {
 	return fmt.Sprintf("hero healthPoint is: %v", hero.HealthPoint)
 }
 
-type monsterStrategyInterface interface {
+type MonsterStrategyInterface interface {
 	AttackStrategy(hero *Hero)
 	IsReachableStrategy(hero *Hero, monster *Monster) bool
 	Name() string
@@ -37,7 +37,8 @@ type monsterStrategyInterface interface {
 type Monster struct {
 	HealthPoint int
 	Location int
-	strategy monsterStrategyInterface
+	// 策略模式
+	strategy MonsterStrategyInterface
 }
 
 func (m *Monster) isDead() bool {
@@ -49,6 +50,7 @@ func (m *Monster) attack(hero *Hero) {
 }
 
 func (m *Monster) isReachable(hero *Hero) bool {
+	// 面向接口编程
 	return m.strategy.IsReachableStrategy(hero, m)
 }
 
@@ -141,7 +143,12 @@ func (b *BattleField) Start(hero *Hero) {
 
 }
 
+// 依赖倒置（面向接口编程）
 func (b *BattleField) monsterAttack(hero *Hero) {
+	// 开放封闭原则，对新增开放，对修改封闭
+	// 当需要添加新的类型的monster时，这里的逻辑并不需要变动
+	// 将依赖关系倒置后，具体怪物依赖战场，通过把自己注册给战场，战场不再依赖具体怪物，
+	// 而是依赖稳定的怪物接口，新增怪物时，战场代码就不需要修改，达成了稳定的目的
 	for _, m := range b.Monsters {
 		if m.isDead() {
 			continue
@@ -171,6 +178,7 @@ func (b *BattleField) heroAttack(hero *Hero) {
 		}
 	}
 }
+
 
 func newBattleField() *BattleField {
 	b := &BattleField{}

@@ -1,6 +1,10 @@
 package gameworld
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+	"time"
+)
 
 func TestWorld(t *testing.T) {
 	//实例化英雄
@@ -12,3 +16,10 @@ func TestWorld(t *testing.T) {
 	battle.Start(hero)
 }
 
+
+func TestTime(t *testing.T) {
+	createTimeStamp := time.Now().Unix()
+	createTime := time.Unix(createTimeStamp, 0)
+	fmt.Println(createTime)
+	fmt.Println(createTime.Add(time.Duration(10) * time.Second))
+}
