@@ -117,3 +117,35 @@ func TestSlice(t *testing.T) {
 	testslice(s)
 	fmt.Println(s)
 }
+
+// leetcode 200
+func island_dfs(grid [][]byte, i, j int) {
+	grid[i][j] = '0'
+	rows := len(grid)
+	cols := len(grid[0])
+	if i + 1 < rows && grid[i+1][j] == '1' {
+		island_dfs(grid, i+1, j)
+	}
+	if i - 1 >= 0 && grid[i-1][j] == '1' {
+		island_dfs(grid, i-1, j)
+	}
+	if j + 1 < cols && grid[i][j+1] == '1' {
+		island_dfs(grid, i, j+1)
+	}
+	if j - 1 >= 0 && grid[i][j-1] == '1' {
+		island_dfs(grid, i, j-1)
+	}
+}
+func numIslands(grid [][]byte) int {
+	result := 0
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			if grid[i][j] == '1' {
+				result += 1
+				island_dfs(grid, i, j)
+			}
+		}
+	}
+	return result
+}
+

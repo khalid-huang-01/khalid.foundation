@@ -175,5 +175,44 @@ func solve(board [][]byte)  {
 	}
 }
 
-
-
+type Point struct {
+	x, y int
+}
+// leetcode 200
+func numIslands1(grid [][]byte) int {
+	result := 0
+	rows := len(grid)
+	cols := len(grid[0])
+	// 尽量把1变成0
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
+			if grid[i][j] == '1' {
+				result += 1
+				grid[i][j] = '0'
+				queue := make([]Point, 0)
+				queue = append(queue, Point{x:i,y:j})
+				for len(queue) != 0 {
+					point := queue[0]
+					queue = queue[1:]
+					if point.x - 1 >= 0&& grid[point.x-1][point.y] == '1' {
+						queue = append(queue, Point{x:point.x-1,y:point.y})
+						grid[point.x-1][point.y]='0'
+					}
+					if point.x + 1 < rows&& grid[point.x+1][point.y] == '1' {
+						queue = append(queue, Point{x:point.x+1,y:point.y})
+						grid[point.x+1][point.y]='0'
+					}
+					if point.y - 1 >= 0&& grid[point.x][point.y-1] == '1' {
+						queue = append(queue, Point{x:point.x,y:point.y-1})
+						grid[point.x][point.y-1]='0'
+					}
+					if point.y + 1 < cols&& grid[point.x][point.y+1] == '1' {
+						queue = append(queue, Point{x:point.x,y:point.y+1})
+						grid[point.x][point.y+1]='0'
+					}
+				}
+			}
+		}
+	}
+	return result
+}

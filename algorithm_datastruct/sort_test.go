@@ -50,7 +50,7 @@ func _mergeSort(data []int, low int, high int) {
 }
 
 //赋值的手法高明
-func merge(data []int, low int, middle int, high int) {
+func merge1(data []int, low int, middle int, high int) {
 	tmp := make([]int, len(data))
 	copy(tmp, data)
 	k, i, j := low, low, middle+1
@@ -73,10 +73,38 @@ func merge(data []int, low int, middle int, high int) {
 	}
 }
 
+// 使用哨兵简化编程，主要是为了避免特殊情况的处理，在两个子串最后都加一个无穷大的数字，这样就可以避免有子串遍历完的情况
+const INT_MAX = int(^uint(0) >> 1) // 全部取反再右移一位，就只有第一位是0了
+const INT_MIN = ^INT_MAX
+func merge(data []int, low int, middle int, high int) {
+	tmpLeft := make([]int, middle-low+2) // middle-low+1+ 1 //最后都补1
+	tmpRight := make([]int, high-middle+1) // high - (middle+1) + 1 + 1
+	copy(tmpLeft, data[low:middle+1])
+	tmpLeft[len(tmpLeft)-1] = INT_MAX
+	copy(tmpRight, data[middle+1:high+1])
+	tmpRight[len(tmpRight)-1] = INT_MAX
+
+	for k,i,j := low, 0, 0; k <= high; k++ {
+		if tmpLeft[i] < tmpRight[j] {
+			data[k] = tmpLeft[i]
+			i++
+		} else {
+			data[k] = tmpRight[j]
+			j++
+		}
+	}
+}
+
 func mergeSort(data []int) {
 	low := 0
 	high := len(data) - 1
 	_mergeSort(data, low, high)
+}
+
+func TestMergeSort(t *testing.T) {
+	data := []int{3,1,5,2,7,11,4}
+	mergeSort(data)
+	t.Log(data)
 }
 
 func _quickSort(data []int, low int, high int) {
@@ -98,6 +126,8 @@ func partition(data []int, low int, high int) int {
 
 	//换位,双指针
 	var i, j int
+	// 思想其实就是把列表划分为两个区，low到i-1区间表示已选择的比data[high]小的数字，i到j-1之间的是比data[high]大的数字，j以上的是没有判断的
+	// 算法的目的就是在没有判断的里面找到比data[high]小的，然后与data[i]交互，放入小区数字，再把i往前移一位，到大区数字，恢复秩序
 	// i是第一个比基准值大的数
 	// j是用于判断的数
 	for i, j = low, low; j < high; j++ {
