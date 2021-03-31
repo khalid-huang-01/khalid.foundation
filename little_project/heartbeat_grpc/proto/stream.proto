@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "khalid.foundation/heartbeat/proto";
+
+package proto;
+
+message StreamMsg {
+	string node = 1;
+	string type = 2;
+	string number = 3;
+}
+
+service Stream {
+	rpc HeartbeatStream (stream StreamMsg) returns (stream StreamMsg) {
+	}
+}
