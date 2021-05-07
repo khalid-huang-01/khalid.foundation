@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text/>
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>40</y>
+      <w>290</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>LocationCache
+--
+# nodeName:Status
++ EdgeNodes: sync.Map
+# namespace/configMapName: nodeName
++ configMapNode sync.Map
+# namespace/secretName: NodeName
++ secreteNode sync.Map
+# namespace/serviceName: v1.Service
++ services sync.Map
+# namespace/endpointName: v1.endpoints
++ endpoints sync.Map
+# namespace/serviceName: []v1.Pod
++ servicePods sync.Map </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>40</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>DownstreamController
+--
+- lc *manager.LocationCache
+- messageLayer: MessageLayer
+--
+- syncService()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>60</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+会把从k8s watch到的
+信息给添加到lc里面
+需要时会从lc里面获取</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>280</y>
+      <w>140</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+MessageLayer
+--
++ Send() 
++ Receive()
++ Response()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>440</y>
+      <w>230</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>ContextMessageLayer
+--
+SendModuleName: string
+RecieveModuleName: stirng
+ResponseModuleName: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>370</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>130</y>
+      <w>240</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+具体实现是ContextMessageLayer
+参数在cloudcore.yaml里面的
+edgeController.context定义了
+receiveModule: edgecontroller
+responeModule: cloudhub
+sendModule: cloudhub
+通过把消息发送到cloudhub，
+让cloudhub把消息发送到edgehub</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>430</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;singleton&gt;&gt;
+beehiveContext
+--
+- modulecontext ModuleContext
+- messageContex MessageContext
+- ctx gocontext.Context
+- cancel gocontext.CancelFunc</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>470</y>
+      <w>200</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖beehiveContext的
+messageContext把消息
+发送到cloudhub
+</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+</diagram>
