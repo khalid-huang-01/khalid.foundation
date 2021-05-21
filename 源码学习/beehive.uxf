@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>160</y>
+      <y>280</y>
       <w>170</w>
       <h>100</h>
     </coordinates>
@@ -21,7 +21,7 @@ ModuleContext
     <id>UMLClass</id>
     <coordinates>
       <x>590</x>
-      <y>0</y>
+      <y>120</y>
       <w>220</w>
       <h>260</h>
     </coordinates>
@@ -47,7 +47,7 @@ MessageContext
     <id>UMLClass</id>
     <coordinates>
       <x>420</x>
-      <y>360</y>
+      <y>480</y>
       <w>380</w>
       <h>80</h>
     </coordinates>
@@ -62,7 +62,7 @@ annoChannels map[string]chan model.Message</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>600</x>
-      <y>250</y>
+      <y>370</y>
       <w>80</w>
       <h>130</h>
     </coordinates>
@@ -73,7 +73,7 @@ annoChannels map[string]chan model.Message</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>440</x>
-      <y>550</y>
+      <y>670</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
@@ -90,7 +90,7 @@ beehiveContext
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>430</y>
+      <y>550</y>
       <w>180</w>
       <h>140</h>
     </coordinates>
@@ -104,7 +104,7 @@ ChannelContext</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>410</x>
-      <y>250</y>
+      <y>370</y>
       <w>170</w>
       <h>130</h>
     </coordinates>
@@ -116,7 +116,7 @@ ChannelContext</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>150</y>
+      <y>270</y>
       <w>130</w>
       <h>110</h>
     </coordinates>
@@ -133,7 +133,7 @@ Module
     <id>Relation</id>
     <coordinates>
       <x>120</x>
-      <y>190</y>
+      <y>310</y>
       <w>250</w>
       <h>110</h>
     </coordinates>
@@ -150,7 +150,7 @@ module负责start</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>70</x>
-      <y>250</y>
+      <y>370</y>
       <w>390</w>
       <h>380</h>
     </coordinates>
@@ -165,7 +165,7 @@ beehiveContext
     <id>UMLClass</id>
     <coordinates>
       <x>930</x>
-      <y>110</y>
+      <y>230</y>
       <w>170</w>
       <h>90</h>
     </coordinates>
@@ -180,7 +180,7 @@ Context interface{}</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>790</x>
-      <y>140</y>
+      <y>260</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -192,7 +192,7 @@ Context interface{}</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>930</x>
-      <y>260</y>
+      <y>380</y>
       <w>170</w>
       <h>160</h>
     </coordinates>
@@ -212,7 +212,7 @@ Context interface{}</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1170</x>
-      <y>80</y>
+      <y>200</y>
       <w>170</w>
       <h>160</h>
     </coordinates>
@@ -231,7 +231,7 @@ Context interface{}</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1090</x>
-      <y>150</y>
+      <y>270</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -242,7 +242,7 @@ Context interface{}</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1010</x>
-      <y>190</y>
+      <y>310</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
