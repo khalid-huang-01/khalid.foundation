@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>330</x>
-      <y>100</y>
+      <x>340</x>
+      <y>70</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -16,8 +16,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>100</y>
+      <x>580</x>
+      <y>70</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -28,8 +28,8 @@ localhost 30002</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>100</y>
+      <x>480</x>
+      <y>70</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -40,8 +40,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
-      <y>100</y>
+      <x>90</x>
+      <y>70</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -52,8 +52,8 @@ telnet localhost 30001</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>100</y>
+      <x>230</x>
+      <y>70</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -64,8 +64,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>50</y>
+      <x>40</x>
+      <y>20</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -75,8 +75,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>200</y>
+      <x>40</x>
+      <y>170</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -87,7 +87,7 @@ tcp conn</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>30</x>
-      <y>350</y>
+      <y>340</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -97,8 +97,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>480</y>
+      <x>40</x>
+      <y>450</y>
       <w>240</w>
       <h>30</h>
     </coordinates>
@@ -108,8 +108,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>620</y>
+      <x>40</x>
+      <y>590</y>
       <w>310</w>
       <h>30</h>
     </coordinates>
@@ -119,8 +119,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>720</y>
+      <x>80</x>
+      <y>690</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -131,8 +131,8 @@ telnet localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>320</x>
-      <y>720</y>
+      <x>330</x>
+      <y>690</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -143,8 +143,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>750</x>
-      <y>720</y>
+      <x>760</x>
+      <y>690</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -155,8 +155,8 @@ localhost 30002</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>550</x>
-      <y>720</y>
+      <x>560</x>
+      <y>690</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -167,8 +167,8 @@ localhost 30002</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>720</y>
+      <x>220</x>
+      <y>690</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -179,8 +179,8 @@ tcp conn</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>460</x>
-      <y>720</y>
+      <x>470</x>
+      <y>690</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -191,13 +191,73 @@ tunnel</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>720</y>
+      <x>700</x>
+      <y>690</y>
       <w>80</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 tcp conn</panel_attributes>
     <additional_attributes>60.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>260</x>
+      <y>230</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+tcp conn</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>230</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>http client
+curl localhost:30001/hello</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>230</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>tcp proxy 
+localhost 30001</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>230</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+tcp conn</panel_attributes>
+    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>610</x>
+      <y>230</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>HTTP server
+localhost:30002</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

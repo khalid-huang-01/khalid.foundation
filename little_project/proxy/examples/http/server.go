@@ -12,8 +12,8 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/hello", hello)
-	log.Println("http server listen on 30003")
-	err := http.ListenAndServe(":30003", nil)
+	log.Println("http server listen on 30002")
+	err := http.ListenAndServe(":30002", nil)
 	if err != nil {
 		log.Fatal("ListenAndServer fail: ", err)
 	}
