@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>160</x>
+      <y>90</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>cloudhub</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>200</x>
+      <y>110</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1140</x>
+      <y>80</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>edgehub.certManager</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1210</x>
+      <y>100</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>200</x>
+      <y>150</y>
+      <w>20</w>
+      <h>590</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1210</x>
+      <y>150</y>
+      <w>20</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>150</y>
+      <w>350</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+httpserver.PrepareAllCerts():
+1. 检查本地目录或者k8s secret
+里面有没有ca私钥以及ca证书，
+没有的话，就生成ca私钥和ca证书
+并存储到k8s secret里面
+
+2.检查本地目录或者k8s secret里面
+有没有自身的私钥和证书，如果没有，
+就生成一个私钥，同时使用ca（证书+私钥）
+生成一个server的证书供自己使用 </panel_attributes>
+    <additional_attributes>10.0;170.0;60.0;170.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>340</y>
+      <w>370</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+httpserver.GenerateToken():
+1. 使用jwt+Ca私钥生成一个jwt token,
+将这个jwt token连并ca证书的hash值进行
+拼装成一个caHashToken
+2. caHashToken会被保存到k8s secret里面
+3. 启动一个协程，每隔12小时对token进行更新
+</panel_attributes>
+    <additional_attributes>10.0;130.0;60.0;130.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>490</y>
+      <w>400</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+httpserver.StartHTTPServer()
+1. 提供/ca.crt用下载ca证书
+2. 提供/edge.crt用于接收client
+的证书申请请求（csr）并进行签名
+具体首先会校验jwt token，
+通过之后会使用ca私钥ca证书对CSR进行签名；
+签名之后就生成了一个客户端的DER（也就是
+经过ca认证的客户端证书了） =&gt; cloudcore就是
+一个CA机构
+3. 提供/readyz用于返回cloudcore是否ready的状态；
+这个函数主要是用于选主的</panel_attributes>
+    <additional_attributes>10.0;190.0;60.0;190.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>140</y>
+      <w>390</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+getCurrent():
+1. 尝试从本地直接加载自身的证书和私钥
+2. 如果成功，对其进行解析，若再成功，直接退出
+3. 如果不成功，调用applyCerts</panel_attributes>
+    <additional_attributes>10.0;80.0;60.0;80.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>230</y>
+      <w>590</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+applyCerts():基于token生成证书
+1. 基于InsecureSkipVerify:true访问
+&lt;clodhub-url&gt;/ca.crt，获取ca证书
+2.使用token(在注册节点的时候从keadm 
+gettoken获取的token，包含了ca证书的哈希值
+和jwt token)校验获取的ca.crt是否被篡改，主要
+是做hash值对比
+3. ca证书校验通过后，保存到文件
+4. 生成私钥，并用私钥csr；利用ca证书，做Certificates:[]tls.Certificate{certificate},
+建立与cloudhub的tls通信，传递csr、token、nodename
+5. cloudhub会使用ca对csr做签名，生成证书，发回给edgehub
+edgehub获取到证书
+6. 到这里就获取了私钥和证书，将私钥和证书保存到本地文件
+</panel_attributes>
+    <additional_attributes>10.0;220.0;60.0;220.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>470</y>
+      <w>160</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+rotate():
+1. 做证书轮换</panel_attributes>
+    <additional_attributes>10.0;70.0;60.0;70.0;60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>830</x>
+      <y>90</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>cloudhub</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>110</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>870</x>
+      <y>160</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>190</y>
+      <w>250</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+初始化过程</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>680</w>
+      <h>800</h>
+    </coordinates>
+    <panel_attributes>yellow
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>210</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>870</x>
+      <y>250</y>
+      <w>20</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>240</y>
+      <w>350</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+/ca.crt
+</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>300</y>
+      <w>350</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+ca.crt</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>360</y>
+      <w>350</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+/edge.crt
+携带csr+token+node
+</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>410</y>
+      <w>350</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+edge.crt(证书)</panel_attributes>
+    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1210</x>
+      <y>560</y>
+      <w>30</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>550</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>990</x>
+      <y>180</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>生成证书
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>980</x>
+      <y>490</y>
+      <w>110</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>建立wss长转接
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>870</x>
+      <y>600</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1210</x>
+      <y>600</y>
+      <w>20</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+</diagram>
