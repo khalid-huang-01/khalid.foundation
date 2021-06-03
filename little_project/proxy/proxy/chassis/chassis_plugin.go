@@ -1,4 +1,4 @@
-package main
+package chassis
 
 import (
 	"github.com/go-chassis/go-archaius"

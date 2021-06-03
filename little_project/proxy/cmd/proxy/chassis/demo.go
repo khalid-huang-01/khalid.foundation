@@ -4,6 +4,7 @@ import (
 	"log"
 	"net"
 
+	_ "khalid.foundation/proxy/proxy/chassis" // 需要初始化chassis-plugin
 	"khalid.foundation/proxy/proxy/chassis/protocol"
 )
 
