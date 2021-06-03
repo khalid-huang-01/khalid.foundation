@@ -66,30 +66,36 @@ func (l *L4ProxyHandler) Handle(chain *handler.Chain, i *invocation.Invocation, 
 
 // 这里要了解下读或者写结束的时候，会返回什么结束码
 func pipe(src, des io.ReadWriteCloser) {
-	//_, err := io.Copy(des, src)
-	//if err != nil {
-	//	fmt.Println("read error: ", err )
-	//}
-
-	buff := make([]byte, 0xffff) //64K
-	for {
-		n, err := src.Read(buff)
-		if err != nil {
-			if err != io.EOF {
-				log.Println("read error: ", err)
-			}
-			src.Close()
-			des.Close()
-			break
-		}
-		_, err = des.Write(buff[:n])
-		if err != nil {
-			log.Println("write error: ", err)
-			src.Close()
-			des.Close()
-			break
-		}
+//	// 从响应上来看，在STOP的时候，没有把数据回传 原因在于说：io.Copy结束的时候err是为空的
+	// 如果中途断了，可能需要做一些重新连接的操作？
+	fmt.Println("pipe")
+	_, err := io.Copy(des, src)
+	if err != nil {
+		fmt.Println("read error: ", err )
 	}
+	src.Close()
+	des.Close()
+
+	//
+	//buff := make([]byte, 0xffff) //64K
+	//for {
+	//	n, err := src.Read(buff)
+	//	if err != nil {
+	//		if err != io.EOF {
+	//			log.Println("read error: ", err)
+	//		}
+	//		src.Close()
+	//		des.Close()
+	//		break
+	//	}
+	//	_, err = des.Write(buff[:n])
+	//	if err != nil {
+	//		log.Println("write error: ", err)
+	//		src.Close()
+	//		des.Close()
+	//		break
+	//	}
+	//}
 }
 
 
