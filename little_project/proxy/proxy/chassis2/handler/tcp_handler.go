@@ -68,7 +68,6 @@ func (l *L4ProxyHandler) Handle(chain *handler.Chain, i *invocation.Invocation, 
 func pipe(src, des io.ReadWriteCloser) {
 //	// 从响应上来看，在STOP的时候，没有把数据回传 原因在于说：io.Copy结束的时候err是为空的
 	// 如果中途断了，可能需要做一些重新连接的操作？
-	fmt.Println("pipe")
 	_, err := io.Copy(des, src)
 	if err != nil {
 		fmt.Println("read error: ", err )

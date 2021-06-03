@@ -46,6 +46,7 @@ func (esd *EdgeServiceDiscovery) GetAllMicroServices() ([]*registry.MicroService
 	return nil, nil
 }
 
+// 这个会在load_balancer.go的BuildStragegy里面调用，用于返回所有的实例，然后给调度算法使用
 // FindMicroServiceInstances find micro-service instances (subnets)
 func (esd *EdgeServiceDiscovery) FindMicroServiceInstances(consumerID, microServiceName string, tags utiltags.Tags) ([]*registry.MicroServiceInstance, error) {
 	fmt.Println("microServiceName: ", microServiceName)
@@ -53,6 +54,9 @@ func (esd *EdgeServiceDiscovery) FindMicroServiceInstances(consumerID, microServ
 	hostIP := "127.0.0.1"
 	HostPort := 30002
 
+	// 这个地址的EndpointsMap会在loadbalance_handler.go里面的getEndpoint函数里面使用
+	// 具体的作用是会把这个key值作为invocation对象，也就是调用链的Protocol变量的值
+	// 这里EndPointsMap里面的value值最后会作为loadbalance_handler.go里面的getEndpoint的返回值
 	var microServiceInstances instanceList
 	microServiceInstances = append(microServiceInstances, &registry.MicroServiceInstance{
 		InstanceID:      "",

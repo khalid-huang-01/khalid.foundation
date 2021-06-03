@@ -8,6 +8,7 @@ import (
 	"github.com/go-chassis/go-chassis/core/loadbalancer"
 	"github.com/go-chassis/go-chassis/core/registry"
 	"github.com/prometheus/common/log"
+	loadbalancer2 "khalid.foundation/proxy/proxy/chassis2/loadbalancer"
 	_ "khalid.foundation/proxy/proxy/chassis2/panel"
 	registry2 "khalid.foundation/proxy/proxy/chassis2/registry"
 )
@@ -29,8 +30,9 @@ func init() {
 		return &loadbalancer.RandomStrategy{}
 	})
 
+	// 这个注册函数，会在loadbalance_handler里面的LBHandler.getEndpoint调用，用于返回一个策略
 	loadbalancer.InstallStrategy(loadbalancer.StrategyRoundRobin, func() loadbalancer.Strategy {
-		return &loadbalancer.RoundRobinStrategy{}
+		return &loadbalancer2.RoundRobinStrategy{}
 	})
 
 	// control panel
