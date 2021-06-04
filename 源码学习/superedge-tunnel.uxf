@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>500</x>
+      <x>330</x>
       <y>560</y>
       <w>170</w>
       <h>130</h>
@@ -22,7 +22,7 @@ NodeIsExist(string) bool</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>500</x>
+      <x>330</x>
       <y>750</y>
       <w>170</w>
       <h>60</h>
@@ -37,7 +37,7 @@ nodeLock sync.RWMutex
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
+      <x>410</x>
       <y>680</y>
       <w>30</w>
       <h>90</h>
@@ -48,7 +48,7 @@ nodeLock sync.RWMutex
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>670</x>
+      <x>500</x>
       <y>260</y>
       <w>100</w>
       <h>100</h>
@@ -66,7 +66,7 @@ protocol ProtocolContext
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
+      <x>390</x>
       <y>350</y>
       <w>290</w>
       <h>230</h>
@@ -78,7 +78,7 @@ protocol ProtocolContext
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
+      <x>0</x>
       <y>550</y>
       <w>220</w>
       <h>140</h>
@@ -97,7 +97,7 @@ GetBindConns() []string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
+      <x>190</x>
       <y>620</y>
       <w>160</w>
       <h>220</h>
@@ -109,7 +109,7 @@ GetBindConns() []string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
+      <x>10</x>
       <y>780</y>
       <w>190</w>
       <h>100</h>
@@ -125,7 +125,7 @@ connsLock sync.RWMutex</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>240</x>
+      <x>70</x>
       <y>680</y>
       <w>30</w>
       <h>120</h>
@@ -136,7 +136,7 @@ connsLock sync.RWMutex</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
+      <x>600</x>
       <y>560</y>
       <w>210</w>
       <h>110</h>
@@ -154,7 +154,7 @@ GetConns(name []string) []*conn
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1110</x>
+      <x>940</x>
       <y>570</y>
       <w>220</w>
       <h>100</h>
@@ -171,7 +171,7 @@ GetUid() string
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>970</x>
+      <x>800</x>
       <y>610</y>
       <w>200</w>
       <h>180</h>
@@ -183,7 +183,7 @@ GetUid() string
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
+      <x>540</x>
       <y>350</y>
       <w>170</w>
       <h>230</h>
@@ -194,7 +194,7 @@ GetUid() string
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>790</x>
+      <x>620</x>
       <y>750</y>
       <w>190</w>
       <h>50</h>
@@ -207,7 +207,7 @@ conns map[string]*conn</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>860</x>
+      <x>690</x>
       <y>660</y>
       <w>30</w>
       <h>110</h>
@@ -218,7 +218,7 @@ conns map[string]*conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1150</x>
+      <x>980</x>
       <y>740</y>
       <w>160</w>
       <h>60</h>
@@ -232,7 +232,7 @@ ch chan *StreamMsg</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1200</x>
+      <x>1030</x>
       <y>660</y>
       <w>30</w>
       <h>100</h>
@@ -243,7 +243,7 @@ ch chan *StreamMsg</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>650</x>
+      <x>480</x>
       <y>0</y>
       <w>150</w>
       <h>180</h>
@@ -265,7 +265,7 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
+      <x>150</x>
       <y>170</y>
       <w>420</w>
       <h>400</h>
@@ -277,7 +277,7 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
+      <x>540</x>
       <y>170</y>
       <w>450</w>
       <h>420</h>
@@ -289,7 +289,7 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
+      <x>540</x>
       <y>170</y>
       <w>210</w>
       <h>110</h>
@@ -301,7 +301,7 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>190</x>
+      <x>20</x>
       <y>1000</y>
       <w>160</w>
       <h>30</h>
@@ -312,7 +312,7 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
+      <x>90</x>
       <y>870</y>
       <w>270</w>
       <h>150</h>
@@ -329,7 +329,7 @@ gRPC的SendMsg发送出去
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
+      <x>0</x>
       <y>1120</y>
       <w>200</w>
       <h>80</h>
@@ -346,7 +346,7 @@ RecvMsg(m interface{}) error
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>260</x>
+      <x>90</x>
       <y>1020</y>
       <w>200</w>
       <h>120</h>
@@ -362,7 +362,7 @@ SendMsg和RecvMsg方法
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
+      <x>30</x>
       <y>1020</y>
       <w>90</w>
       <h>120</h>
@@ -373,7 +373,7 @@ SendMsg和RecvMsg方法
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
+      <x>170</x>
       <y>790</y>
       <w>1180</w>
       <h>250</h>

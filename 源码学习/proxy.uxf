@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>390</x>
+      <x>460</x>
       <y>50</y>
       <w>150</w>
       <h>40</h>
@@ -16,7 +16,7 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
+      <x>700</x>
       <y>50</y>
       <w>150</w>
       <h>40</h>
@@ -28,7 +28,7 @@ localhost 30002</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
+      <x>600</x>
       <y>50</y>
       <w>120</w>
       <h>40</h>
@@ -40,7 +40,7 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
+      <x>210</x>
       <y>50</y>
       <w>150</w>
       <h>40</h>
@@ -52,7 +52,7 @@ telnet localhost 30001</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
+      <x>350</x>
       <y>50</y>
       <w>130</w>
       <h>40</h>
@@ -64,7 +64,7 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
+      <x>160</x>
       <y>0</y>
       <w>180</w>
       <h>30</h>
@@ -75,7 +75,7 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>90</x>
+      <x>160</x>
       <y>150</y>
       <w>180</w>
       <h>30</h>
@@ -86,7 +86,7 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>80</x>
+      <x>150</x>
       <y>320</y>
       <w>180</w>
       <h>30</h>
@@ -95,31 +95,9 @@ tcp conn</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>80</x>
-      <y>430</y>
-      <w>240</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>http proxy server代理http (libp2p)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>60</x>
-      <y>640</y>
-      <w>310</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>tcp proxy server代理tcp (libp2p relay)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>310</x>
+      <x>380</x>
       <y>210</y>
       <w>130</w>
       <h>40</h>
@@ -131,7 +109,7 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>140</x>
+      <x>210</x>
       <y>210</y>
       <w>180</w>
       <h>40</h>
@@ -143,7 +121,7 @@ curl localhost:30001/hello</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
+      <x>490</x>
       <y>210</y>
       <w>150</w>
       <h>40</h>
@@ -155,7 +133,7 @@ localhost 30001</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
+      <x>630</x>
       <y>210</y>
       <w>120</w>
       <h>40</h>
@@ -167,7 +145,7 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>660</x>
+      <x>730</x>
       <y>210</y>
       <w>150</w>
       <h>40</h>
@@ -179,8 +157,8 @@ localhost:30002</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>730</y>
+      <x>410</x>
+      <y>970</y>
       <w>340</w>
       <h>90</h>
     </coordinates>
@@ -190,8 +168,8 @@ localhost:30002</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>750</y>
+      <x>420</x>
+      <y>990</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -202,8 +180,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>750</y>
+      <x>590</x>
+      <y>990</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -213,8 +191,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>960</y>
+      <x>650</x>
+      <y>1200</y>
       <w>340</w>
       <h>90</h>
     </coordinates>
@@ -224,8 +202,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>770</x>
-      <y>980</y>
+      <x>830</x>
+      <y>1220</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -235,8 +213,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>610</x>
-      <y>980</y>
+      <x>670</x>
+      <y>1220</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -246,8 +224,8 @@ localhost 30001</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>750</y>
+      <x>170</x>
+      <y>990</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -258,8 +236,8 @@ telnet localhost 30001</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>750</y>
+      <x>310</x>
+      <y>990</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -270,8 +248,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>750</y>
+      <x>820</x>
+      <y>990</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -281,8 +259,8 @@ tcp conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>310</x>
-      <y>980</y>
+      <x>370</x>
+      <y>1220</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -293,8 +271,8 @@ localhost 30002</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>980</y>
+      <x>510</x>
+      <y>1220</y>
       <w>180</w>
       <h>40</h>
     </coordinates>
@@ -305,25 +283,179 @@ tcp conn</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>750</y>
+      <x>730</x>
+      <y>990</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;
-tcp conn</panel_attributes>
+stream</panel_attributes>
     <additional_attributes>90.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>780</y>
-      <w>80</w>
+      <x>900</x>
+      <y>1020</y>
+      <w>70</w>
       <h>220</h>
     </coordinates>
     <panel_attributes>lt=&lt;-&gt;
-tcp conn</panel_attributes>
+stream</panel_attributes>
     <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>480</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>http client
+curl -x "127.0.0.1:9900" 
+http://www.baidu.com</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>470</y>
+      <w>340</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>490</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>http server
+127.0.0.1:9900</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>490</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>libp2p local node</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>630</y>
+      <w>340</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>650</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>http client</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>650</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>libp2p remote node</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>650</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>http server
+www.baidu.com</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>320</x>
+      <y>490</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+http request
+http response</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>520</y>
+      <w>70</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+stream</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>310</x>
+      <y>650</y>
+      <w>180</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+http request
+http response</panel_attributes>
+    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>90</x>
+      <y>930</y>
+      <w>330</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>tcp proxy server代理tcp (libp2p relay)
+style=wordwrap
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>70</x>
+      <y>440</y>
+      <w>240</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>http proxy server代理http (libp2p)</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
