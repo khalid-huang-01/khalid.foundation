@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>800</x>
-      <y>350</y>
-      <w>210</w>
-      <h>130</h>
+      <x>640</x>
+      <y>416</y>
+      <w>168</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 host.host
@@ -22,10 +22,10 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>860</x>
-      <y>580</y>
-      <w>120</w>
-      <h>80</h>
+      <x>688</x>
+      <y>600</y>
+      <w>96</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>config.config
 --
@@ -37,10 +37,10 @@ NewStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>470</y>
-      <w>30</w>
-      <h>130</h>
+      <x>720</x>
+      <y>512</y>
+      <w>24</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
@@ -48,10 +48,10 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>590</y>
-      <w>110</w>
-      <h>30</h>
+      <x>504</x>
+      <y>608</y>
+      <w>88</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>swarm.Swarm</panel_attributes>
     <additional_attributes/>
@@ -59,10 +59,10 @@ NewStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>730</x>
-      <y>600</y>
-      <w>150</w>
-      <h>30</h>
+      <x>584</x>
+      <y>616</y>
+      <w>120</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;130.0;10.0</additional_attributes>
@@ -70,10 +70,10 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>380</y>
-      <w>140</w>
-      <h>80</h>
+      <x>504</x>
+      <y>440</y>
+      <w>112</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 network.Network
@@ -85,10 +85,10 @@ NewStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>450</y>
-      <w>30</w>
-      <h>160</h>
+      <x>536</x>
+      <y>496</y>
+      <w>24</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
@@ -96,10 +96,10 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>820</x>
-      <y>200</y>
-      <w>180</w>
-      <h>110</h>
+      <x>656</x>
+      <y>296</y>
+      <w>144</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>BasicHost
 bg=yellow
@@ -114,10 +114,10 @@ SetStreamHandler()// 在接收到原始stream请求之后会做的操作
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>900</x>
-      <y>300</y>
-      <w>30</w>
-      <h>70</h>
+      <x>720</x>
+      <y>376</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -125,10 +125,10 @@ SetStreamHandler()// 在接收到原始stream请求之后会做的操作
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>270</y>
-      <w>170</w>
-      <h>130</h>
+      <x>536</x>
+      <y>352</y>
+      <w>136</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;110.0;150.0;10.0</additional_attributes>
@@ -136,10 +136,10 @@ SetStreamHandler()// 在接收到原始stream请求之后会做的操作
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1100</x>
-      <y>370</y>
-      <w>180</w>
-      <h>60</h>
+      <x>880</x>
+      <y>432</y>
+      <w>144</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>MultistreamMuxer
 --
@@ -149,10 +149,10 @@ handlers: []Handler</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>990</x>
-      <y>260</y>
-      <w>200</w>
-      <h>130</h>
+      <x>792</x>
+      <y>344</y>
+      <w>160</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>180.0;110.0;10.0;10.0</additional_attributes>
@@ -160,10 +160,10 @@ handlers: []Handler</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>480</x>
-      <y>240</y>
-      <w>110</w>
-      <h>40</h>
+      <x>384</x>
+      <y>328</y>
+      <w>88</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 network.Stream
@@ -178,10 +178,10 @@ Conn() Conn
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>110</y>
-      <w>130</w>
-      <h>80</h>
+      <x>376</x>
+      <y>224</y>
+      <w>104</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>//Stream is a bidrectional to pipe within a connection
 //继承了io.Reader/io.Writer/io.Closer
@@ -196,10 +196,10 @@ CloseRead()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>180</y>
-      <w>30</w>
-      <h>80</h>
+      <x>416</x>
+      <y>280</y>
+      <w>24</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -207,10 +207,10 @@ CloseRead()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>580</x>
-      <y>240</y>
-      <w>260</w>
-      <h>50</h>
+      <x>464</x>
+      <y>328</y>
+      <w>208</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 SetStreamHandler会用到
@@ -220,10 +220,10 @@ SetStreamHandler会用到
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1190</x>
-      <y>160</y>
-      <w>150</w>
-      <h>40</h>
+      <x>952</x>
+      <y>264</y>
+      <w>120</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 peerstore.Peersotre
@@ -234,10 +234,10 @@ peerstore.Peersotre
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1190</x>
-      <y>50</y>
-      <w>150</w>
-      <h>60</h>
+      <x>952</x>
+      <y>176</y>
+      <w>120</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 peerstore.AddrBook
@@ -249,10 +249,10 @@ AddAddr()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1250</x>
-      <y>100</y>
-      <w>30</w>
-      <h>80</h>
+      <x>1000</x>
+      <y>216</y>
+      <w>24</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -260,10 +260,10 @@ AddAddr()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1500</x>
-      <y>60</y>
-      <w>260</w>
-      <h>60</h>
+      <x>1200</x>
+      <y>184</y>
+      <w>208</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>memoryAddrBook
 --
@@ -273,10 +273,10 @@ map[Peer.ID]map[string]*expiringAddr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1310</x>
-      <y>60</y>
-      <w>230</w>
-      <h>60</h>
+      <x>1048</x>
+      <y>184</y>
+      <w>184</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 当前的唯一实现
@@ -287,10 +287,10 @@ map[Peer.ID]map[string]*expiringAddr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>990</x>
-      <y>180</y>
-      <w>220</w>
-      <h>100</h>
+      <x>792</x>
+      <y>280</y>
+      <w>176</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 用于存储peer node的信息
@@ -301,10 +301,10 @@ node才知道如何连接</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>280</x>
-      <y>510</y>
-      <w>210</w>
-      <h>110</h>
+      <x>224</x>
+      <y>544</y>
+      <w>168</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>Swarm.Conn
 --
@@ -318,10 +318,10 @@ NewStram() Stream</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>580</y>
-      <w>170</w>
-      <h>40</h>
+      <x>384</x>
+      <y>600</y>
+      <w>136</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 NewStream()调用</panel_attributes>
@@ -330,10 +330,10 @@ NewStream()调用</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>270</y>
-      <w>270</w>
-      <h>260</h>
+      <x>296</x>
+      <y>352</y>
+      <w>216</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 NewStream returns a new
@@ -344,9 +344,9 @@ Stream from this connection</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>400</y>
-      <w>180</w>
-      <h>80</h>
+      <y>456</y>
+      <w>144</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 MuxedConn
@@ -359,9 +359,9 @@ AcceptStream()</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>550</y>
-      <w>180</w>
-      <h>70</h>
+      <y>576</y>
+      <w>144</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 CapableConn
@@ -372,10 +372,10 @@ Transpsort() Transport</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>60</x>
-      <y>470</y>
-      <w>30</w>
-      <h>100</h>
+      <x>48</x>
+      <y>512</y>
+      <w>24</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
@@ -383,10 +383,10 @@ Transpsort() Transport</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>230</y>
-      <w>200</w>
-      <h>120</h>
+      <x>176</x>
+      <y>320</y>
+      <w>160</w>
+      <h>96</h>
     </coordinates>
     <panel_attributes>sm_yamux.conn
 (go-libp2p-yamux)
@@ -400,10 +400,10 @@ yamux() //转化为原本的session</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>560</y>
-      <w>120</w>
-      <h>50</h>
+      <x>144</x>
+      <y>584</y>
+      <w>96</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;30.0;100.0;10.0</additional_attributes>
@@ -411,10 +411,10 @@ yamux() //转化为原本的session</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>80</x>
-      <y>280</y>
-      <w>160</w>
-      <h>140</h>
+      <x>64</x>
+      <y>360</y>
+      <w>128</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;120.0;140.0;10.0</additional_attributes>
@@ -422,10 +422,10 @@ yamux() //转化为原本的session</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>110</y>
-      <w>130</w>
-      <h>100</h>
+      <x>48</x>
+      <y>224</y>
+      <w>104</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>yamux.Session
 (go-yamux)
@@ -437,10 +437,10 @@ AcceptStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>150</y>
-      <w>160</w>
-      <h>100</h>
+      <x>144</x>
+      <y>256</y>
+      <w>128</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 封装了外部库</panel_attributes>

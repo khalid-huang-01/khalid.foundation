@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>80</x>
-      <y>100</y>
+      <y>110</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -16,7 +16,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>100</y>
+      <y>110</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -28,7 +28,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>700</x>
-      <y>100</y>
+      <y>110</y>
       <w>210</w>
       <h>30</h>
     </coordinates>
@@ -39,7 +39,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>500</x>
-      <y>100</y>
+      <y>110</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -51,7 +51,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>940</x>
-      <y>100</y>
+      <y>110</y>
       <w>180</w>
       <h>30</h>
     </coordinates>
@@ -63,7 +63,7 @@ bg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1140</x>
-      <y>100</y>
+      <y>110</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -74,7 +74,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>120</x>
-      <y>120</y>
+      <y>130</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -85,9 +85,9 @@ bg=red</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>120</x>
-      <y>160</y>
+      <y>170</y>
       <w>20</w>
-      <h>820</h>
+      <h>1100</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -96,7 +96,7 @@ bg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>0</x>
-      <y>140</y>
+      <y>150</y>
       <w>140</w>
       <h>50</h>
     </coordinates>
@@ -109,7 +109,7 @@ Process()
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>160</y>
+      <y>170</y>
       <w>240</w>
       <h>100</h>
     </coordinates>
@@ -124,7 +124,7 @@ context传入lconn</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>240</y>
+      <y>250</y>
       <w>210</w>
       <h>130</h>
     </coordinates>
@@ -138,7 +138,7 @@ context传入lconn</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>390</x>
-      <y>120</y>
+      <y>130</y>
       <w>30</w>
       <h>290</h>
     </coordinates>
@@ -149,9 +149,9 @@ context传入lconn</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>390</x>
-      <y>390</y>
+      <y>400</y>
       <w>20</w>
-      <h>590</h>
+      <h>840</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -160,7 +160,7 @@ context传入lconn</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>370</y>
+      <y>380</y>
       <w>280</w>
       <h>50</h>
     </coordinates>
@@ -173,7 +173,7 @@ inv: invocation, cb: callbackfunc</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>550</x>
-      <y>120</y>
+      <y>130</y>
       <w>30</w>
       <h>300</h>
     </coordinates>
@@ -184,7 +184,7 @@ inv: invocation, cb: callbackfunc</panel_attributes>
     <id>UMLGeneric</id>
     <coordinates>
       <x>550</x>
-      <y>400</y>
+      <y>410</y>
       <w>20</w>
       <h>390</h>
     </coordinates>
@@ -195,7 +195,7 @@ inv: invocation, cb: callbackfunc</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>380</y>
+      <y>390</y>
       <w>170</w>
       <h>80</h>
     </coordinates>
@@ -210,7 +210,7 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>410</y>
+      <y>420</y>
       <w>220</w>
       <h>100</h>
     </coordinates>
@@ -224,7 +224,7 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>120</y>
+      <y>130</y>
       <w>30</w>
       <h>420</h>
     </coordinates>
@@ -235,7 +235,7 @@ i: index
     <id>UMLGeneric</id>
     <coordinates>
       <x>800</x>
-      <y>520</y>
+      <y>530</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -246,7 +246,7 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>500</y>
+      <y>510</y>
       <w>260</w>
       <h>60</h>
     </coordinates>
@@ -259,33 +259,35 @@ i.MicroServiceName, i.RouteTag)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>560</y>
-      <w>260</w>
-      <h>40</h>
+      <x>540</x>
+      <y>570</y>
+      <w>300</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-:返回实例列表（kv-&gt;string）</panel_attributes>
-    <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
+:返回实例列表（kv-&gt;string）
+实例列表里面要包含的信息有：nodename、
+远端serer的信息</panel_attributes>
+    <additional_attributes>30.0;20.0;260.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>980</x>
-      <y>120</y>
+      <y>130</y>
       <w>30</w>
-      <h>520</h>
+      <h>540</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;500.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;520.0</additional_attributes>
   </element>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
       <x>980</x>
-      <y>620</y>
+      <y>650</y>
       <w>20</w>
-      <h>60</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -294,7 +296,7 @@ i.MicroServiceName, i.RouteTag)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>600</y>
+      <y>630</y>
       <w>440</w>
       <h>50</h>
     </coordinates>
@@ -307,7 +309,7 @@ ReceiveData()
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>660</y>
+      <y>670</y>
       <w>440</w>
       <h>40</h>
     </coordinates>
@@ -319,7 +321,7 @@ ReceiveData()
     <id>Relation</id>
     <coordinates>
       <x>980</x>
-      <y>670</y>
+      <y>680</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -330,7 +332,7 @@ ReceiveData()
     <id>UMLGeneric</id>
     <coordinates>
       <x>980</x>
-      <y>720</y>
+      <y>730</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -341,7 +343,7 @@ ReceiveData()
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>700</y>
+      <y>710</y>
       <w>440</w>
       <h>50</h>
     </coordinates>
@@ -354,7 +356,7 @@ Pick()
     <id>Relation</id>
     <coordinates>
       <x>560</x>
-      <y>730</y>
+      <y>740</y>
       <w>440</w>
       <h>40</h>
     </coordinates>
@@ -366,7 +368,7 @@ Pick()
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>770</y>
+      <y>780</y>
       <w>170</w>
       <h>50</h>
     </coordinates>
@@ -379,7 +381,7 @@ i里面注入了选择的实例</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>400</x>
-      <y>820</y>
+      <y>830</y>
       <w>830</w>
       <h>80</h>
     </coordinates>
@@ -394,7 +396,7 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>1210</x>
-      <y>120</y>
+      <y>130</y>
       <w>30</w>
       <h>740</h>
     </coordinates>
@@ -405,9 +407,9 @@ i: index
     <id>UMLGeneric</id>
     <coordinates>
       <x>1210</x>
-      <y>840</y>
+      <y>850</y>
       <w>20</w>
-      <h>110</h>
+      <h>340</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -416,44 +418,21 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>1220</x>
-      <y>850</y>
-      <w>390</w>
-      <h>90</h>
+      <y>840</y>
+      <w>320</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-1. 通过ep获取目标服务地址和端口，建立连接rconn
-2. pipe(lconn, rconn)
-3. pipe(rconn, lconn)
-4. 调用cb()</panel_attributes>
-    <additional_attributes>10.0;70.0;50.0;70.0;50.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>400</x>
-      <y>940</y>
-      <w>830</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;810.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1210</x>
-      <y>940</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+1. 通过ep获取获取node和目标tcp信息，
+	建立一个tunnel.Client
+2. 同时从chain.ctx里面获取lconn</panel_attributes>
+    <additional_attributes>10.0;60.0;50.0;60.0;50.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>390</x>
-      <y>970</y>
+      <y>1230</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -464,7 +443,7 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>120</x>
-      <y>970</y>
+      <y>1260</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -475,11 +454,206 @@ i: index
     <id>Relation</id>
     <coordinates>
       <x>130</x>
-      <y>970</y>
+      <y>1230</y>
       <w>280</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1460</x>
+      <y>110</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>tunnel.Client</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1960</x>
+      <y>110</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>tunnel.Stream</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1530</x>
+      <y>130</y>
+      <w>30</w>
+      <h>820</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;800.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1530</x>
+      <y>930</y>
+      <w>20</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2230</x>
+      <y>110</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>tunnel.Server</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1710</x>
+      <y>110</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>tunnel.Connection</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1790</x>
+      <y>130</y>
+      <w>30</w>
+      <h>930</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;910.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>910</y>
+      <w>330</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+tunne.Client.Connect()</panel_attributes>
+    <additional_attributes>310.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>960</y>
+      <w>330</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+返回tunne.Client.Connection对象
+也就是rconn</panel_attributes>
+    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>1020</y>
+      <w>590</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+调用pipe(lconn, rconn)和pipe(rconn, lconn)
+tunnel.Client.Connection.Read()
+tunnel.Client.Connection.Write()</panel_attributes>
+    <additional_attributes>570.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1790</x>
+      <y>1040</y>
+      <w>20</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>1070</y>
+      <w>590</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;20.0;570.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>1100</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+调用cb()</panel_attributes>
+    <additional_attributes>10.0;70.0;50.0;70.0;50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1210</x>
+      <y>1180</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1790</x>
+      <y>1080</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>1180</y>
+      <w>830</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;810.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>580</y>
+      <w>30</w>
+      <h>720</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;700.0</additional_attributes>
   </element>
 </diagram>

@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>300</x>
-      <y>690</y>
+      <y>790</y>
       <w>320</w>
       <h>190</h>
     </coordinates>
@@ -31,7 +31,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>560</y>
+      <y>660</y>
       <w>170</w>
       <h>140</h>
     </coordinates>
@@ -50,7 +50,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>380</y>
+      <y>480</y>
       <w>400</w>
       <h>150</h>
     </coordinates>
@@ -71,7 +71,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>390</x>
-      <y>550</y>
+      <y>650</y>
       <w>120</w>
       <h>80</h>
     </coordinates>
@@ -88,7 +88,7 @@ ProtocolServer
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>620</y>
+      <y>720</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -99,7 +99,7 @@ ProtocolServer
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>520</y>
+      <y>620</y>
       <w>130</w>
       <h>50</h>
     </coordinates>
@@ -110,7 +110,7 @@ ProtocolServer
     <id>UMLClass</id>
     <coordinates>
       <x>470</x>
-      <y>420</y>
+      <y>520</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -123,7 +123,7 @@ ProtocolServer
     <id>Relation</id>
     <coordinates>
       <x>450</x>
-      <y>480</y>
+      <y>580</y>
       <w>110</w>
       <h>90</h>
     </coordinates>
@@ -134,7 +134,7 @@ ProtocolServer
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>30</y>
+      <y>130</y>
       <w>200</w>
       <h>260</h>
     </coordinates>
@@ -154,6 +154,8 @@ Connection
 + LocalAddr()
 + ConnectionState()
 + Close()
+
+bg=orange
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -161,7 +163,7 @@ Connection
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>280</y>
+      <y>380</y>
       <w>100</w>
       <h>120</h>
     </coordinates>
@@ -172,7 +174,7 @@ Connection
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>280</y>
+      <y>380</y>
       <w>90</w>
       <h>160</h>
     </coordinates>
@@ -182,8 +184,8 @@ Connection
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>0</y>
+      <x>620</x>
+      <y>20</y>
       <w>290</w>
       <h>190</h>
     </coordinates>
@@ -206,18 +208,18 @@ Connection
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>150</y>
-      <w>140</w>
-      <h>130</h>
+      <y>250</y>
+      <w>240</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;120.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;220.0;40.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>660</x>
-      <y>210</y>
+      <x>760</x>
+      <y>240</y>
       <w>200</w>
       <h>150</h>
     </coordinates>
@@ -237,18 +239,18 @@ Connection
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>80</y>
-      <w>110</w>
-      <h>80</h>
+      <y>150</y>
+      <w>100</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;90.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>730</x>
-      <y>740</y>
+      <y>840</y>
       <w>200</w>
       <h>80</h>
     </coordinates>
@@ -263,7 +265,7 @@ ProtocolClient
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>250</y>
+      <y>350</y>
       <w>210</w>
       <h>550</h>
     </coordinates>
@@ -274,7 +276,7 @@ ProtocolClient
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>690</y>
+      <y>790</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -285,7 +287,7 @@ ProtocolClient
     <id>UMLClass</id>
     <coordinates>
       <x>1010</x>
-      <y>570</y>
+      <y>670</y>
       <w>220</w>
       <h>100</h>
     </coordinates>
@@ -300,19 +302,19 @@ ctrlLan: layne.Lane
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>850</x>
-      <y>260</y>
-      <w>220</w>
-      <h>330</h>
+      <x>540</x>
+      <y>310</y>
+      <w>530</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;200.0;310.0</additional_attributes>
+    <additional_attributes>10.0;10.0;510.0;360.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>880</x>
-      <y>610</y>
+      <y>710</y>
       <w>150</w>
       <h>50</h>
     </coordinates>
@@ -325,7 +327,7 @@ ctrlLan: layne.Lane
     <id>UMLClass</id>
     <coordinates>
       <x>1000</x>
-      <y>750</y>
+      <y>850</y>
       <w>220</w>
       <h>100</h>
     </coordinates>
@@ -341,7 +343,7 @@ dialer: *websocket.Dialer
     <id>Relation</id>
     <coordinates>
       <x>880</x>
-      <y>630</y>
+      <y>730</y>
       <w>180</w>
       <h>180</h>
     </coordinates>
@@ -353,19 +355,19 @@ dialer: *websocket.Dialer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>120</y>
-      <w>370</w>
-      <h>700</h>
+      <x>540</x>
+      <y>290</y>
+      <w>740</w>
+      <h>630</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;350.0;440.0;350.0;680.0;310.0;680.0</additional_attributes>
+    <additional_attributes>10.0;10.0;720.0;370.0;720.0;610.0;680.0;610.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1070</x>
-      <y>70</y>
+      <y>90</y>
       <w>180</w>
       <h>140</h>
     </coordinates>
@@ -384,29 +386,31 @@ Lane
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>910</x>
-      <y>80</y>
-      <w>180</w>
+      <x>900</x>
+      <y>100</y>
+      <w>190</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 依赖lane的具体实现
 进行数据的读写</panel_attributes>
-    <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1310</x>
-      <y>20</y>
-      <w>170</w>
-      <h>100</h>
+      <y>0</y>
+      <w>260</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes># 使用proto进行编码与解码
 QuicLane
 --
 - writeDeadline
 - readDeadline
+# 这里最后会通过直接调用quic.Stream
+# 的方法进行读写
 - stream: quic.Stream
 </panel_attributes>
     <additional_attributes/>
@@ -415,25 +419,27 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>1240</x>
-      <y>20</y>
+      <y>30</y>
       <w>90</w>
-      <h>120</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;100.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;70.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1330</x>
-      <y>170</y>
-      <w>170</w>
-      <h>80</h>
+      <y>190</y>
+      <w>240</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>WSLaneWithoutPack
 --
 - writeDeadlin
 - readDeadline
+# 这里最后会直接通过调用ws.
+# 的底层接口进行读写
 - conn: *websocket.Conn
 </panel_attributes>
     <additional_attributes/>
@@ -442,7 +448,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>1240</x>
-      <y>150</y>
+      <y>170</y>
       <w>110</w>
       <h>90</h>
     </coordinates>
@@ -452,21 +458,21 @@ QuicLane
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>850</x>
-      <y>200</y>
-      <w>420</w>
-      <h>80</h>
+      <x>950</x>
+      <y>220</y>
+      <w>320</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 依赖lane的具体实现
 进行数据的读写</panel_attributes>
-    <additional_attributes>280.0;10.0;280.0;60.0;10.0;60.0</additional_attributes>
+    <additional_attributes>180.0;10.0;180.0;70.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>920</x>
-      <y>790</y>
+      <y>890</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
@@ -477,7 +483,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>610</y>
+      <y>710</y>
       <w>460</w>
       <h>280</h>
     </coordinates>
