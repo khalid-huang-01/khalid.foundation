@@ -18,7 +18,7 @@ func main() {
 }
 
 func run() {
-	// Create three libp2p hosts, enable relay.go client capabilities on all
+	// Create three libp2p hosts, enable relay client capabilities on all
 	// of them.
 
 	// Tell the host use relays
@@ -28,8 +28,8 @@ func run() {
 		return
 	}
 
-	// Tell the host to relay.go connections for other peers (The ability to *use*
-	// a relay.go vs the ability to *be* a relay.go)
+	// Tell the host to relay connections for other peers (The ability to *use*
+	// a relay vs the ability to *be* a relay)
 	h2, err := libp2p.New(context.Background(), libp2p.EnableRelay(circuit.OptHop))
 	if err != nil {
 		log.Printf("Failed to create h2: %v", err)
@@ -73,12 +73,20 @@ func run() {
 	log.Printf("Okay, no connection from h1 to h3: %v", err)
 	log.Println("Just as we suspected")
 
-	// Creates a relay.go address to h3 using h2 as the relay.go
+	// Creates a relay address to h3 using h2 as the relay
 	relayaddr, err := ma.NewMultiaddr("/p2p/" + h2.ID().Pretty() + "/p2p-circuit/ipfs/" + h3.ID().Pretty())
+	log.Println("relayadd: ", relayaddr)
 	if err != nil {
 		log.Println(err)
 		return
 	}
+	h4ID, err := peer.Decode(h2.ID().Pretty())
+	if err != nil {
+		log.Println("IDFromString err: ", err)
+		return
+	}
+	log.Println(h4ID)
+
 
 	// Since we just tried and failed to dial, the dialer system will, by default
 	// prevent us from redialing again so quickly. Since we know what we're doing, we

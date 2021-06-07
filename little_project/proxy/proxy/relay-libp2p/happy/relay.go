@@ -23,7 +23,8 @@ func main() {
 		return
 	}
 
-	utils.PrintHostAddr("RELAY 1: ", host)
+	utils.PrintHostAddr("RELAY : ", host)
+	log.Println("ID: ", host.ID())
 
 	select {}
 
