@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>300</x>
-      <y>790</y>
+      <y>800</y>
       <w>320</w>
       <h>190</h>
     </coordinates>
@@ -31,7 +31,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>720</x>
-      <y>660</y>
+      <y>670</y>
       <w>170</w>
       <h>140</h>
     </coordinates>
@@ -50,7 +50,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>480</y>
+      <y>490</y>
       <w>400</w>
       <h>150</h>
     </coordinates>
@@ -71,7 +71,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>390</x>
-      <y>650</y>
+      <y>660</y>
       <w>120</w>
       <h>80</h>
     </coordinates>
@@ -88,7 +88,7 @@ ProtocolServer
     <id>Relation</id>
     <coordinates>
       <x>440</x>
-      <y>720</y>
+      <y>730</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -99,7 +99,7 @@ ProtocolServer
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>620</y>
+      <y>630</y>
       <w>130</w>
       <h>50</h>
     </coordinates>
@@ -110,7 +110,7 @@ ProtocolServer
     <id>UMLClass</id>
     <coordinates>
       <x>470</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -123,7 +123,7 @@ ProtocolServer
     <id>Relation</id>
     <coordinates>
       <x>450</x>
-      <y>580</y>
+      <y>590</y>
       <w>110</w>
       <h>90</h>
     </coordinates>
@@ -134,7 +134,7 @@ ProtocolServer
     <id>UMLClass</id>
     <coordinates>
       <x>350</x>
-      <y>130</y>
+      <y>140</y>
       <w>200</w>
       <h>260</h>
     </coordinates>
@@ -163,7 +163,7 @@ bg=orange
     <id>Relation</id>
     <coordinates>
       <x>320</x>
-      <y>380</y>
+      <y>390</y>
       <w>100</w>
       <h>120</h>
     </coordinates>
@@ -174,7 +174,7 @@ bg=orange
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>380</y>
+      <y>390</y>
       <w>90</w>
       <h>160</h>
     </coordinates>
@@ -185,7 +185,7 @@ bg=orange
     <id>UMLClass</id>
     <coordinates>
       <x>620</x>
-      <y>20</y>
+      <y>30</y>
       <w>290</w>
       <h>190</h>
     </coordinates>
@@ -208,7 +208,7 @@ bg=orange
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>250</y>
+      <y>260</y>
       <w>240</w>
       <h>60</h>
     </coordinates>
@@ -219,7 +219,7 @@ bg=orange
     <id>UMLClass</id>
     <coordinates>
       <x>760</x>
-      <y>240</y>
+      <y>250</y>
       <w>200</w>
       <h>150</h>
     </coordinates>
@@ -239,7 +239,7 @@ bg=orange
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>150</y>
+      <y>160</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -250,7 +250,7 @@ bg=orange
     <id>UMLClass</id>
     <coordinates>
       <x>730</x>
-      <y>840</y>
+      <y>850</y>
       <w>200</w>
       <h>80</h>
     </coordinates>
@@ -265,7 +265,7 @@ ProtocolClient
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>350</y>
+      <y>360</y>
       <w>210</w>
       <h>550</h>
     </coordinates>
@@ -276,7 +276,7 @@ ProtocolClient
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>790</y>
+      <y>800</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -287,7 +287,7 @@ ProtocolClient
     <id>UMLClass</id>
     <coordinates>
       <x>1010</x>
-      <y>670</y>
+      <y>680</y>
       <w>220</w>
       <h>100</h>
     </coordinates>
@@ -303,7 +303,7 @@ ctrlLan: layne.Lane
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>310</y>
+      <y>320</y>
       <w>530</w>
       <h>380</h>
     </coordinates>
@@ -314,7 +314,7 @@ ctrlLan: layne.Lane
     <id>Relation</id>
     <coordinates>
       <x>880</x>
-      <y>710</y>
+      <y>720</y>
       <w>150</w>
       <h>50</h>
     </coordinates>
@@ -327,7 +327,7 @@ ctrlLan: layne.Lane
     <id>UMLClass</id>
     <coordinates>
       <x>1000</x>
-      <y>850</y>
+      <y>860</y>
       <w>220</w>
       <h>100</h>
     </coordinates>
@@ -343,7 +343,7 @@ dialer: *websocket.Dialer
     <id>Relation</id>
     <coordinates>
       <x>880</x>
-      <y>730</y>
+      <y>740</y>
       <w>180</w>
       <h>180</h>
     </coordinates>
@@ -356,7 +356,7 @@ dialer: *websocket.Dialer
     <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>290</y>
+      <y>300</y>
       <w>740</w>
       <h>630</h>
     </coordinates>
@@ -367,7 +367,7 @@ dialer: *websocket.Dialer
     <id>UMLClass</id>
     <coordinates>
       <x>1070</x>
-      <y>90</y>
+      <y>100</y>
       <w>180</w>
       <h>140</h>
     </coordinates>
@@ -387,7 +387,7 @@ Lane
     <id>Relation</id>
     <coordinates>
       <x>900</x>
-      <y>100</y>
+      <y>110</y>
       <w>190</w>
       <h>50</h>
     </coordinates>
@@ -400,7 +400,7 @@ Lane
     <id>UMLClass</id>
     <coordinates>
       <x>1310</x>
-      <y>0</y>
+      <y>10</y>
       <w>260</w>
       <h>130</h>
     </coordinates>
@@ -419,7 +419,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>1240</x>
-      <y>30</y>
+      <y>40</y>
       <w>90</w>
       <h>130</h>
     </coordinates>
@@ -430,7 +430,7 @@ QuicLane
     <id>UMLClass</id>
     <coordinates>
       <x>1330</x>
-      <y>190</y>
+      <y>200</y>
       <w>240</w>
       <h>120</h>
     </coordinates>
@@ -448,7 +448,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>1240</x>
-      <y>170</y>
+      <y>180</y>
       <w>110</w>
       <h>90</h>
     </coordinates>
@@ -459,7 +459,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>950</x>
-      <y>220</y>
+      <y>230</y>
       <w>320</w>
       <h>90</h>
     </coordinates>
@@ -472,7 +472,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>920</x>
-      <y>890</y>
+      <y>900</y>
       <w>100</w>
       <h>50</h>
     </coordinates>
@@ -483,7 +483,7 @@ QuicLane
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>710</y>
+      <y>720</y>
       <w>460</w>
       <h>280</h>
     </coordinates>

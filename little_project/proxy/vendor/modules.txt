@@ -74,6 +74,8 @@ github.com/go-chassis/go-chassis/third_party/forked/k8s.io/apimachinery/pkg/util
 github.com/go-chassis/go-chassis-config
 # github.com/go-chassis/go-restful-swagger20 v1.0.1
 github.com/go-chassis/go-restful-swagger20
+# github.com/go-logr/logr v0.2.0
+github.com/go-logr/logr
 # github.com/go-mesh/openlogging v1.0.1-0.20181205082104-3d418c478b2d
 github.com/go-mesh/openlogging
 # github.com/gogo/protobuf v1.3.2
@@ -116,7 +118,7 @@ github.com/jbenet/go-temp-err-catcher
 github.com/jbenet/goprocess
 github.com/jbenet/goprocess/context
 github.com/jbenet/goprocess/periodic
-# github.com/json-iterator/go v1.1.6
+# github.com/json-iterator/go v1.1.10
 github.com/json-iterator/go
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1
 github.com/konsorten/go-windows-terminal-sequences
@@ -236,6 +238,7 @@ github.com/libp2p/go-tcp-transport
 # github.com/libp2p/go-ws-transport v0.4.0
 github.com/libp2p/go-ws-transport
 # github.com/libp2p/go-yamux/v2 v2.0.0
+## explicit
 github.com/libp2p/go-yamux/v2
 # github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1
 github.com/minio/blake2b-simd
@@ -324,17 +327,21 @@ golang.org/x/crypto/poly1305
 golang.org/x/crypto/salsa20/salsa
 golang.org/x/crypto/sha3
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/net v0.0.0-20201021035429-f5854403a974
+# golang.org/x/net v0.0.0-20201110031124-69a78807bb2b
 golang.org/x/net/bpf
 golang.org/x/net/context
 golang.org/x/net/html
 golang.org/x/net/html/atom
 golang.org/x/net/html/charset
+golang.org/x/net/http/httpguts
+golang.org/x/net/http2
+golang.org/x/net/http2/hpack
+golang.org/x/net/idna
 golang.org/x/net/internal/iana
 golang.org/x/net/internal/socket
 golang.org/x/net/ipv4
 golang.org/x/net/route
-# golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f
+# golang.org/x/sys v0.0.0-20201112073958-5cba982894dd
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
@@ -358,8 +365,22 @@ golang.org/x/text/internal/tag
 golang.org/x/text/internal/utf8internal
 golang.org/x/text/language
 golang.org/x/text/runes
+golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
+golang.org/x/text/unicode/bidi
+golang.org/x/text/unicode/norm
 # gopkg.in/alecthomas/kingpin.v2 v2.2.6
 gopkg.in/alecthomas/kingpin.v2
 # gopkg.in/yaml.v2 v2.3.0
 gopkg.in/yaml.v2
+# k8s.io/apimachinery v0.19.10
+## explicit
+k8s.io/apimachinery/pkg/util/net
+k8s.io/apimachinery/pkg/util/sets
+# k8s.io/client-go v0.19.10
+## explicit
+k8s.io/client-go/util/cert
+k8s.io/client-go/util/keyutil
+# k8s.io/klog/v2 v2.2.0
+## explicit
+k8s.io/klog/v2

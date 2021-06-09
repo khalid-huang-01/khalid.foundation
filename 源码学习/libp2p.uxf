@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>640</x>
-      <y>416</y>
+      <x>696</x>
+      <y>320</y>
       <w>168</w>
       <h>104</h>
     </coordinates>
@@ -22,8 +22,8 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>688</x>
-      <y>600</y>
+      <x>744</x>
+      <y>504</y>
       <w>96</w>
       <h>64</h>
     </coordinates>
@@ -37,8 +37,8 @@ NewStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>512</y>
+      <x>776</x>
+      <y>416</y>
       <w>24</w>
       <h>104</h>
     </coordinates>
@@ -48,8 +48,8 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>608</y>
+      <x>560</x>
+      <y>512</y>
       <w>88</w>
       <h>24</h>
     </coordinates>
@@ -59,8 +59,8 @@ NewStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>584</x>
-      <y>616</y>
+      <x>640</x>
+      <y>520</y>
       <w>120</w>
       <h>24</h>
     </coordinates>
@@ -70,8 +70,8 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>504</x>
-      <y>440</y>
+      <x>560</x>
+      <y>344</y>
       <w>112</w>
       <h>64</h>
     </coordinates>
@@ -85,8 +85,8 @@ NewStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>536</x>
-      <y>496</y>
+      <x>592</x>
+      <y>400</y>
       <w>24</w>
       <h>128</h>
     </coordinates>
@@ -96,10 +96,10 @@ NewStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>656</x>
-      <y>296</y>
-      <w>144</w>
-      <h>88</h>
+      <x>712</x>
+      <y>160</y>
+      <w>272</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>BasicHost
 bg=yellow
@@ -107,15 +107,18 @@ bg=yellow
 network: network.Network
 mux: MultistreamMuxer
 -
-SetStreamHandler()// 在接收到原始stream请求之后会做的操作
+# 被连接端在接收到原始stream请求之后会做的操作
+SetStreamHandler()
+# 发起连接的一端开启的Stream，用于数据交互的流
+NewStream()
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>376</y>
+      <x>776</x>
+      <y>280</y>
       <w>24</w>
       <h>56</h>
     </coordinates>
@@ -125,19 +128,20 @@ SetStreamHandler()// 在接收到原始stream请求之后会做的操作
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>536</x>
-      <y>352</y>
+      <x>592</x>
+      <y>256</y>
       <w>136</w>
       <h>104</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
+    <panel_attributes>lt=&lt;-
+NewStream会调用到</panel_attributes>
     <additional_attributes>10.0;110.0;150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>880</x>
-      <y>432</y>
+      <x>1032</x>
+      <y>344</y>
       <w>144</w>
       <h>48</h>
     </coordinates>
@@ -149,19 +153,19 @@ handlers: []Handler</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
-      <y>344</y>
-      <w>160</w>
-      <h>104</h>
+      <x>976</x>
+      <y>248</y>
+      <w>128</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>180.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>140.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>384</x>
-      <y>328</y>
+      <x>440</x>
+      <y>232</y>
       <w>88</w>
       <h>32</h>
     </coordinates>
@@ -178,8 +182,8 @@ Conn() Conn
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>376</x>
-      <y>224</y>
+      <x>432</x>
+      <y>128</y>
       <w>104</w>
       <h>64</h>
     </coordinates>
@@ -196,8 +200,8 @@ CloseRead()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>416</x>
-      <y>280</y>
+      <x>472</x>
+      <y>184</y>
       <w>24</w>
       <h>64</h>
     </coordinates>
@@ -207,21 +211,21 @@ CloseRead()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>464</x>
-      <y>328</y>
+      <x>520</x>
+      <y>232</y>
       <w>208</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-SetStreamHandler会用到
+
 </panel_attributes>
     <additional_attributes>10.0;20.0;240.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>952</x>
-      <y>264</y>
+      <x>1120</x>
+      <y>160</y>
       <w>120</w>
       <h>32</h>
     </coordinates>
@@ -234,8 +238,8 @@ peerstore.Peersotre
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>952</x>
-      <y>176</y>
+      <x>1120</x>
+      <y>80</y>
       <w>120</w>
       <h>48</h>
     </coordinates>
@@ -249,19 +253,19 @@ AddAddr()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1000</x>
-      <y>216</y>
+      <x>1168</x>
+      <y>120</y>
       <w>24</w>
-      <h>64</h>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>184</y>
+      <x>1392</x>
+      <y>88</y>
       <w>208</w>
       <h>48</h>
     </coordinates>
@@ -273,36 +277,36 @@ map[Peer.ID]map[string]*expiringAddr</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1048</x>
-      <y>184</y>
-      <w>184</w>
+      <x>1232</x>
+      <y>88</y>
+      <w>176</w>
       <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 当前的唯一实现
 可重新定义
 通过libp2p.New(libp2p.Peerstore)</panel_attributes>
-    <additional_attributes>30.0;20.0;190.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>792</x>
-      <y>280</y>
-      <w>176</w>
-      <h>80</h>
+      <x>976</x>
+      <y>176</y>
+      <w>160</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 用于存储peer node的信息
 只有存入peerstore,
 node才知道如何连接</panel_attributes>
-    <additional_attributes>200.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>180.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>224</x>
-      <y>544</y>
+      <x>280</x>
+      <y>448</y>
       <w>168</w>
       <h>88</h>
     </coordinates>
@@ -318,8 +322,8 @@ NewStram() Stream</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>384</x>
-      <y>600</y>
+      <x>440</x>
+      <y>504</y>
       <w>136</w>
       <h>32</h>
     </coordinates>
@@ -330,8 +334,8 @@ NewStream()调用</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>296</x>
-      <y>352</y>
+      <x>352</x>
+      <y>256</y>
       <w>216</w>
       <h>208</h>
     </coordinates>
@@ -343,8 +347,8 @@ Stream from this connection</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>456</y>
+      <x>56</x>
+      <y>360</y>
       <w>144</w>
       <h>64</h>
     </coordinates>
@@ -358,8 +362,8 @@ AcceptStream()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>576</y>
+      <x>56</x>
+      <y>464</y>
       <w>144</w>
       <h>56</h>
     </coordinates>
@@ -372,19 +376,19 @@ Transpsort() Transport</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>48</x>
-      <y>512</y>
+      <x>104</x>
+      <y>416</y>
       <w>24</w>
-      <h>80</h>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>176</x>
-      <y>320</y>
+      <x>232</x>
+      <y>224</y>
       <w>160</w>
       <h>96</h>
     </coordinates>
@@ -400,19 +404,19 @@ yamux() //转化为原本的session</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>584</y>
-      <w>96</w>
-      <h>40</h>
+      <x>192</x>
+      <y>488</y>
+      <w>104</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;30.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>64</x>
-      <y>360</y>
+      <x>120</x>
+      <y>264</y>
       <w>128</w>
       <h>112</h>
     </coordinates>
@@ -422,8 +426,8 @@ yamux() //转化为原本的session</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>48</x>
-      <y>224</y>
+      <x>104</x>
+      <y>128</y>
       <w>104</w>
       <h>80</h>
     </coordinates>
@@ -437,8 +441,8 @@ AcceptStream()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>144</x>
-      <y>256</y>
+      <x>200</x>
+      <y>160</y>
       <w>128</w>
       <h>80</h>
     </coordinates>
