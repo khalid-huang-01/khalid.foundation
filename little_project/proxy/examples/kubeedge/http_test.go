@@ -58,10 +58,10 @@ func TestNewHttpClient(t *testing.T) {
 // TestGetCACert
 func TestGetCACert(t *testing.T) {
 	// kubeedge url
-	//url := "https://192.168.0.247:10002/ca.crt"
+	url := "https://192.168.0.247:10002/ca.crt"
 
 	// edgemesh-server url
-	url := "https://192.168.0.10:10002/ca.crt"
+	//url := "https://192.168.0.10:10002/ca.crt"
 	client := NewHTTPClient()
 	req, err := BuildRequest("GET", url, nil, "", "")
 	if err != nil {
