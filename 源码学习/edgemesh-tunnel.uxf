@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>220</y>
+      <x>240</x>
+      <y>300</y>
       <w>220</w>
       <h>310</h>
     </coordinates>
@@ -33,8 +33,8 @@ bg=orange
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>250</y>
+      <x>590</x>
+      <y>330</y>
       <w>290</w>
       <h>110</h>
     </coordinates>
@@ -50,8 +50,8 @@ bg=orange
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>700</x>
-      <y>300</y>
+      <x>450</x>
+      <y>380</y>
       <w>160</w>
       <h>30</h>
     </coordinates>
@@ -61,8 +61,8 @@ bg=orange
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>820</x>
-      <y>20</y>
+      <x>570</x>
+      <y>100</y>
       <w>340</w>
       <h>160</h>
     </coordinates>
@@ -82,8 +82,8 @@ NewStream()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>960</x>
-      <y>170</y>
+      <x>710</x>
+      <y>250</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -93,8 +93,8 @@ NewStream()
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>900</x>
-      <y>450</y>
+      <x>750</x>
+      <y>760</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -104,14 +104,105 @@ NewStream()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>970</x>
-      <y>350</y>
-      <w>180</w>
-      <h>120</h>
+      <x>530</x>
+      <y>760</y>
+      <w>240</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
-依赖Connection进行交互
-NewP2PConn</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+通过Peer建立的连接进行交互</panel_attributes>
+    <additional_attributes>10.0;20.0;220.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>680</y>
+      <w>360</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Peer
+--
+peerID string
+--
+# 做为一个节点启动，需要做如下的事情
+# 1.根据中继地址，与中继建立连接
+# 2.获取所有agent对应地址信息(nodename-&gt;peerID)
+# 3.配置stream处理函数（SetStreamHandler，俩阶段，
+先建立本地连接，再直接io.Copy）
+Start() // 做为server要做的事情
+# 建立一个与peerID的Connection，这里就是
+# P2PConnection，返回的其实就是libp2p.network.Stream
+# 本地使用这个进行io.Copy
+Connect(peerID) Connection // 作为client是做的事情 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>600</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>710</x>
+      <y>540</y>
+      <w>260</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes># 负责管理nodeName到PeerID的
+# 映射；涉及到与list-watch secret
+nodeName2PeerID （singleton）
+--
+start() # 开始启动
+# 根据nodeName获取PeerID
+Get(nodeName string) (string, err) 
+# 返回所有peerID
+GetAll() []string
+# 返回所有nodeName
+GetAllKey() []string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>710</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1100</x>
+      <y>610</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>kubeClient</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>610</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖client-go
+作list-watch</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
