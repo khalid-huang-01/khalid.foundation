@@ -22,12 +22,23 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+		go handlerSession(session)
+	}
+}
+
+func handlerSession(session *yamux.Session) {
+	for {
 		stream, err := session.Accept()
 		if err != nil {
 			panic(err)
 		}
-		buf := make([]byte, 4)
-		stream.Read(buf)
-		fmt.Println(string(buf))
+		go handleStream(stream)
 	}
+}
+
+func handleStream(stream net.Conn) {
+	buf := make([]byte, 10)
+	stream.Read(buf)
+	fmt.Println(string(buf))
+	stream.Write(buf)
 }
