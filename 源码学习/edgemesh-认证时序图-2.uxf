@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
+  <help_text/>
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>140</x>
+      <x>120</x>
       <y>90</y>
       <w>130</w>
       <h>30</h>
@@ -15,7 +16,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>180</x>
+      <x>160</x>
       <y>150</y>
       <w>20</w>
       <h>520</h>
@@ -26,7 +27,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
+      <x>170</x>
       <y>150</y>
       <w>380</w>
       <h>190</h>
@@ -46,7 +47,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
+      <x>170</x>
       <y>340</y>
       <w>370</w>
       <h>150</h>
@@ -63,7 +64,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>190</x>
+      <x>170</x>
       <y>490</y>
       <w>380</w>
       <h>170</h>
@@ -82,7 +83,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
+      <x>160</x>
       <y>110</y>
       <w>30</w>
       <h>60</h>
@@ -93,7 +94,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>770</x>
+      <x>750</x>
       <y>60</y>
       <w>120</w>
       <h>30</h>
@@ -104,7 +105,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>810</x>
+      <x>790</x>
       <y>130</y>
       <w>20</w>
       <h>60</h>
@@ -115,7 +116,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
+      <x>790</x>
       <y>80</y>
       <w>30</w>
       <h>70</h>
@@ -126,10 +127,10 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>810</x>
-      <y>220</y>
+      <x>790</x>
+      <y>260</y>
       <w>20</w>
-      <h>310</h>
+      <h>270</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -137,7 +138,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>810</x>
+      <x>790</x>
       <y>570</y>
       <w>20</w>
       <h>60</h>
@@ -148,7 +149,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1150</x>
+      <x>1130</x>
       <y>570</y>
       <w>20</w>
       <h>60</h>
@@ -159,7 +160,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1150</x>
+      <x>1130</x>
       <y>530</y>
       <w>30</w>
       <h>60</h>
@@ -170,7 +171,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
+      <x>790</x>
       <y>520</y>
       <w>30</w>
       <h>70</h>
@@ -181,7 +182,7 @@
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1150</x>
+      <x>1130</x>
       <y>120</y>
       <w>20</w>
       <h>420</h>
@@ -192,7 +193,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1160</x>
+      <x>1140</x>
       <y>440</y>
       <w>160</w>
       <h>90</h>
@@ -205,31 +206,24 @@ rotate():
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1160</x>
-      <y>200</y>
+      <x>1140</x>
+      <y>240</y>
       <w>590</w>
-      <h>240</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-1. 基于InsecureSkipVerify:true访问
-&lt;edgemeshserver-url&gt;/ca.crt，获取ca证书
-2.使用token(在注册节点的时候从keadm 
-gettoken获取的token，包含了ca证书的哈希值
-和jwt token)校验获取的ca.crt是否被篡改，主要
-是做hash值对比
-3. ca证书校验通过后，保存到文件
-4. 生成私钥，并用私钥csr；利用ca证书，做Certificates:[]tls.Certificate{certificate},
+1. 生成私钥，并用私钥csr；利用ca证书，做Certificates:[]tls.Certificate{certificate},
 建立与edgemeshserver的tls通信，传递csr、token
-5. edgemeshserver会使用ca对csr做签名，生成证书，发回给edgemeshagent
+2. edgemeshserver会使用ca对csr做签名，生成证书，发回给edgemeshagent
 edgemeshagent获取到证书
-6. 到这里就获取了私钥和证书，将私钥和证书保存到本地文件
+3. 到这里就获取了私钥和证书，将私钥和证书保存到本地文件
 </panel_attributes>
-    <additional_attributes>10.0;220.0;60.0;220.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;170.0;60.0;170.0;60.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1150</x>
+      <x>1130</x>
       <y>70</y>
       <w>30</w>
       <h>70</h>
@@ -240,7 +234,7 @@ edgemeshagent获取到证书
   <element>
     <id>UMLGeneric</id>
     <coordinates>
-      <x>1080</x>
+      <x>1060</x>
       <y>50</y>
       <w>170</w>
       <h>30</h>
@@ -251,7 +245,7 @@ edgemeshagent获取到证书
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>930</x>
+      <x>910</x>
       <y>150</y>
       <w>110</w>
       <h>40</h>
@@ -263,8 +257,8 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>210</y>
+      <x>800</x>
+      <y>240</y>
       <w>350</w>
       <h>50</h>
     </coordinates>
@@ -276,8 +270,8 @@ bg=green</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>270</y>
+      <x>800</x>
+      <y>280</y>
       <w>350</w>
       <h>40</h>
     </coordinates>
@@ -288,7 +282,7 @@ ca.crt</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
+      <x>800</x>
       <y>330</y>
       <w>350</w>
       <h>60</h>
@@ -302,7 +296,7 @@ ca.crt</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
+      <x>800</x>
       <y>380</y>
       <w>350</w>
       <h>40</h>
@@ -314,18 +308,18 @@ edge.crt(证书)</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
+      <x>790</x>
       <y>180</y>
       <w>30</w>
-      <h>60</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>20</x>
+      <x>0</x>
       <y>0</y>
       <w>610</w>
       <h>730</h>
@@ -337,7 +331,7 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
+      <x>540</x>
       <y>70</y>
       <w>230</w>
       <h>100</h>
@@ -348,21 +342,23 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1160</x>
+      <x>1140</x>
       <y>110</y>
       <w>620</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
+0. 程序启动初始化配置时，从casecret挂载的目录，读取ca证书，
+	填充入配置类；再从环境变量读取tokensecret的值，填充入配置类
 1. 尝试从本地直接加载自身的证书和私钥(挂载主机/etc/kubeedge/edgemesh/certs目录 )
 2. 如果成功，对其进行解析，若再成功，直接退出
 3. 如果不成功，调用applyCerts</panel_attributes>
-    <additional_attributes>10.0;80.0;60.0;80.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;60.0;100.0;60.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
-      <x>930</x>
+      <x>910</x>
       <y>530</y>
       <w>150</w>
       <h>40</h>
@@ -374,7 +370,7 @@ bg=green</panel_attributes>
   <element>
     <id>Text</id>
     <coordinates>
-      <x>520</x>
+      <x>500</x>
       <y>700</y>
       <w>380</w>
       <h>120</h>
