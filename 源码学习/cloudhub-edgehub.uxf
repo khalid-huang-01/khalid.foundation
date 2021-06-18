@@ -147,9 +147,9 @@ getCurrent():
     <id>Relation</id>
     <coordinates>
       <x>1210</x>
-      <y>290</y>
+      <y>280</y>
       <w>590</w>
-      <h>240</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 applyCerts():基于token生成证书
@@ -161,12 +161,13 @@ gettoken获取的token，包含了ca证书的哈希值
 是做hash值对比
 3. ca证书校验通过后，保存到文件
 4. 生成私钥，并用私钥csr；利用ca证书，做Certificates:[]tls.Certificate{certificate},
-建立与cloudhub的tls通信，传递csr、token、nodename
+其实就是要求对方证书是ca签发的，建立与cloudhub的tls通信，
+传递csr、头部设置token、nodename
 5. cloudhub会使用ca对csr做签名，生成证书，发回给edgehub
 edgehub获取到证书
 6. 到这里就获取了私钥和证书，将私钥和证书保存到本地文件
 </panel_attributes>
-    <additional_attributes>10.0;220.0;60.0;220.0;60.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;230.0;60.0;230.0;60.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

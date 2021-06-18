@@ -11,17 +11,30 @@ import (
 )
 
 func main() {
-	relayID := "QmdBMV5BHd7PV8jHJvb7pvvbzQEbjmysN4exdf3FhXgBXN"
-	peerBID := "QmRVp43XvGY68BmLG56PmXF3t5n49L9sWy7Uz1NLAGww1w"
-	host, err := libp2p.New(context.Background(), libp2p.EnableRelay())
-	if err != nil {
-		log.Printf("Failed to create h1: %s", err)
-		return
-	}
+	peerBID := "QmUkK2Wyto6Bm68PnUqpmg4VYP6C9PzFpbHTqRu4LHpnmp"
+
+	relayID := "QmQuUjm1s3VfqASbRjH65MBctVQiASCLqkaMBcMj72bvtz"
+
 	relayAddr := "/ip4/192.168.0.38/tcp/10001/p2p/" + relayID
 	relayAddrInfo, err := utils.Addr2info(relayAddr)
 	if err != nil {
 		log.Println("err: ", err)
+		return
+	}
+	//relayID2 := "QmU9dFLPxN9ubtb13CfgAjHRC4xMzbJQWcQWaSc8Db455i"
+	//relayAddr2 := "/ip4/192.168.0.38/tcp/10001/p2p/" + relayID2
+	//relayAddrInfo2, err := utils.Addr2info(relayAddr2)
+	//if err != nil {
+	//	log.Println("err: ", err)
+	//	return
+	//}
+
+	host, err := libp2p.New(context.Background(), libp2p.EnableRelay(), libp2p.EnableAutoRelay(),
+		libp2p.StaticRelays([]peer.AddrInfo{*relayAddrInfo}))
+		//libp2p.StaticRelays([]peer.AddrInfo{*relayAddrInfo, *relayAddrInfo2}))
+
+	if err != nil {
+		log.Printf("Failed to create h1: %s", err)
 		return
 	}
 

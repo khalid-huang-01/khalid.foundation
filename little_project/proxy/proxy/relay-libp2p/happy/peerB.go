@@ -10,14 +10,14 @@ import (
 )
 
 func main() {
-	relayID := "QmcbNjSVqW6U1mAnv8koDp9hQL8K36A5f2YQqdpMUNZGXH"
+	relayID := "Qme1yzRpXV6CSeS43wdLAEsTCMwX8fJzsz6yQVyMGrEjc6"
 	// libp2p.ListenAddrs的作用是什么 => 启动服务，这样别人才能通过stream连接自己，这个是默认启动的，不用配置
 	host, err := libp2p.New(context.Background(), libp2p.EnableRelay())
 	if err != nil {
 		log.Printf("Failed to create h1: %s", err)
 		return
 	}
-	relayAddr := "/ip4/192.168.0.10/tcp/10001/p2p/" + relayID
+	relayAddr := "/ip4/192.168.0.38/tcp/10001/p2p/" + relayID
 	relayAddrInfo, err := utils.Addr2info(relayAddr)
 	if err != nil {
 		log.Println("err: ", err)
@@ -25,7 +25,7 @@ func main() {
 	}
 
 	if err := host.Connect(context.Background(), *relayAddrInfo); err != nil {
-		log.Printf("Failed to connect peerA and relay")
+		log.Println("Failed to connect relay, error: ", err)
 		return
 	}
 	host.SetStreamHandler("/cats", func(s network.Stream) {

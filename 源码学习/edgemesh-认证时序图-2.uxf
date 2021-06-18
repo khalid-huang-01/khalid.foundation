@@ -6,7 +6,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>120</x>
-      <y>90</y>
+      <y>150</y>
       <w>130</w>
       <h>30</h>
     </coordinates>
@@ -17,7 +17,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>160</x>
-      <y>150</y>
+      <y>210</y>
       <w>20</w>
       <h>520</h>
     </coordinates>
@@ -28,7 +28,7 @@
     <id>Relation</id>
     <coordinates>
       <x>170</x>
-      <y>150</y>
+      <y>210</y>
       <w>380</w>
       <h>190</h>
     </coordinates>
@@ -48,7 +48,7 @@
     <id>Relation</id>
     <coordinates>
       <x>170</x>
-      <y>340</y>
+      <y>400</y>
       <w>370</w>
       <h>150</h>
     </coordinates>
@@ -65,7 +65,7 @@
     <id>Relation</id>
     <coordinates>
       <x>170</x>
-      <y>490</y>
+      <y>550</y>
       <w>380</w>
       <h>170</h>
     </coordinates>
@@ -84,7 +84,7 @@
     <id>Relation</id>
     <coordinates>
       <x>160</x>
-      <y>110</y>
+      <y>170</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -95,7 +95,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>750</x>
-      <y>60</y>
+      <y>120</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -106,7 +106,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>790</x>
-      <y>130</y>
+      <y>190</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -117,7 +117,7 @@
     <id>Relation</id>
     <coordinates>
       <x>790</x>
-      <y>80</y>
+      <y>140</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -128,7 +128,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>790</x>
-      <y>260</y>
+      <y>320</y>
       <w>20</w>
       <h>270</h>
     </coordinates>
@@ -139,7 +139,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>790</x>
-      <y>570</y>
+      <y>630</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -150,7 +150,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>1130</x>
-      <y>570</y>
+      <y>630</y>
       <w>20</w>
       <h>60</h>
     </coordinates>
@@ -161,7 +161,7 @@
     <id>Relation</id>
     <coordinates>
       <x>1130</x>
-      <y>530</y>
+      <y>590</y>
       <w>30</w>
       <h>60</h>
     </coordinates>
@@ -172,7 +172,7 @@
     <id>Relation</id>
     <coordinates>
       <x>790</x>
-      <y>520</y>
+      <y>580</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -183,7 +183,7 @@
     <id>UMLGeneric</id>
     <coordinates>
       <x>1130</x>
-      <y>120</y>
+      <y>180</y>
       <w>20</w>
       <h>420</h>
     </coordinates>
@@ -194,7 +194,7 @@
     <id>Relation</id>
     <coordinates>
       <x>1140</x>
-      <y>440</y>
+      <y>500</y>
       <w>160</w>
       <h>90</h>
     </coordinates>
@@ -207,7 +207,7 @@ rotate():
     <id>Relation</id>
     <coordinates>
       <x>1140</x>
-      <y>240</y>
+      <y>300</y>
       <w>590</w>
       <h>190</h>
     </coordinates>
@@ -224,7 +224,7 @@ edgemeshagent获取到证书
     <id>Relation</id>
     <coordinates>
       <x>1130</x>
-      <y>70</y>
+      <y>130</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -235,7 +235,7 @@ edgemeshagent获取到证书
     <id>UMLGeneric</id>
     <coordinates>
       <x>1060</x>
-      <y>50</y>
+      <y>110</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -246,7 +246,7 @@ edgemeshagent获取到证书
     <id>UMLUseCase</id>
     <coordinates>
       <x>910</x>
-      <y>150</y>
+      <y>210</y>
       <w>110</w>
       <h>40</h>
     </coordinates>
@@ -258,7 +258,7 @@ bg=green</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>240</y>
+      <y>300</y>
       <w>350</w>
       <h>50</h>
     </coordinates>
@@ -271,7 +271,7 @@ bg=green</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>280</y>
+      <y>340</y>
       <w>350</w>
       <h>40</h>
     </coordinates>
@@ -283,7 +283,7 @@ ca.crt</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>330</y>
+      <y>390</y>
       <w>350</w>
       <h>60</h>
     </coordinates>
@@ -297,7 +297,7 @@ ca.crt</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>800</x>
-      <y>380</y>
+      <y>440</y>
       <w>350</w>
       <h>40</h>
     </coordinates>
@@ -309,7 +309,7 @@ edge.crt(证书)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>790</x>
-      <y>180</y>
+      <y>240</y>
       <w>30</w>
       <h>100</h>
     </coordinates>
@@ -317,33 +317,10 @@ edge.crt(证书)</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
   </element>
   <element>
-    <id>UMLUseCase</id>
-    <coordinates>
-      <x>0</x>
-      <y>0</y>
-      <w>610</w>
-      <h>730</h>
-    </coordinates>
-    <panel_attributes>
-bg=yellow</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>70</y>
-      <w>230</w>
-      <h>100</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;80.0;210.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>1140</x>
-      <y>110</y>
+      <y>170</y>
       <w>620</w>
       <h>120</h>
     </coordinates>
@@ -359,7 +336,7 @@ bg=yellow</panel_attributes>
     <id>UMLUseCase</id>
     <coordinates>
       <x>910</x>
-      <y>530</y>
+      <y>590</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -371,15 +348,39 @@ bg=green</panel_attributes>
     <id>Text</id>
     <coordinates>
       <x>500</x>
-      <y>700</y>
-      <w>380</w>
+      <y>760</y>
+      <w>490</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>//Text Element
 与cloudcore和edgecore认证的区别 ：
-1. edgemesh-server无须从本地加载认证信息
+1. edgemesh-server无须从本地加载认证信息，直接读取secret信息就可以了
 2. edgemsh-agent为了避免重启去拉认证信息，将认证信息
-写到hostpath中，与edgecore保持一致</panel_attributes>
+写到hostpath中，与edgecore保持一致
+3. secret </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>130</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;80.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>0</x>
+      <y>60</y>
+      <w>610</w>
+      <h>730</h>
+    </coordinates>
+    <panel_attributes>
+bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
