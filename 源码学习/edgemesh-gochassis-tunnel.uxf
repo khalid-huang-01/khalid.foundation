@@ -497,17 +497,6 @@ i: index
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2230</x>
-      <y>0</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>tunnel.Server</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>1710</x>
       <y>0</y>
       <w>170</w>
@@ -618,10 +607,10 @@ tunnel.Client.Connection.Write()</panel_attributes>
       <x>1790</x>
       <y>970</y>
       <w>30</w>
-      <h>70</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -644,5 +633,16 @@ tunnel.Client.Connection.Write()</panel_attributes>
     </coordinates>
     <panel_attributes>lt=.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;700.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1530</x>
+      <y>860</y>
+      <w>30</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;290.0</additional_attributes>
   </element>
 </diagram>
