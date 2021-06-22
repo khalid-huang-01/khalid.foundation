@@ -3,11 +3,11 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+
 	"github.com/libp2p/go-libp2p"
 	circuit "github.com/libp2p/go-libp2p-circuit"
 	"khalid.foundation/proxy/proxy/relay-libp2p/utils"
-
-	"log"
 )
 
 func main() {
@@ -27,5 +27,6 @@ func main() {
 	log.Println("ID: ", host.ID())
 
 	select {}
+
 
 }

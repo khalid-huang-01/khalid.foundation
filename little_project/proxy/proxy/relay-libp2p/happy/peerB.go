@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	relayID := "QmQ6t5SKxiT1JkiXG1YnuDyZphgZmZYZGZ4itmx2BZ2rYD"
+	relayID := "QmaiMau95mur7YknDjYxN3QiC7mnQ4HDa8Kxo8WdMHCv8f"
 	// libp2p.ListenAddrs的作用是什么 => 启动服务，这样别人才能通过stream连接自己，这个是默认启动的，不用配置
 	host, err := libp2p.New(context.Background(), libp2p.EnableRelay())
 	if err != nil {

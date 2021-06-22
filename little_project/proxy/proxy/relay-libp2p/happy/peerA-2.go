@@ -11,11 +11,11 @@ import (
 )
 
 func main() {
-	peerBID := "QmUkK2Wyto6Bm68PnUqpmg4VYP6C9PzFpbHTqRu4LHpnmp"
+	peerBID := "QmU2Nq2RJSC4os9WGwN5J5fbxTxsND26NmUTds1JSzWzuE"
 
-	relayID := "QmQuUjm1s3VfqASbRjH65MBctVQiASCLqkaMBcMj72bvtz"
+	relayID := "QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
 
-	relayAddr := "/ip4/192.168.0.38/tcp/10001/p2p/" + relayID
+	relayAddr := "/ip4/127.0.0.1/tcp/10001/p2p/" + relayID
 	relayAddrInfo, err := utils.Addr2info(relayAddr)
 	if err != nil {
 		log.Println("err: ", err)

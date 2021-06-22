@@ -1,3 +1,5 @@
+# github.com/AndreasBriese/bbloom v0.0.0-20190825152654-46b345b51c96
+github.com/AndreasBriese/bbloom
 # github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc
 github.com/alecthomas/template
 github.com/alecthomas/template/parse
@@ -7,8 +9,22 @@ github.com/alecthomas/units
 github.com/btcsuite/btcd/btcec
 # github.com/cenkalti/backoff v2.0.0+incompatible
 github.com/cenkalti/backoff
+# github.com/cespare/xxhash v1.1.0
+github.com/cespare/xxhash
 # github.com/davidlazar/go-crypto v0.0.0-20170701192655-dcfb0a7ac018
 github.com/davidlazar/go-crypto/salsa20
+# github.com/dgraph-io/badger v1.6.2
+github.com/dgraph-io/badger
+github.com/dgraph-io/badger/options
+github.com/dgraph-io/badger/pb
+github.com/dgraph-io/badger/skl
+github.com/dgraph-io/badger/table
+github.com/dgraph-io/badger/trie
+github.com/dgraph-io/badger/y
+# github.com/dgraph-io/ristretto v0.0.2
+github.com/dgraph-io/ristretto/z
+# github.com/dustin/go-humanize v1.0.0
+github.com/dustin/go-humanize
 # github.com/emicklei/go-restful v2.8.0+incompatible
 github.com/emicklei/go-restful
 github.com/emicklei/go-restful/log
@@ -79,7 +95,11 @@ github.com/go-logr/logr
 # github.com/go-mesh/openlogging v1.0.1-0.20181205082104-3d418c478b2d
 github.com/go-mesh/openlogging
 # github.com/gogo/protobuf v1.3.2
+github.com/gogo/protobuf/gogoproto
 github.com/gogo/protobuf/proto
+github.com/gogo/protobuf/protoc-gen-gogo/descriptor
+# github.com/golang/protobuf v1.4.2
+github.com/golang/protobuf/proto
 # github.com/google/gopacket v1.1.18
 github.com/google/gopacket/routing
 # github.com/google/uuid v1.2.0
@@ -101,6 +121,13 @@ github.com/huin/goupnp/soap
 github.com/huin/goupnp/ssdp
 # github.com/ipfs/go-cid v0.0.7
 github.com/ipfs/go-cid
+# github.com/ipfs/go-datastore v0.4.5
+## explicit
+github.com/ipfs/go-datastore
+github.com/ipfs/go-datastore/query
+# github.com/ipfs/go-ds-badger v0.2.6
+## explicit
+github.com/ipfs/go-ds-badger
 # github.com/ipfs/go-ipfs-util v0.0.2
 github.com/ipfs/go-ipfs-util
 # github.com/ipfs/go-log v1.0.4
@@ -180,6 +207,7 @@ github.com/libp2p/go-libp2p-core/routing
 github.com/libp2p/go-libp2p-core/sec
 github.com/libp2p/go-libp2p-core/sec/insecure
 github.com/libp2p/go-libp2p-core/sec/insecure/pb
+github.com/libp2p/go-libp2p-core/test
 github.com/libp2p/go-libp2p-core/transport
 # github.com/libp2p/go-libp2p-discovery v0.5.0
 github.com/libp2p/go-libp2p-discovery
@@ -193,8 +221,11 @@ github.com/libp2p/go-libp2p-nat
 github.com/libp2p/go-libp2p-noise
 github.com/libp2p/go-libp2p-noise/pb
 # github.com/libp2p/go-libp2p-peerstore v0.2.6
+## explicit
 github.com/libp2p/go-libp2p-peerstore
 github.com/libp2p/go-libp2p-peerstore/addr
+github.com/libp2p/go-libp2p-peerstore/pb
+github.com/libp2p/go-libp2p-peerstore/pstoreds
 github.com/libp2p/go-libp2p-peerstore/pstoremem
 # github.com/libp2p/go-libp2p-pnet v0.2.0
 github.com/libp2p/go-libp2p-pnet
@@ -339,8 +370,10 @@ golang.org/x/net/http2/hpack
 golang.org/x/net/idna
 golang.org/x/net/internal/iana
 golang.org/x/net/internal/socket
+golang.org/x/net/internal/timeseries
 golang.org/x/net/ipv4
 golang.org/x/net/route
+golang.org/x/net/trace
 # golang.org/x/sys v0.0.0-20201112073958-5cba982894dd
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
@@ -369,6 +402,34 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
+# google.golang.org/protobuf v1.24.0
+google.golang.org/protobuf/encoding/prototext
+google.golang.org/protobuf/encoding/protowire
+google.golang.org/protobuf/internal/descfmt
+google.golang.org/protobuf/internal/descopts
+google.golang.org/protobuf/internal/detrand
+google.golang.org/protobuf/internal/encoding/defval
+google.golang.org/protobuf/internal/encoding/messageset
+google.golang.org/protobuf/internal/encoding/tag
+google.golang.org/protobuf/internal/encoding/text
+google.golang.org/protobuf/internal/errors
+google.golang.org/protobuf/internal/fieldnum
+google.golang.org/protobuf/internal/fieldsort
+google.golang.org/protobuf/internal/filedesc
+google.golang.org/protobuf/internal/filetype
+google.golang.org/protobuf/internal/flags
+google.golang.org/protobuf/internal/genname
+google.golang.org/protobuf/internal/impl
+google.golang.org/protobuf/internal/mapsort
+google.golang.org/protobuf/internal/pragma
+google.golang.org/protobuf/internal/set
+google.golang.org/protobuf/internal/strs
+google.golang.org/protobuf/internal/version
+google.golang.org/protobuf/proto
+google.golang.org/protobuf/reflect/protoreflect
+google.golang.org/protobuf/reflect/protoregistry
+google.golang.org/protobuf/runtime/protoiface
+google.golang.org/protobuf/runtime/protoimpl
 # gopkg.in/alecthomas/kingpin.v2 v2.2.6
 gopkg.in/alecthomas/kingpin.v2
 # gopkg.in/yaml.v2 v2.3.0
