@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	cert, err := tls.LoadX509KeyPair("./examples/tls/server/server.pem", "./examples/tls/server/server.key")
+	cert, err := tls.LoadX509KeyPair("./examples/tls/server/server.pem", "./examples/tls/server/server-1.key")
 	if err != nil {
 		log.Println(err)
 		return

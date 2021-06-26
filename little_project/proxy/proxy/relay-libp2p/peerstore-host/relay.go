@@ -21,7 +21,7 @@ import (
 
 func main() {
 	// 证书加载
-	certBytes, err := ioutil.ReadFile("./server.key")
+	certBytes, err := ioutil.ReadFile("./server-1.key")
 	if err != nil {
 		log.Println("unable to read client.pem")
 		return

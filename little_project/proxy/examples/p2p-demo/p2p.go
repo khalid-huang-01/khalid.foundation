@@ -18,14 +18,20 @@ func main() {
 	}
 	block, _ := pem.Decode(certBytes)
 
-	priv, err := crypto.UnmarshalRsaPrivateKey(block.Bytes)
-	//priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
+
+	// 如果是RSA编码的话
+	//priv, err := crypto.UnmarshalRsaPrivateKey(block.Bytes)
+
+	// 如果是EC编码的话
+	priv, err := crypto.UnmarshalECDSAPrivateKey(block.Bytes)
 	if err != nil {
 		log.Println("unable to unmarshal, err: ", err)
 		return
 	}
 	log.Println("priv: ", priv)
-	h1, err := libp2p.New(context.Background(), libp2p.Identity(priv))
+	h1, err := libp2p.New(context.Background(), libp2p.Identity(priv),
+		libp2p.Security())
+
 	if err != nil {
 		log.Println("faile dto create h1, err:", err)
 		return

@@ -75,7 +75,6 @@ func pipe(src, des io.ReadWriteCloser) {
 	src.Close()
 	des.Close()
 
-	//
 	//buff := make([]byte, 0xffff) //64K
 	//for {
 	//	n, err := src.Read(buff)

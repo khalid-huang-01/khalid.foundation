@@ -13,7 +13,7 @@ func main() {
 		Handler:   &handler{},
 		TLSConfig: cfg,
 	}
-	log.Fatal(srv.ListenAndServeTLS("./examples/https/server/server.crt", "./examples/https/server/server.key"))
+	log.Fatal(srv.ListenAndServeTLS("./examples/https/server/server.crt", "./examples/https/server/server-1.key"))
 }
 
 type handler struct{}
