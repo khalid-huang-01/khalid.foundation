@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>430</x>
+=======
+      <x>330</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>560</y>
       <w>170</w>
       <h>130</h>
@@ -22,7 +26,11 @@ NodeIsExist(string) bool</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>430</x>
+=======
+      <x>330</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>750</y>
       <w>170</w>
       <h>60</h>
@@ -37,7 +45,11 @@ nodeLock sync.RWMutex
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>510</x>
+=======
+      <x>410</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>680</y>
       <w>30</w>
       <h>90</h>
@@ -48,10 +60,14 @@ nodeLock sync.RWMutex
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>600</x>
+=======
+      <x>500</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>260</y>
       <w>100</w>
-      <h>100</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>Context
 // 单例管理器
@@ -66,19 +82,28 @@ protocol ProtocolContext
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>490</x>
       <y>350</y>
+=======
+      <x>390</x>
+      <y>370</y>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <w>290</w>
-      <h>230</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 组合 (底层实现是nodeContext)</panel_attributes>
-    <additional_attributes>10.0;210.0;150.0;10.0</additional_attributes>
+    <additional_attributes>10.0;190.0;150.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>100</x>
+=======
+      <x>0</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>550</y>
       <w>220</w>
       <h>140</h>
@@ -97,7 +122,11 @@ GetBindConns() []string</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>290</x>
+=======
+      <x>190</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>620</y>
       <w>160</w>
       <h>220</h>
@@ -109,7 +138,11 @@ GetBindConns() []string</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>110</x>
+=======
+      <x>10</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>780</y>
       <w>190</w>
       <h>100</h>
@@ -125,7 +158,11 @@ connsLock sync.RWMutex</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>170</x>
+=======
+      <x>70</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>680</y>
       <w>30</w>
       <h>120</h>
@@ -136,7 +173,11 @@ connsLock sync.RWMutex</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>700</x>
+=======
+      <x>600</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>560</y>
       <w>210</w>
       <h>110</h>
@@ -154,7 +195,11 @@ GetConns(name []string) []*conn
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>1040</x>
+=======
+      <x>940</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>570</y>
       <w>220</w>
       <h>100</h>
@@ -171,7 +216,11 @@ GetUid() string
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>900</x>
+=======
+      <x>800</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>610</y>
       <w>200</w>
       <h>180</h>
@@ -183,18 +232,27 @@ GetUid() string
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>640</x>
       <y>350</y>
+=======
+      <x>540</x>
+      <y>370</y>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <w>170</w>
-      <h>230</h>
+      <h>210</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>150.0;210.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;190.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>720</x>
+=======
+      <x>620</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>750</y>
       <w>190</w>
       <h>50</h>
@@ -207,7 +265,11 @@ conns map[string]*conn</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>790</x>
+=======
+      <x>690</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>660</y>
       <w>30</w>
       <h>110</h>
@@ -218,7 +280,11 @@ conns map[string]*conn</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>1080</x>
+=======
+      <x>980</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>740</y>
       <w>160</w>
       <h>60</h>
@@ -232,7 +298,11 @@ ch chan *StreamMsg</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>1130</x>
+=======
+      <x>1030</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>660</y>
       <w>30</w>
       <h>100</h>
@@ -243,7 +313,11 @@ ch chan *StreamMsg</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>580</x>
+=======
+      <x>480</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>0</y>
       <w>150</w>
       <h>180</h>
@@ -265,7 +339,11 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>250</x>
+=======
+      <x>150</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>170</y>
       <w>420</w>
       <h>400</h>
@@ -277,7 +355,11 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>640</x>
+=======
+      <x>540</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>170</y>
       <w>450</w>
       <h>420</h>
@@ -289,9 +371,13 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>640</x>
+=======
+      <x>540</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>170</y>
-      <w>200</w>
+      <w>210</w>
       <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -301,7 +387,11 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>120</x>
+=======
+      <x>20</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>1000</y>
       <w>160</w>
       <h>30</h>
@@ -312,9 +402,13 @@ closeOpposite() // 让发送消息通知对端关闭</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>190</x>
+=======
+      <x>90</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>870</y>
-      <w>260</w>
+      <w>270</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
@@ -329,7 +423,11 @@ gRPC的SendMsg发送出去
   <element>
     <id>UMLClass</id>
     <coordinates>
+<<<<<<< HEAD
       <x>100</x>
+=======
+      <x>0</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>1120</y>
       <w>200</w>
       <h>80</h>
@@ -346,7 +444,11 @@ RecvMsg(m interface{}) error
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>190</x>
+=======
+      <x>90</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>1020</y>
       <w>200</w>
       <h>120</h>
@@ -362,7 +464,11 @@ SendMsg和RecvMsg方法
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>130</x>
+=======
+      <x>30</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>1020</y>
       <w>90</w>
       <h>120</h>
@@ -373,9 +479,13 @@ SendMsg和RecvMsg方法
   <element>
     <id>Relation</id>
     <coordinates>
+<<<<<<< HEAD
       <x>270</x>
+=======
+      <x>170</x>
+>>>>>>> 59eeed0afbd826f6b4d2c71326faae208b0a9f18
       <y>790</y>
-      <w>1170</w>
+      <w>1180</w>
       <h>250</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
