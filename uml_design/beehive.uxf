@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>280</y>
+      <w>170</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ModuleContext
+--
++ AddModule()
++ AddModuleGroup()
++ Clean()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>120</y>
+      <w>220</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+MessageContext
+--
+# async mode
++ Send()
+# receive是通过channel实现的
+# 本身就是会等待消息到来
++ Receive()
+# sync mode
++ SendSync()
+# Response message其实就是Ack消息
+# 用于可靠性传输的
++ SendResp()
+# group broadcast
++ SendToGroup()
++ SendToGroupSync()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>480</y>
+      <w>380</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ChannelContext
+--
+channels map[string]chan model.Message
+typeChannels map[string]map[string]chan model.Message
+annoChannels map[string]chan model.Message</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>370</y>
+      <w>80</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>670</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;singleton&gt;&gt;
+beehiveContext
+--
+- modulecontext ModuleContext
+- messageContex MessageContext
+- ctx gocontext.Context
+- cancel gocontext.CancelFunc</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>550</y>
+      <w>180</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+moduleContext和
+messageContext都用的
+ChannelContext</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>370</y>
+      <w>170</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>270</y>
+      <w>130</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Module
+--
++ Name() string
++ Group() stirng
++ Start()
++ Enable() bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>310</y>
+      <w>250</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.&gt;
+依赖反转
+有一个全局的
+modeuls map[string]Module
+modulecontext会管理module的
+name和group
+module负责start</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>70</x>
+      <y>370</y>
+      <w>390</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+Module间会依赖
+beehiveContext
+来进行交互，获取
+彼此之间的消息</panel_attributes>
+    <additional_attributes>370.0;360.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>930</x>
+      <y>230</y>
+      <w>170</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>model.Message
+--
+Header MessageHeader
+Router MessageRoute
+Context interface{}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>260</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+发送的消息定义</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>930</x>
+      <y>380</y>
+      <w>170</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>MessageRoute
+--
+# the message from
++ Source string
+# the message will broadcast to
++ Group string
+# the operation on resource
++ operation
+# what the resource wan tto operate
++ resource</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1170</x>
+      <y>200</y>
+      <w>170</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>MessageHeader
+--
++ ID string
+# the response message parentid 
+# must be same with message received
++ ParentID
++ Timestamp
++ ResourceVersion
++ sync</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1090</x>
+      <y>270</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1010</x>
+      <y>310</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

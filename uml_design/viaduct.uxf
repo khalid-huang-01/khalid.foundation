@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>333</x>
+      <y>738</y>
+      <w>288</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>Server
+--
++ ConnNotify: ConnNotify
+# 用于管理所有连接上来的conn， 
+# 会在接收到客户端的连接请示，并
+# 成功建立后添加进去；使用了sync.Map进行管理
++ connMgr: *connectionManager
++ Consumer: io.Writer
++ Handler mux.Handler
++ protoServer: ProtocolServer
+--
+- getTLSConfig()
+- getProtoServer()
+- ListenAndServerTLS()
+- Close()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>711</x>
+      <y>621</y>
+      <w>153</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Client
+--
++ Options
+- protoConn: Conn.Connection
++ somsumer: io.Writer
+--
+# 根据options里面的内容
+# 建立真实类型的连接
++ Connect(): Connection</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>63</x>
+      <y>459</y>
+      <w>360</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>WSServer
+--
+-server: *http.Server
+--
+# 使用http建立ws长连接
+- upgrade(http.ResonseWriter, http.Request): websocket.Conn
+# 客户端与服务端发起连接时调用的函数。会通过依赖的方式将操作委托给
+# Connection对象进行处理
+# Connection会调用ServerConn
+- ServerHTTP(http.ResponseWriter, http.Request)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>612</y>
+      <w>108</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ProtocolServer
+--
++ ListenAndServerTLS(): error
++ Close(): error
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>459</x>
+      <y>675</y>
+      <w>27</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>351</x>
+      <y>585</y>
+      <w>117</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>110.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>486</x>
+      <y>495</y>
+      <w>126</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>QuicServer
+--
+-listener: quic.Listener</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>468</x>
+      <y>549</y>
+      <w>99</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>378</x>
+      <y>144</y>
+      <w>180</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Connection
+--
++ ServerConn()
++ SetReadDeadLine()
++ SetWriteDeadline()
++ Read()
++ Write()
+# do care about the response
++ WriteMessageAsync()
++ WriteMessageSync()
++ ReadMessage()
++ RemoteAddr()
++ LocalAddr()
++ ConnectionState()
++ Close()
+
+bg=orange
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>351</x>
+      <y>369</y>
+      <w>90</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>477</x>
+      <y>369</y>
+      <w>81</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>621</x>
+      <y>45</y>
+      <w>261</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>WSConnection
+--
+- wsConn: webscoket.Conn
+- consumer: io.Writer
+# 这个东西与AutoRoute有关，
+# 但是有什么用呢？
+- messageFifo: fifo.MessageFifo 
+--
+# ServerConn函数会调用如下的两个
+# 函数进行处理接收到的数据
+- hanleMessage()
+- handleRawData()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>252</y>
+      <w>216</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>747</x>
+      <y>243</y>
+      <w>180</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>QuicConnection
+--
+# smgr.Session后面是quic.Session
+- session: smgr.Session 
+- consumer: io.Writer
+- messageFifo: *fifo.MessageFifo
+--
+# ServerConn会使用这两个
+- handlerMessage()
+- handleRawData()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>162</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>783</y>
+      <w>180</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ProtocolClient
+--
+# 用与与相应的server建立连接
++ Connect() Connection, error</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>342</y>
+      <w>189</w>
+      <h>495</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;100.0;110.0;530.0;190.0;530.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>783</x>
+      <y>738</y>
+      <w>27</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>972</x>
+      <y>630</y>
+      <w>198</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>QuicClient
+--
+ctrlLan: layne.Lane
+--
+# 真实返回了一个QuicConnection
++ Connect(): Conn.Connection</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>306</y>
+      <w>477</w>
+      <h>342</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;510.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>855</x>
+      <y>666</y>
+      <w>135</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖其
+建立Connection</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>963</x>
+      <y>792</y>
+      <w>198</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>WSClient
+--
+dialer: *websocket.Dialer
+--
+# 真实返回了一个WSConnection
++ Connect(): Conn.Connection</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>855</x>
+      <y>684</y>
+      <w>162</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖其
+建立Connection</panel_attributes>
+    <additional_attributes>120.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>549</x>
+      <y>288</y>
+      <w>666</w>
+      <h>567</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;720.0;370.0;720.0;610.0;680.0;610.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1026</x>
+      <y>108</y>
+      <w>162</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Lane
+--
++ SetReadDeadline()
++ SetWriteDeadline()
++ ReadMessage()
++ WriteMessage
++ Read()
++ Write()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>873</x>
+      <y>117</y>
+      <w>171</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖lane的具体实现
+进行数据的读写</panel_attributes>
+    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1242</x>
+      <y>27</y>
+      <w>234</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes># 使用proto进行编码与解码
+QuicLane
+--
+- writeDeadline
+- readDeadline
+# 这里最后会通过直接调用quic.Stream
+# 的方法进行读写
+- stream: quic.Stream
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1179</x>
+      <y>54</y>
+      <w>81</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;110.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1260</x>
+      <y>198</y>
+      <w>216</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>WSLaneWithoutPack
+--
+- writeDeadlin
+- readDeadline
+# 这里最后会直接通过调用ws.
+# 的底层接口进行读写
+- conn: *websocket.Conn
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1179</x>
+      <y>180</y>
+      <w>99</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>918</x>
+      <y>225</y>
+      <w>288</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖lane的具体实现
+进行数据的读写</panel_attributes>
+    <additional_attributes>180.0;10.0;180.0;70.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>891</x>
+      <y>828</y>
+      <w>90</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>783</x>
+      <y>666</y>
+      <w>414</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;260.0;440.0;260.0;440.0;10.0;430.0;10.0</additional_attributes>
+  </element>
+</diagram>

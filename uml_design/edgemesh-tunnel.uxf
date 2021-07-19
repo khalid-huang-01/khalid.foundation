@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>340</y>
+      <w>220</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Connection
+--
+# 开始启动连接，主要是监听消息
++ ServerConn()
++ SetReadDeadLine()
++ SetWriteDeadline()
++ Read()
++ Write()
+# 同步操作
++ WriteMessage()
++ ReadMessage()
++ RemoteAddr()
++ LocalAddr()
++ ConnectionState()
++ Close()
+
+bg=orange
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>370</y>
+      <w>290</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>P2PConnection
+--
+- stream: libp2p.network.Stream 
+- consumer: io.Writer
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>420</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>140</y>
+      <w>340</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>BasicHost
+bg=yellow
+-
+network: network.Network
+mux: MultistreamMuxer
+-
+# 被连接端在接收到原始stream请求之后会做的操作
+SetStreamHandler()
+# 发起连接的一端开启的Stream，用于数据交互的流
+NewStream()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>290</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>800</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>handler.L4ProxyHandler</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>800</y>
+      <w>200</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+通过Peer建立的连接进行交互</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>720</y>
+      <w>400</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>Peer
+--
+peerID string
+--
+# 做为一个节点启动，需要做如下的事情
+# 1.根据中继地址，与中继建立连接
+# 2.获取所有agent对应地址信息(nodename-&gt;peerID)
+# 3.配置stream处理函数（SetStreamHandler，俩阶段，
+先建立本地连接，再直接io.Copy）
+Start() // 做为server要做的事情
+# 建立一个与peerID的Connection，这里就是
+# P2PConnection，返回的其实就是libp2p.network.Stream
+# 本地使用这个进行io.Copy
+Connect(peerID) Connection // 作为client是做的事情 </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>150</x>
+      <y>640</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>580</y>
+      <w>260</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes># 负责管理nodeName到PeerID的
+# 映射；涉及到与list-watch secret
+nodeName2PeerID （singleton）
+--
+start() # 开始启动
+# 根据nodeName获取PeerID
+Get(nodeName string) (string, err) 
+# 返回所有peerID
+GetAll() []string
+# 返回所有nodeName
+GetAllKey() []string
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>750</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>920</x>
+      <y>650</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>kubeClient</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>780</x>
+      <y>650</y>
+      <w>160</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+依赖client-go
+作list-watch</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1130</x>
+      <y>360</y>
+      <w>310</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>NodeAddr
+--
+nodeName2PeerAddr map[string]peer.AddrInfo
+--
+Get(nodeName string) string
+Set(nodeName, peerAddr peer.AddrInfo)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1800</x>
+      <y>130</y>
+      <w>340</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>BasicHost
+-
+network: network.Network
+mux: MultistreamMuxer
+-
+# 被连接端在接收到原始stream请求之后会做的操作
+SetStreamHandler()
+# 发起连接的一端开启的Stream，用于数据交互的流
+NewStream()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>10</x>
+      <y>170</y>
+      <w>400</w>
+      <h>570</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>380.0;10.0;10.0;10.0;10.0;550.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1830</x>
+      <y>360</y>
+      <w>450</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>TCPProxyService
+--
+host host.Host
+--
+# 作为server的行为,由host.SetStreamHandler调用
+ReceiveProxyStream（s network.Stream） 
+# 作为client的行为
+GetProxyStream(nodeName, podIP string, podPort int) network.stream
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLGeneric</id>
+    <coordinates>
+      <x>1510</x>
+      <y>360</y>
+      <w>250</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>tunnel.Agent
+--
+nodeName string
+TCPProxySvc *tcp.TCPProxyService
+NodeAddr *agentaddr.NodeAddr
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1430</x>
+      <y>400</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1750</x>
+      <y>410</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1940</x>
+      <y>280</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1890</x>
+      <y>580</y>
+      <w>110</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+network.Stream
+--
+io.Reader
+io.Writer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1930</x>
+      <y>470</y>
+      <w>30</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1540</x>
+      <y>570</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>handler.L4ProxyHandler
+bg=yellow
+--
+Name()
+Handle(chain ....)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1630</x>
+      <y>450</y>
+      <w>210</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+通过Peer建立的连接进行交互</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1540</x>
+      <y>720</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+go-chassis.Handler
+--
+Name()
+Handle(chain ....)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1630</x>
+      <y>630</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
