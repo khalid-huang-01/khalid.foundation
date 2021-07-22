@@ -18,7 +18,7 @@ func main()  {
 	}
 
 	pingService := &ping.PingService{Host: node}
-	peerChan := msdn.InitMDNS(ctx, node, "meetup")
+	peerChan := msdn.InitMDNS(ctx, node, "meetup-2")
 
 
 	fmt.Println("start listener")
@@ -26,15 +26,17 @@ func main()  {
 		fmt.Println("Found peer:", peer, ", connecting")
 		if err := node.Connect(ctx, peer); err != nil {
 			fmt.Println("Connection failed:", err)
-			ch := pingService.Ping(ctx, peer.ID)
-			go func(ch <-chan ping.Result) {
-				for i := 0; i < 5; i++ {
-					res := <-ch
-					fmt.Println("pinged", peer.ID, "in", res.RTT)
-					time.Sleep(10 * time.Second)
-				}
-			}(ch)
+			continue
 		}
+		fmt.Println("Connection success")
+		ch := pingService.Ping(ctx, peer.ID)
+		go func(ch <-chan ping.Result) {
+			for i := 0; i < 5; i++ {
+				res := <-ch
+				fmt.Println("pinged", peer.ID, "in", res.RTT)
+				time.Sleep(10 * time.Second)
+			}
+		}(ch)
 	}
 
 	fmt.Println("exit")
