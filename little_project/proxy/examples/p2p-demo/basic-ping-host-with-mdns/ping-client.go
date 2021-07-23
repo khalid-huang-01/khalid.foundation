@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p-core/peer"
 	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"khalid.foundation/proxy/msdn/msdn"
 	"time"
@@ -18,25 +19,25 @@ func main()  {
 	}
 
 	pingService := &ping.PingService{Host: node}
-	peerChan := msdn.InitMDNS(ctx, node, "meetup-2")
+	peerChan := msdn.InitMDNS(ctx, node, "meetup-3")
 
 
 	fmt.Println("start listener")
-	for peer := range peerChan {
-		fmt.Println("Found peer:", peer, ", connecting")
-		if err := node.Connect(ctx, peer); err != nil {
+	for p := range peerChan {
+		fmt.Println("Found p:", p, ", connecting")
+		if err := node.Connect(ctx, p); err != nil {
 			fmt.Println("Connection failed:", err)
 			continue
 		}
 		fmt.Println("Connection success")
-		ch := pingService.Ping(ctx, peer.ID)
-		go func(ch <-chan ping.Result) {
+		ch := pingService.Ping(ctx, p.ID)
+		go func(ch <-chan ping.Result, addrInfo peer.AddrInfo) {
 			for i := 0; i < 5; i++ {
 				res := <-ch
-				fmt.Println("pinged", peer.ID, "in", res.RTT)
+				fmt.Println("pinged", addrInfo.Addrs, "in", res.RTT)
 				time.Sleep(10 * time.Second)
 			}
-		}(ch)
+		}(ch, p)
 	}
 
 	fmt.Println("exit")
