@@ -13,7 +13,10 @@ import (
 func main()  {
 	ctx := context.Background()
 
-	node, err := libp2p.New(ctx, libp2p.Ping(false))
+	node, err := libp2p.New(ctx,
+		libp2p.Ping(false),
+		libp2p.ForceReachabilityPrivate(),
+		)
 	if err != nil {
 		panic(err)
 	}
