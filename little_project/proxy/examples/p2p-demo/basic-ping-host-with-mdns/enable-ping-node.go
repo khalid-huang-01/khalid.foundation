@@ -38,7 +38,7 @@ func main() {
 	}
 	fmt.Println("libp2p node address: ", addrs[0])
 
-	peerChan := msdn.InitMDNS(ctx, node, "meetup-3")
+	peerChan := msdn.InitMDNS(ctx, node, "meetup-13")
 
 	for peer := range peerChan {
 		fmt.Println("Found peer:", peer, ", connecting")
