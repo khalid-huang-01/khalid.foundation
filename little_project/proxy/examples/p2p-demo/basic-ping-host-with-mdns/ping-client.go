@@ -13,7 +13,7 @@ import (
 func main()  {
 	ctx := context.Background()
 
-	node, err := libp2p.New(ctx, libp2p.Ping(false))
+	node, err := libp2p.New(ctx, libp2p.Ping(false), libp2p.ListenAddrStrings("/ip4/192.168.0.32/tcp/10007"))
 	if err != nil {
 		panic(err)
 	}
