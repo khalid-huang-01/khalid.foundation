@@ -19,7 +19,6 @@ func main()  {
 	}
 
 	pingService := &ping.PingService{Host: node}
-	peerChan := msdn.InitMDNS(ctx, node, "meetup-13")
 
 	// pint he node's peerInfo in multiaddr format
 	peerInfo := peer.AddrInfo{
@@ -31,6 +30,8 @@ func main()  {
 		panic(err)
 	}
 	fmt.Println("libp2p node address: ", addrs[0])
+
+	peerChan := msdn.InitMDNS(ctx, node, "meetup-13")
 
 
 	fmt.Println("start listener")
