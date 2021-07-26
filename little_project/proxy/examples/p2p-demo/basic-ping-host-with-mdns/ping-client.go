@@ -19,7 +19,7 @@ func main()  {
 	}
 
 	pingService := &ping.PingService{Host: node}
-	peerChan := msdn.InitMDNS(ctx, node, "meetup-3")
+	peerChan := msdn.InitMDNS(ctx, node, "meetup-4")
 
 
 	fmt.Println("start listener")
