@@ -2,8 +2,8 @@ package stack
 
 // leetcode 173
 type TreeNode struct {
-	Val int
-	Left *TreeNode
+	Val   int
+	Left  *TreeNode
 	Right *TreeNode
 }
 
@@ -17,7 +17,7 @@ func Constructor(root *TreeNode) BSTIterator {
 	return bi
 }
 
-func (this *BSTIterator) push(node *TreeNode)  {
+func (this *BSTIterator) push(node *TreeNode) {
 	for node != nil {
 		this.stack = append(this.stack, node)
 		node = node.Left // 一直往左边找，同时把当前节点给保持起来
@@ -33,4 +33,28 @@ func (this *BSTIterator) Next() int {
 
 func (this *BSTIterator) HasNext() bool {
 	return len(this.stack) > 0
+}
+
+// leetcode 20
+func isValid(s string) bool {
+	stack := make([]rune, 0)
+	pairs := map[rune]rune{
+		')': '(',
+		'}': '{',
+		']': '[',
+	}
+	for _, v := range s {
+		switch v {
+		case '(', '{', '[':
+			stack = append(stack, v)
+		case ')', '}', ']':
+			if len(stack) == 0 || stack[len(stack)-1] != pairs[v] {
+				return false
+			}
+			stack = stack[:len(stack)-1]
+		default:
+			return false
+		}
+	}
+	return len(stack) == 0
 }
