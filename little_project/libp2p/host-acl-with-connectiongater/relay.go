@@ -40,6 +40,7 @@ func main() {
 		libp2p.EnableRelay(circuit.OptHop),
 		libp2p.ForceReachabilityPrivate(),
 		libp2p.ConnectionGater(&Gater{}),
+		libp2p.Ping(true),
 	)
 	if err != nil {
 		log.Printf("Failed to create relay-libp2p server: %s", err)
@@ -57,19 +58,19 @@ type Gater struct {
 }
 
 func (g *Gater) InterceptPeerDial(p peer.ID) (allow bool) {
-	return true
-}
-
-func (g *Gater) InterceptAddrDial(peer.ID, ma.Multiaddr) (allow bool) {
-	fmt.Println("addr dial")
-	return true
-}
-
-func (g *Gater) InterceptAccept(connAddr network.ConnMultiaddrs) (allow bool) {
-	if connAddr.RemoteMultiaddr().String() == "/ip4/192.168.0.10/tcp/10002" {
+	fmt.Println("remote peer ID: ", p)
+	if p.String() == "QmbyWhnkqUQArfzukTRTQqnzuAVQfSTuijTN1iHsK5CU8z" {
 		return true
 	}
 	return false
+}
+
+func (g *Gater) InterceptAddrDial(p peer.ID,_ ma.Multiaddr) (allow bool) {
+	return g.InterceptPeerDial(p)
+}
+
+func (g *Gater) InterceptAccept(connAddr network.ConnMultiaddrs) (allow bool) {
+	return true
 }
 
 
@@ -78,6 +79,5 @@ func (g *Gater) InterceptSecured(network.Direction, peer.ID, network.ConnMultiad
 }
 
 func (g *Gater) InterceptUpgraded(n network.Conn) (allow bool, reason control.DisconnectReason) {
-	fmt.Println("n", n)
 	return true, 0
 }

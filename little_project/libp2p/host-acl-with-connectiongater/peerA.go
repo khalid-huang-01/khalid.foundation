@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
+	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"io/ioutil"
 	"khalid.fondation/libp2pdemo/utils"
 	"log"
@@ -20,6 +21,7 @@ func main() {
 	block, _ := pem.Decode(certBytes)
 
 	priv, err := crypto.UnmarshalRsaPrivateKey(block.Bytes)
+	//_, err = crypto.UnmarshalRsaPrivateKey(block.Bytes)
 	if err != nil {
 		panic(err)
 	}
@@ -28,7 +30,8 @@ func main() {
 	relayID := "QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
 	host, err := libp2p.New(context.Background(), libp2p.EnableRelay(),
 		libp2p.ListenAddrStrings(fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", 10002)),
-		libp2p.Identity(priv))
+		libp2p.Identity(priv),
+	)
 	if err != nil {
 		log.Printf("Failed to create h1: %s", err)
 		return
@@ -46,4 +49,16 @@ func main() {
 		return
 	}
 	log.Println("success to connect to relay")
+
+	// 下面也可以直接 ping.Ping(ctx, node, peer.ID)
+	pingService := &ping.PingService{Host: host}
+	ch := pingService.Ping(context.Background(), relayAddrInfo.ID)
+	for i := 0; i < 5; i++ {
+		res := <-ch
+		if res.Error != nil {
+			fmt.Println("err: ", res.Error)
+			return
+		}
+		fmt.Println("pinged", relayAddrInfo.ID, "in", res.RTT)
+	}
 }
