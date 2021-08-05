@@ -39,6 +39,10 @@ func main()  {
 	ch := pingService.Ping(ctx, peer.ID)
 	for i := 0; i < 5; i++ {
 		res := <-ch
+		if res.Error != nil {
+			fmt.Println("ping error: ", res.Error)
+			return
+		}
 		fmt.Println("pinged", addr, "in", res.RTT)
 	}
 

@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"github.com/libp2p/go-libp2p-core/crypto"
+	"github.com/libp2p/go-libp2p-core/pnet"
 	"io/ioutil"
 	"khalid.fondation/libp2pdemo/utils"
 	"log"
@@ -36,10 +38,15 @@ func main() {
 		panic(err)
 	}
 	s := ""
-	//s += fmt.Sprintln("/key/swarm/psk/1.0.0/")
-	//s += fmt.Sprintln("/base16/")
+	s += fmt.Sprintln("/key/swarm/psk/1.0.0/")
+	s += fmt.Sprintln("/base16/")
 	s += fmt.Sprintf("%s", hex.EncodeToString(key))
 	fmt.Println(s)
+	psk, err := pnet.DecodeV1PSK(bytes.NewBuffer([]byte(s)))
+	if err != nil {
+		panic(err)
+	}
+
 
 	host, err := libp2p.New(
 		context.Background(),
@@ -47,7 +54,7 @@ func main() {
 		libp2p.ListenAddrStrings(fmt.Sprintf("/ip4/0.0.0.0/tcp/%d", listenPort)),
 		libp2p.EnableRelay(circuit.OptHop),
 		libp2p.ForceReachabilityPrivate(),
-		libp2p.PrivateNetwork([]byte(s)),
+		libp2p.PrivateNetwork(psk),
 	)
 	if err != nil {
 		log.Printf("Failed to create relay-libp2p server: %s", err)

@@ -1,23 +1,29 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p-core/pnet"
 	"khalid.fondation/libp2pdemo/utils"
 	"log"
 )
 
 func main() {
-	key := "d6a3ab80d31ab42650da9173c764380ab7e1421b4041329ff3e1a3cbe0860f6b"
+	key := "2bc218803c6d2a57e1709a1199997c5cee6414201d9c1d13488d12cfd61cbd96"
 	s := ""
-	//s += fmt.Sprintln("/key/swarm/psk/1.0.0/")
-	//s += fmt.Sprintln("/base16/")
+	s += fmt.Sprintln("/key/swarm/psk/1.0.0/")
+	s += fmt.Sprintln("/base16/")
 	s += fmt.Sprintf("%s", key)
+	psk, err := pnet.DecodeV1PSK(bytes.NewBuffer([]byte(s)))
+	if err != nil {
+		panic(err)
+	}
 
 	relayID := "QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
 	host, err := libp2p.New(context.Background(), libp2p.EnableRelay(),
-		libp2p.PrivateNetwork([]byte(s)))
+		libp2p.PrivateNetwork(psk))
 	if err != nil {
 		log.Printf("Failed to create h1: %s", err)
 		return

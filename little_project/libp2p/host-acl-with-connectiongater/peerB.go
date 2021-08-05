@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/libp2p/go-libp2p"
+	"github.com/libp2p/go-libp2p/p2p/protocol/ping"
 	"khalid.fondation/libp2pdemo/utils"
 	"log"
 )
@@ -27,4 +29,14 @@ func main() {
 		return
 	}
 	log.Println("success to connect to relay")
+	pingService := &ping.PingService{Host: host}
+	ch := pingService.Ping(context.Background(), relayAddrInfo.ID)
+	for i := 0; i < 5; i++ {
+		res := <-ch
+		if res.Error != nil {
+			fmt.Println("err: ", res.Error)
+			return
+		}
+		fmt.Println("pinged", relayAddrInfo.ID, "in", res.RTT)
+	}
 }
