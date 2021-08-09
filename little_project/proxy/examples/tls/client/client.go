@@ -2,6 +2,8 @@ package main
 
 import (
 	"crypto/tls"
+	"crypto/x509"
+	"fmt"
 	"log"
 )
 
@@ -10,9 +12,14 @@ func main()  {
 		InsecureSkipVerify: true,
 	}
 
+	conf.VerifyPeerCertificate = func(rawCerts [][]byte, verifiedChains [][]*x509.Certificate) error {
+		fmt.Println(rawCerts)
+		return fmt.Errorf("verify faile")
+	}
+
 	conn, err := tls.Dial("tcp", "127.0.0.1:443", conf)
 	if err != nil {
-		log.Println(err)
+		log.Println("Dial faile: ", err)
 		return
 	}
 	defer conn.Close()

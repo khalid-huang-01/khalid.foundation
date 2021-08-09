@@ -10,8 +10,8 @@ require (
 	github.com/libp2p/go-libp2p v0.13.1-0.20210224102305-f981b25d2738
 	github.com/libp2p/go-libp2p-circuit v0.4.0
 	github.com/libp2p/go-libp2p-core v0.8.5
-	github.com/libp2p/go-libp2p-discovery v0.5.0
-	github.com/libp2p/go-libp2p-kad-dht v0.12.2
+	github.com/libp2p/go-libp2p-discovery v0.5.0 // indirect
+	github.com/libp2p/go-libp2p-kad-dht v0.12.2 // indirect
 	github.com/libp2p/go-libp2p-peerstore v0.2.7
 	github.com/libp2p/go-libp2p-swarm v0.5.0
 	github.com/libp2p/go-libp2p/examples v0.0.0-20210531210754-f0d89c2770c7
