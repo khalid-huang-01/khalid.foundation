@@ -11,17 +11,17 @@ openssl req -new -x509 -days 365 -key ca.key -out ca.crt
 openssl genrsa -out server.key 1024
 
 # 3. 生成服务端证书的 CSR
-# CN(common name) 必须填写为: localhost
-openssl req -new -key server.key -out server.csr
+# CN(common name) 必须填写
+openssl req -new -key server.key -subj "/CN=127.0.0.1" -out server.csr
 
-# 4. 通过 CSR 向 CA 签发服务端证书
-openssl x509 -req -days 365 -in server.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out server.crt
-
+# 4. 通过 CSR 向 CA 签发服务端证书, 地址要填写，不然要配置InSercurityVerify才可以访问
+echo subjectAltName = IP:127.0.0.1 > etfile.cnf
+openssl x509 -req -days 365 -in server.csr -CA ../ca.crt -CAkey ../ca.key -set_serial 01 -out server.crt -extfile extfile.cnf
 # 5. 生成客户端秘钥
 openssl genrsa -out client.key 1024
 
 # 6. 生成客户端 CSR，一路回车即可
-openssl req -new -key client.key -out client.csr
+openssl req -new -key client.key  -out client.csr
 
 # 7. 通过 CSR 向 CA 签发客户端证书
 openssl x509 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
@@ -32,9 +32,12 @@ openssl x509 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 
 go run ./server/server.go
 go run ./client/client.go
 ```
+为了验证ca证书的有效性，可以把client里面的ca.crt修改为rootCA.crt，可以看到，如果不是ca签署的话，是过不了的
 
 ### 双向认证
 ```shell
 go run ./server/mutal_tls_server.go
 go run ./server/mutal_tls_client.go
 ```
+
+

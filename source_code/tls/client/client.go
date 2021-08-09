@@ -8,7 +8,7 @@ import (
 )
 
 func main()  {
-	caCertBytes, err := ioutil.ReadFile("./ca.crt")
+	caCertBytes, err := ioutil.ReadFile("./rootCA.crt")
 	if err != nil {
 		panic("unable to read client.pem")
 	}

@@ -13,7 +13,7 @@ func main()  {
 		log.Println(err)
 		return
 	}
-	caCertBytes, err := ioutil.ReadFile("./rootCA.crt")
+	caCertBytes, err := ioutil.ReadFile("./ca.crt")
 	if err != nil {
 		panic("unable to read client.pem")
 	}
@@ -26,7 +26,6 @@ func main()  {
 	conf := &tls.Config{
 		RootCAs: clientCertPool,
 		Certificates: []tls.Certificate{cert},
-		InsecureSkipVerify: true,
 	}
 
 	conn, err := tls.Dial("tcp", "127.0.0.1:443", conf)

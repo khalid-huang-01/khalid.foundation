@@ -30,7 +30,6 @@ func main() {
 		Certificates: []tls.Certificate{cert},
 		ClientAuth: tls.RequireAndVerifyClientCert,
 		ClientCAs: clientCertPool,
-		InsecureSkipVerify: false,
 	}
 
 	ln, err := tls.Listen("tcp", ":443", config)
