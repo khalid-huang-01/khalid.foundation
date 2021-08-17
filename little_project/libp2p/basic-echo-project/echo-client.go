@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/peer"
+	libp2ptls "github.com/libp2p/go-libp2p-tls"
 	"github.com/multiformats/go-multiaddr"
 	"io/ioutil"
 	"log"
@@ -14,7 +15,9 @@ func main()  {
 
 	// 这里使用libp2p.NoSecurity，如果对端不使用这个或者Security里面的协议不一样的化，两者就无法建立连接
 	// 因为没有对应的协议做Secrutiy
-	node, err := libp2p.New(ctx, libp2p.Ping(false), libp2p.NoSecurity)
+	node, err := libp2p.New(ctx, libp2p.Ping(false),
+		//libp2p.NoSecurity)
+		libp2p.Security(libp2ptls.ID, libp2ptls.New))
 	if err != nil {
 		panic(err)
 	}
