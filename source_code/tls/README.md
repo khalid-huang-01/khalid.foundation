@@ -18,12 +18,12 @@ openssl req -new -key server.key -subj "/CN=127.0.0.1" -out server.csr
 
 # 4. 通过 CSR 向 CA 签发服务端证书, 地址要填写，不然要配置InSercurityVerify才可以访问
 #echo subjectAltName = IP:127.0.0.1 > etfile.cnf
-cat >etfile.cnf<<EOF
+cat >extfile.cnf<<EOF
 subjectAltName=@alt_names
 [alt_names]
 DNS.1 = www.my.com
 DNS.2 = www.alone.com
-IP.1 = 192.168.0.10
+IP.1 = 192.168.0.38
 IP.2 = 127.0.0.1
 EOF
 
