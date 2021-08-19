@@ -14,7 +14,7 @@ func main() {
 		return
 	}
 
-	config := &tls.Config{Certificates: []tls.Certificate{cert}}
+	config := &tls.Config{Certificates: []tls.Certificate{cert}, MaxVersion: tls.VersionTLS12}
 	ln, err := tls.Listen("tcp", ":443", config)
 	if err != nil {
 		log.Println("err: ", err)
