@@ -19,11 +19,12 @@ func main()  {
 	}
 
 	conf := &tls.Config{
-		RootCAs: clientCertPool,
+		//RootCAs: clientCertPool,
+		InsecureSkipVerify: true,
 	}
 
-	//conn, err := tls.Dial("tcp", "127.0.0.1:443", conf)
-	conn, err := tls.Dial("tcp", "192.168.0.38:443", conf)
+	conn, err := tls.Dial("tcp", "127.0.0.1:443", conf)
+	//conn, err := tls.Dial("tcp", "192.168.0.38:443", conf)
 	if err != nil {
 		log.Println("Dial faile: ", err)
 		return

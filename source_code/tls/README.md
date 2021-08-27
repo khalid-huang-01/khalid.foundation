@@ -16,7 +16,7 @@ openssl genrsa -out server.key 1024
 # 一般为网站域名，cnblogs.com/iiiiher/p/8085698.html
 openssl req -new -key server.key -subj "/CN=127.0.0.1" -out server.csr
 
-# 4. 通过 CSR 向 CA 签发服务端证书, 地址要填写，不然要配置InSercurityVerify才可以访问
+# 4. 通过 CSR 向 CA 签发服务端证书, 地址要填写，不然要配置InsecureSkipVerify才可以访问
 #echo subjectAltName = IP:127.0.0.1 > etfile.cnf
 cat >extfile.cnf<<EOF
 subjectAltName=@alt_names

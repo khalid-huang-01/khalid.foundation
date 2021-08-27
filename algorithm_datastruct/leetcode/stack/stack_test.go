@@ -1,5 +1,7 @@
 package stack
 
+import "testing"
+
 // leetcode 173
 type TreeNode struct {
 	Val   int
@@ -57,4 +59,25 @@ func isValid(s string) bool {
 		}
 	}
 	return len(stack) == 0
+}
+
+func nextExceed(array []int) []int {
+	monoStack := make([]int, 0)
+	rsl := make([]int, len(array))
+	for i, v := range array {
+		for len(monoStack) != 0 && array[monoStack[len(monoStack)-1]] < v {
+			rsl[monoStack[len(monoStack)-1]] = i - monoStack[len(monoStack)-1]
+			monoStack = monoStack[:len(monoStack)-1]
+		}
+		monoStack = append(monoStack, i)
+	}
+	for i := 0; i < len(monoStack); i++ {
+		rsl[monoStack[i]] = -1
+	}
+	return rsl
+}
+
+func TestNextExceed(t *testing.T) {
+	array := []int{5,3,1,2,4}
+	t.Log(nextExceed(array))
 }

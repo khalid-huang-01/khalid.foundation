@@ -26,7 +26,7 @@ func main()  {
 	//	panic("Please provide the peer addr")
 	//}
 	//addr, err := multiaddr.NewMultiaddr(os.Args[1])
-	addrStr := "/ip4/192.168.0.10/tcp/10001/p2p/QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
+	addrStr := "/ip4/192.168.0.38/tcp/10001/p2p/QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
 	addr, err := multiaddr.NewMultiaddr(addrStr)
 	if err != nil {
 		panic(err)
