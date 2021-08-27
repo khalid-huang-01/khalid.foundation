@@ -126,12 +126,12 @@ func (instance *instanceWithRedis) Name() string {
 	return instance.name
 }
 
-// 提供外部调用，用于关闭应用
+// Shutdown 提供外部调用，用于关闭应用
 func (instance *instanceWithRedis) Shutdown() {
 	close(instance.stopCh)
 }
 
-// 这个函数需要传入一个finishCh来通知外部调用者，内部已经初始化完成
+// StartUp 这个函数需要传入一个finishCh来通知外部调用者，内部已经初始化完成
 func (instance *instanceWithRedis) StartUp() {
 	//监听信号
 	signal.Notify(instance.signalCh, syscall.SIGINT, syscall.SIGTERM)
