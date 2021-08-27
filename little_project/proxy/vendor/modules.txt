@@ -106,10 +106,6 @@ github.com/google/gopacket/routing
 github.com/google/uuid
 # github.com/gorilla/websocket v1.4.2
 github.com/gorilla/websocket
-# github.com/hashicorp/errwrap v1.0.0
-github.com/hashicorp/errwrap
-# github.com/hashicorp/go-multierror v1.1.1
-github.com/hashicorp/go-multierror
 # github.com/hashicorp/go-version v1.0.0
 github.com/hashicorp/go-version
 # github.com/hashicorp/golang-lru v0.5.4
@@ -128,17 +124,12 @@ github.com/ipfs/go-cid
 # github.com/ipfs/go-datastore v0.4.5
 ## explicit
 github.com/ipfs/go-datastore
-github.com/ipfs/go-datastore/autobatch
 github.com/ipfs/go-datastore/query
-github.com/ipfs/go-datastore/sync
 # github.com/ipfs/go-ds-badger v0.2.6
 ## explicit
 github.com/ipfs/go-ds-badger
 # github.com/ipfs/go-ipfs-util v0.0.2
 github.com/ipfs/go-ipfs-util
-# github.com/ipfs/go-ipns v0.0.2
-github.com/ipfs/go-ipns
-github.com/ipfs/go-ipns/pb
 # github.com/ipfs/go-log v1.0.5
 github.com/ipfs/go-log
 github.com/ipfs/go-log/tracer
@@ -166,9 +157,6 @@ github.com/koron/go-ssdp
 github.com/libp2p/go-addr-util
 # github.com/libp2p/go-buffer-pool v0.0.2
 github.com/libp2p/go-buffer-pool
-# github.com/libp2p/go-cidranger v1.1.0
-github.com/libp2p/go-cidranger
-github.com/libp2p/go-cidranger/net
 # github.com/libp2p/go-conn-security-multistream v0.2.1
 github.com/libp2p/go-conn-security-multistream
 # github.com/libp2p/go-eventbus v0.2.1
@@ -179,7 +167,6 @@ github.com/libp2p/go-flow-metrics
 ## explicit
 github.com/libp2p/go-libp2p
 github.com/libp2p/go-libp2p/config
-github.com/libp2p/go-libp2p/p2p/discovery
 github.com/libp2p/go-libp2p/p2p/host/basic
 github.com/libp2p/go-libp2p/p2p/host/relay
 github.com/libp2p/go-libp2p/p2p/host/routed
@@ -188,8 +175,6 @@ github.com/libp2p/go-libp2p/p2p/protocol/holepunch/pb
 github.com/libp2p/go-libp2p/p2p/protocol/identify
 github.com/libp2p/go-libp2p/p2p/protocol/identify/pb
 github.com/libp2p/go-libp2p/p2p/protocol/ping
-# github.com/libp2p/go-libp2p-asn-util v0.0.0-20200825225859-85005c6cf052
-github.com/libp2p/go-libp2p-asn-util
 # github.com/libp2p/go-libp2p-autonat v0.4.0
 github.com/libp2p/go-libp2p-autonat
 github.com/libp2p/go-libp2p-autonat/pb
@@ -231,19 +216,6 @@ github.com/libp2p/go-libp2p-core/transport
 github.com/libp2p/go-libp2p-discovery
 # github.com/libp2p/go-libp2p-kad-dht v0.12.2
 ## explicit
-github.com/libp2p/go-libp2p-kad-dht
-github.com/libp2p/go-libp2p-kad-dht/internal
-github.com/libp2p/go-libp2p-kad-dht/internal/config
-github.com/libp2p/go-libp2p-kad-dht/internal/net
-github.com/libp2p/go-libp2p-kad-dht/metrics
-github.com/libp2p/go-libp2p-kad-dht/pb
-github.com/libp2p/go-libp2p-kad-dht/providers
-github.com/libp2p/go-libp2p-kad-dht/qpeerset
-github.com/libp2p/go-libp2p-kad-dht/rtrefresh
-# github.com/libp2p/go-libp2p-kbucket v0.4.7
-github.com/libp2p/go-libp2p-kbucket
-github.com/libp2p/go-libp2p-kbucket/keyspace
-github.com/libp2p/go-libp2p-kbucket/peerdiversity
 # github.com/libp2p/go-libp2p-loggables v0.1.0
 github.com/libp2p/go-libp2p-loggables
 # github.com/libp2p/go-libp2p-mplex v0.4.1
@@ -262,9 +234,6 @@ github.com/libp2p/go-libp2p-peerstore/pstoreds
 github.com/libp2p/go-libp2p-peerstore/pstoremem
 # github.com/libp2p/go-libp2p-pnet v0.2.0
 github.com/libp2p/go-libp2p-pnet
-# github.com/libp2p/go-libp2p-record v0.1.3
-github.com/libp2p/go-libp2p-record
-github.com/libp2p/go-libp2p-record/pb
 # github.com/libp2p/go-libp2p-swarm v0.5.0
 ## explicit
 github.com/libp2p/go-libp2p-swarm
@@ -307,8 +276,6 @@ github.com/libp2p/go-ws-transport
 # github.com/libp2p/go-yamux/v2 v2.0.0
 ## explicit
 github.com/libp2p/go-yamux/v2
-# github.com/miekg/dns v1.1.31
-github.com/miekg/dns
 # github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1
 github.com/minio/blake2b-simd
 # github.com/minio/sha256-simd v1.0.0
@@ -363,10 +330,6 @@ github.com/sirupsen/logrus
 github.com/spacemonkeygo/spacelog
 # github.com/spf13/cast v1.3.0
 github.com/spf13/cast
-# github.com/whyrusleeping/go-keyspace v0.0.0-20160322163242-5b898ac5add1
-github.com/whyrusleeping/go-keyspace
-# github.com/whyrusleeping/mdns v0.0.0-20190826153040-b9b60ed33aa9
-github.com/whyrusleeping/mdns
 # github.com/whyrusleeping/multiaddr-filter v0.0.0-20160516205228-e903e4adabd7
 github.com/whyrusleeping/multiaddr-filter
 # go.opencensus.io v0.22.4
@@ -398,8 +361,6 @@ golang.org/x/crypto/blake2s
 golang.org/x/crypto/chacha20
 golang.org/x/crypto/chacha20poly1305
 golang.org/x/crypto/curve25519
-golang.org/x/crypto/ed25519
-golang.org/x/crypto/ed25519/internal/edwards25519
 golang.org/x/crypto/internal/subtle
 golang.org/x/crypto/poly1305
 golang.org/x/crypto/salsa20/salsa
@@ -419,7 +380,6 @@ golang.org/x/net/internal/iana
 golang.org/x/net/internal/socket
 golang.org/x/net/internal/timeseries
 golang.org/x/net/ipv4
-golang.org/x/net/ipv6
 golang.org/x/net/route
 golang.org/x/net/trace
 # golang.org/x/sys v0.0.0-20210426080607-c94f62235c83

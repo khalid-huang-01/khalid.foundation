@@ -57,6 +57,9 @@ func main() {
 type Gater struct {
 }
 
+// InterceptPeerDial 这个是做outbound 流量的控制的,当这个返回false的时候,节点之间的connection是无法建立的,可以通过
+// netstat -anp | grep 10001 查看验证
+// 但是remote peerB connect不会返回失败
 func (g *Gater) InterceptPeerDial(p peer.ID) (allow bool) {
 	fmt.Println("remote peer ID: ", p)
 	if p.String() == "QmbyWhnkqUQArfzukTRTQqnzuAVQfSTuijTN1iHsK5CU8z" {
@@ -69,7 +72,11 @@ func (g *Gater) InterceptAddrDial(p peer.ID,_ ma.Multiaddr) (allow bool) {
 	return g.InterceptPeerDial(p)
 }
 
+// InterceptAccept 这个是做inbound流量的,但这个false, 节点之间的connection也是无法建立的,而且remote Peer connect
+// 会返回失败
 func (g *Gater) InterceptAccept(connAddr network.ConnMultiaddrs) (allow bool) {
+	fmt.Printf("%v\n", connAddr.RemoteMultiaddr())
+	//return false
 	return true
 }
 

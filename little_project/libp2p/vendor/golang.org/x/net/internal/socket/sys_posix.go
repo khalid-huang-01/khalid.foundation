@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//go:build aix || darwin || dragonfly || freebsd || linux || netbsd || openbsd || solaris || windows || zos
 // +build aix darwin dragonfly freebsd linux netbsd openbsd solaris windows zos
 
 package socket
@@ -32,12 +31,12 @@ func marshalInetAddr(a net.Addr) []byte {
 
 func marshalSockaddr(ip net.IP, port int, zone string) []byte {
 	if ip4 := ip.To4(); ip4 != nil {
-		b := make([]byte, sizeofSockaddrInet4)
+		b := make([]byte, sizeofSockaddrInet)
 		switch runtime.GOOS {
 		case "android", "illumos", "linux", "solaris", "windows":
 			NativeEndian.PutUint16(b[:2], uint16(sysAF_INET))
 		default:
-			b[0] = sizeofSockaddrInet4
+			b[0] = sizeofSockaddrInet
 			b[1] = sysAF_INET
 		}
 		binary.BigEndian.PutUint16(b[2:4], uint16(port))
@@ -77,7 +76,7 @@ func parseInetAddr(b []byte, network string) (net.Addr, error) {
 	var ip net.IP
 	var zone string
 	if af == sysAF_INET {
-		if len(b) < sizeofSockaddrInet4 {
+		if len(b) < sizeofSockaddrInet {
 			return nil, errors.New("short address")
 		}
 		ip = make(net.IP, net.IPv4len)

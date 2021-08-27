@@ -1,5 +1,10 @@
 package others
 
+import (
+	"testing"
+	"time"
+)
+
 // leetcode 350
 // 无序的且重复数字也要多次返回
 // 使用map，一个数组计数，一个消除，消除就加入
@@ -53,6 +58,10 @@ func maxDiff(nums []int) int {
 }
 
 func TestMaxDiff(t *testing.T) {
+	t.Log("start")
+	var intervalTime = 5 * time.Second
+	time.Sleep(intervalTime)
+	t.Log("end")
 	nums := []int{2, 4, 1, 16, 7, 5, 11, 9}
 	t.Log(maxDiff(nums))
 }
@@ -65,5 +74,3 @@ func max(a, b int) int {
 	}
 	return b
 }
-
->>>>>>> 790e15936318e90465583a5bce6e6210cd86b29d

@@ -11,7 +11,7 @@ import (
 
 // 一般客户端本地是有CA的
 func main() {
-	cert, err := tls.LoadX509KeyPair("./examples/tls/server/server.pem", "./examples/tls/server/server-1.key")
+	cert, err := tls.LoadX509KeyPair("./examples/tls/server/server.pem", "./examples/tls/server/server.key")
 	if err != nil {
 		log.Println(err)
 		return
