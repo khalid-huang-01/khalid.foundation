@@ -9,14 +9,14 @@ openssl genrsa  -out ca.key 4096
 openssl req -new -x509 -days 365 -key ca.key -out ca.crt
 
 # 2. 生成服务端秘钥
-openssl genrsa -out server.key 1024
+openssl genrsa -out server.key 2048
 
 # 3. 生成服务端证书的 CSR
 # CN(common name) 必须填写
 # 一般为网站域名，cnblogs.com/iiiiher/p/8085698.html
 openssl req -new -key server.key -subj "/CN=127.0.0.1" -out server.csr
 
-# 4. 通过 CSR 向 CA 签发服务端证书, 地址要填写，不然要配置InsecureSkipVerify才可以访问
+# 4. 通过 CSR 向 CA 签发服务端证书, 地址要填写，不然要配置InsecureSkipVerify才可以访问, 对应与SANs
 #echo subjectAltName = IP:127.0.0.1 > etfile.cnf
 cat >extfile.cnf<<EOF
 subjectAltName=@alt_names
@@ -29,13 +29,13 @@ EOF
 
 openssl x509 -req -days 365 -in server.csr -CA ../ca.crt -CAkey ../ca.key -set_serial 01 -out server.crt -extfile extfile.cnf
 # 5. 生成客户端秘钥
-openssl genrsa -out client.key 1024
+openssl genrsa -out client.key 2048
 
 # 6. 生成客户端 CSR，一路回车即可
 openssl req -new -key client.key  -out client.csr
 
 # 7. 通过 CSR 向 CA 签发客户端证书
-openssl x509 -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
+openssl x509 -req -days 365 -in client.csr -CA ../ca.crt -CAkey ../ca.key -set_serial 01 -out client.crt
 ```
 
 #### 单向认证
