@@ -10,13 +10,15 @@ import (
 )
 
 func main() {
-	cert, err := tls.LoadX509KeyPair("./server/kubeedge/server.crt", "./server/kubeedge/server.key")
+	//cert, err := tls.LoadX509KeyPair("./server/kubeedge/server.crt", "./server/kubeedge/server.key")
+	cert, err := tls.LoadX509KeyPair("./server/server.crt", "./server/server.key")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
-	caCertBytes, err := ioutil.ReadFile("./ca-kubeedge.crt")
+	//caCertBytes, err := ioutil.ReadFile("./ca-kubeedge.crt")
+	caCertBytes, err := ioutil.ReadFile("./ca.crt")
 	if err != nil {
 		panic("unable to read client.pem")
 	}
