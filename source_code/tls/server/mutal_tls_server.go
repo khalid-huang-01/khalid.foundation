@@ -11,7 +11,8 @@ import (
 
 func main() {
 	//cert, err := tls.LoadX509KeyPair("./server/kubeedge/server.crt", "./server/kubeedge/server.key")
-	cert, err := tls.LoadX509KeyPair("./server/server.crt", "./server/server.key")
+	//cert, err := tls.LoadX509KeyPair("./server/server.crt", "./server/server.key")
+	cert, err := tls.LoadX509KeyPair("./server/ecdsa/server.crt", "./server/ecdsa/server.key")
 	if err != nil {
 		log.Println(err)
 		return
