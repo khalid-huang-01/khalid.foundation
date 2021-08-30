@@ -73,3 +73,40 @@ func findOrder(numCourses int, prerequisites [][]int) []int {
 	}
 	return []int{}
 }
+
+// leetcode 785
+// 二部图
+func isBipartite(graph [][]int) bool {
+	colors := make([]int, len(graph)) // -1,0,1, 0 means no color
+	for i := 0; i < len(graph); i++ {
+		if colors[i] != 0 {
+			continue
+		}
+		// bfs
+		if !isValid(graph , colors , i) {
+			return false
+		}
+	}
+	return true
+}
+
+func isValid(graph [][]int, colors []int, start int) bool {
+	colors[start] = -1
+	queue := make([]int, 0)
+	queue = append(queue, start)
+	var node int
+	for len(queue) != 0 {
+		node = queue[0]
+		queue = queue[1:]
+		for _, next := range graph[node] {
+			if colors[next] == colors[node]{
+				return false
+			}
+			if colors[next] == 0 {
+				colors[next] = -colors[node]
+				queue = append(queue, next)
+			}
+		}
+	}
+	return  true
+}
