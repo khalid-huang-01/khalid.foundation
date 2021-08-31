@@ -21,6 +21,11 @@ import (
 // https://docs.libp2p.io/tutorials/getting-started/go
 
 func main() {
+	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\ca-ca-server.crt"
+	certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.crt"
+	keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.key"
+
+
 	// openssl genrsa -out rsa_private.key 2048
 	certBytes, err := ioutil.ReadFile("D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.key")
 	if err != nil {
@@ -34,9 +39,7 @@ func main() {
 		panic(err)
 	}
 
-	os.Setenv("CERTFILE", "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.crt")
-	os.Setenv("KEYFILE", "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.key")
-	os.Setenv("CAFILE", "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\ca-ca-server.crt")
+	libp2ptlsca.Init(caFile, certFile, keyFile)
 
 	ctx := context.Background()
 	// 为了更好的知道ping服务，这里禁止了直接使用内置的ping protocol

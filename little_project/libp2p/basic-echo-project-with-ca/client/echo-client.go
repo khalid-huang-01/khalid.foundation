@@ -12,10 +12,13 @@ import (
 	//libp2ptls "github.com/libp2p/go-libp2p-tls"
 	libp2ptlsca "khalid.fondation/libp2pdemo/go-libp2p-tls-ca"
 	"log"
-	"os"
 )
 
 func main() {
+	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\ca-ca-server.crt"
+	certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.crt"
+	keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.key"
+
 	// openssl genrsa -out rsa_private.key 2048
 	certBytes, err := ioutil.ReadFile("D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.key")
 	if err != nil {
@@ -30,9 +33,7 @@ func main() {
 	}
 
 	ctx := context.Background()
-	os.Setenv("CERTFILE", "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.crt")
-	os.Setenv("KEYFILE", "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.key")
-	os.Setenv("CAFILE", "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\ca-ca-server.crt")
+	libp2ptlsca.Init(caFile, certFile, keyFile)
 
 	// 这里使用libp2p.NoSecurity，如果对端不使用这个或者Security里面的协议不一样的化，两者就无法建立连接
 	// 因为没有对应的协议做Secrutiy

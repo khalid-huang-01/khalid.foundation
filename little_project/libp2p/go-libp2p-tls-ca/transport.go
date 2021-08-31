@@ -11,7 +11,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net"
-	"os"
 	"sync"
 
 	libp2pcrypto "github.com/libp2p/go-libp2p-core/crypto"
@@ -22,29 +21,30 @@ import (
 // ID is the protocol ID
 const ID = "/tls-ca/1.0.0"
 
+type Config struct {
+	caFile string
+	certFile string
+	keyFile string
+}
+
+var config Config
+
 type Transport struct {
 	identity  *Identity
 	localPeer peer.ID
 	privKey   libp2pcrypto.PrivKey
 }
 
-func New(key libp2pcrypto.PrivKey) (*Transport, error) {
-	certFile, ok := os.LookupEnv("CERTFILE")
-	if !ok {
-		fmt.Println("get CERTFILE env fail")
-		os.Exit(1)
+func Init(caFile, certFile, keyFile string) {
+	config = Config{
+		caFile:   caFile,
+		certFile: certFile,
+		keyFile:  keyFile,
 	}
-	keyFile, ok := os.LookupEnv("KEYFILE")
-	if !ok {
-		fmt.Println("get KEYFILE env fail")
-		os.Exit(1)
-	}
-	caFile, ok := os.LookupEnv("CAFILE")
-	if !ok {
-		fmt.Println("get CAFILE env fail")
-		os.Exit(1)
-	}
+}
 
+// New 没有其他的传输参数手段，只能这么做
+func New(key libp2pcrypto.PrivKey) (*Transport, error) {
 	id, err := peer.IDFromPrivateKey(key)
 	if err != nil {
 		return nil, err
@@ -55,19 +55,19 @@ func New(key libp2pcrypto.PrivKey) (*Transport, error) {
 	}
 
 	var cert tls.Certificate
-	cert, err = tls.LoadX509KeyPair(certFile, keyFile)
+	cert, err = tls.LoadX509KeyPair(config.certFile, config.keyFile)
 	if err != nil {
 		log.Println(err)
 		return nil, err
 	}
 
 	var clientCertPool *x509.CertPool
-	caCertBytes, err := ioutil.ReadFile(caFile)
+	caCertBytes, err := ioutil.ReadFile(config.caFile)
 	if err != nil {
 		panic("unable to read client.pem")
 	}
 	clientCertPool = x509.NewCertPool()
-	ok = clientCertPool.AppendCertsFromPEM(caCertBytes)
+	ok := clientCertPool.AppendCertsFromPEM(caCertBytes)
 	if !ok {
 		panic("failed to parse root certificate")
 	}
