@@ -185,10 +185,12 @@ func signCerts(csr *x509.CertificateRequest, pbKey crypto.PublicKey) ([]byte, er
 		CommonName:   csr.Subject.CommonName,
 		Organization: csr.Subject.Organization,
 		//Usages:       []x509.ExtKeyUsage{x509.ExtKeyUsageAny},
+		// TODO kubeedge 里面唯一需要变更的
 		Usages:       []x509.ExtKeyUsage{
 			x509.ExtKeyUsageServerAuth,
 			x509.ExtKeyUsageClientAuth,
 		},
+		// 这个可以不加
 		AltNames: certutil.AltNames{
 			DNSNames: csr.DNSNames,
 			IPs:      csr.IPAddresses,

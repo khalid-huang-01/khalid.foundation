@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\ca-ca-server.crt"
+	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\rootCA.crt"
 	certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.crt"
 	keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.key"
 
@@ -52,7 +52,7 @@ func main() {
 	//}
 	//addr, err := multiaddr.NewMultiaddr(os.Args[1])
 	//addrStr := "/ip4/192.168.0.38/tcp/10001/p2p/QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
-	addrStr := "/ip4/127.0.0.1/tcp/10001/p2p/QmZaB9gz9Vhuc3Gc1mz1tAXUCqkfsKZXieQiEiUk57xQiF"
+	addrStr := "/ip4/127.0.0.1/tcp/10001/p2p/QmXjUw2gzd9CSKeP8ME9snj8dyw1kTwz4Mu7JQVkYRamb2"
 	addr, err := multiaddr.NewMultiaddr(addrStr)
 	if err != nil {
 		panic(err)

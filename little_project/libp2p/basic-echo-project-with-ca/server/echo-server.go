@@ -21,7 +21,7 @@ import (
 // https://docs.libp2p.io/tutorials/getting-started/go
 
 func main() {
-	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\ca-ca-server.crt"
+	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\rootCA.crt"
 	certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.crt"
 	keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\server\\server.key"
 

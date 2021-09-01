@@ -66,6 +66,9 @@ IP.2 = 127.0.0.1
 EOF
 
 openssl x509 -req -days 365 -in server.csr -CA ../ca.crt -CAkey ../ca.key -set_serial 01 -out server.crt -extfile extfile.cnf
+# 查看证书的相关信息
+openssl x509 -in server.crt -text
+
 # 5. 生成客户端秘钥
 openssl ecparam -list_curves #椭圆曲线参数
 openssl ecparam -genkey -name secp521r1 -out client.key
