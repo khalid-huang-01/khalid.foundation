@@ -5,16 +5,18 @@ go 1.15
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gorilla/mux v1.7.3
+	github.com/kubeedge/kubeedge v1.6.2
 	github.com/pkg/errors v0.9.1
+	k8s.io/apimachinery v0.19.10
 	k8s.io/client-go v0.19.10
 	k8s.io/klog/v2 v2.2.0
-	github.com/kubeedge/kubeedge v1.6.2
 )
+
 replace (
 	github.com/kubeedge/beehive v0.0.0 => github.com/kubeedge/beehive v0.0.0-20201125122335-cd19bca6e436
-    github.com/kubeedge/viaduct v0.0.0 => github.com/kubeedge/viaduct v0.0.0-20210601015050-d832643a3d35
-    k8s.io/api v0.0.0 => k8s.io/api v0.19.3
-    k8s.io/apiextensions-apiserver v0.0.0 => k8s.io/apiextensions-apiserver v0.19.3
+	github.com/kubeedge/viaduct v0.0.0 => github.com/kubeedge/viaduct v0.0.0-20210601015050-d832643a3d35
+	k8s.io/api v0.0.0 => k8s.io/api v0.19.3
+	k8s.io/apiextensions-apiserver v0.0.0 => k8s.io/apiextensions-apiserver v0.19.3
 	k8s.io/apimachinery v0.0.0 => k8s.io/apimachinery v0.19.3
 	k8s.io/apiserver v0.0.0 => k8s.io/apiserver v0.19.3
 	k8s.io/cli-runtime v0.0.0 => k8s.io/cli-runtime v0.19.3
