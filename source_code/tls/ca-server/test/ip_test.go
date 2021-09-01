@@ -1,6 +1,7 @@
 package test
 
 import (
+	"fmt"
 	"net"
 	"testing"
 )
@@ -14,7 +15,6 @@ func TestIP(t *testing.T) {
 	}
 	for _, address := range addrs {
 		ipnet := address.(*net.IPNet)
-
-		t.Log(ipnet.IP.String())
+		fmt.Println(ipnet.IP.String())
 	}
 }
