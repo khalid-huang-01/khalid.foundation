@@ -86,6 +86,7 @@ func (t *Transport) SecureInbound(ctx context.Context, insecure net.Conn) (sec.S
 	cs, err := t.handshake(ctx, tls.Server(insecure, config), keyCh)
 	if err != nil {
 		insecure.Close()
+		fmt.Println("handshake error: ", err)
 	}
 	return cs, err
 }
@@ -97,6 +98,7 @@ func (t *Transport) SecureOutbound(ctx context.Context, insecure net.Conn, p pee
 	cs, err := t.handshake(ctx, tls.Client(insecure, config), keyCh)
 	if err != nil {
 		insecure.Close()
+		fmt.Println("handshake error: ", err)
 	}
 	return cs, err
 }
