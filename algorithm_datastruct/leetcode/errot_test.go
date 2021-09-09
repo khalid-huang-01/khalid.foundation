@@ -1,7 +1,6 @@
 package leetcode
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -28,9 +27,14 @@ func (t *TimeoutErr) Timeout() bool {
 }
 
 
+var constructMap = make(map[string]string)
 
 func TestError(t *testing.T)  {
-	err := &TimeoutErr{err: "timeout for 4ms"}
-	fmt.Println(err)
-	fmt.Println(IsTimeout(err))
+	//err := &TimeoutErr{err: "timeout for 4ms"}
+	//fmt.Println(err)
+	//fmt.Println(IsTimeout(err))
+
+	constructMap["ni"] = "ki"
+	t.Log(constructMap["ni"])
+
 }

@@ -10,17 +10,20 @@ import (
 )
 
 func main() {
+	//cert, err := tls.LoadX509KeyPair("./server/ca-server/server.crt", "./server/ca-server/server.key")
 	//cert, err := tls.LoadX509KeyPair("./server/kubeedge/server.crt", "./server/kubeedge/server.key")
-	cert, err := tls.LoadX509KeyPair("./server/server.crt", "./server/server.key")
+	//cert, err := tls.LoadX509KeyPair("./server/server.crt", "./server/server.key")
+	cert, err := tls.LoadX509KeyPair("./server/tmp/server.crt", "./server/tmp/server.key")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	//caCertBytes, err := ioutil.ReadFile("./ca-kubeedge.crt")
-	caCertBytes, err := ioutil.ReadFile("./ca.crt")
+	//caCertBytes, err := ioutil.ReadFile("./ca-ca-server.crt")
+	caCertBytes, err := ioutil.ReadFile("./server/tmp/rootCA.crt")
 	if err != nil {
-		panic("unable to read client.pem")
+		panic("unable to read client.pem" + err.Error())
 	}
 	clientCertPool := x509.NewCertPool()
 	ok := clientCertPool.AppendCertsFromPEM(caCertBytes)
@@ -36,7 +39,7 @@ func main() {
 
 	ln, err := tls.Listen("tcp", ":443", config)
 	if err != nil {
-		log.Println("err")
+		log.Println(err)
 		return
 	}
 	defer ln.Close()
