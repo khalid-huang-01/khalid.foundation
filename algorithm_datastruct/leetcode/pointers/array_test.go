@@ -66,6 +66,42 @@ func merge2(nums1 []int, nums2 []int) []int {
 	return rsl
 }
 
+// leetcode 25
+type ListNode struct {
+    Val int
+    Next *ListNode
+}
+
+func reverseKGroup(head *ListNode, k int) *ListNode {
+	if head == nil {
+		return nil
+	}
+
+	var pre, cur, next, tail, check *ListNode
+	check, tail, cur = head, head, head
+
+	// 判断是否有足够的数量
+	var i int
+	for i = 0; i < k && check != nil; i++ {
+		check = check.Next
+	}
+
+	if i != k {
+		return head
+	}
+
+	for ;i >= 1; i-- {
+		next = cur.Next	// 保留后面的元素
+		cur.Next = pre // 修改新指向
+		pre = cur // 指标推进
+		cur = next // 指标推进
+	}
+	// 每次都把本段的尾巴指向下一段的开头
+	tail.Next = reverseKGroup(next, k)
+	head = pre // 返回本段的头
+	return head
+}
+
 func TestMerge1(t *testing.T) {
 	nums1 := []int{1,2,3}
 	nums2 := []int{2,5,6}
