@@ -52,3 +52,65 @@ func lengthOfLongestSubstring(s string) int {
 	}
 	return ans
 }
+
+// leetcode 1004
+func longestOnes(nums []int, k int) int {
+	left, right := 0, 0
+	cost, rsl := 0, 0
+	for right < len(nums) {
+		// 加入右侧
+		if nums[right] == 0 {
+			cost += 1 // 变更一次
+		}
+		
+		// 通过右移左侧游标，使条件满足，主要就是不让变更的数量大于k
+		for cost > k {
+			if nums[left] == 0 {
+				cost -= 1 // 撤销前面变更的
+			}
+			left += 1
+		}
+		
+		// 获取最新结果
+		if rsl < right - left + 1 {
+			rsl = right - left + 1
+		}
+
+		// 推进右侧游标
+		right += 1
+	}
+	return rsl
+}
+
+// leetcode 1208
+func abs(a, b byte) int {
+	tmp := int(a) - int(b)
+	if tmp <  0 {
+		return -tmp
+	}
+	return tmp
+}
+
+func equalSubstring(s string, t string, maxCost int) int {
+	left, right := 0, 0
+	cost, rsl := 0, 0
+	for right < len(s) {
+		// 加入右侧数据，比较
+		cost += abs(s[right], t[right])
+
+		// 右移左侧游标，满足条件
+		for cost > maxCost {
+			cost -= abs(s[left], t[left])
+			left += 1
+		}
+
+		// 获取最新结果
+		if rsl < right - left + 1 {
+			rsl = right - left + 1
+		}
+
+		// 右移右侧游标
+		right += 1
+	}
+	return rsl
+}

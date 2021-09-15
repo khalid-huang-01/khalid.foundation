@@ -1,7 +1,6 @@
 package others
 
 import (
-	"math"
 	"testing"
 	"time"
 )
