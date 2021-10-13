@@ -17,13 +17,13 @@ limitations under the License.
 package httpserver
 
 import (
-	"crypto"
 	"crypto/ecdsa"
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
+	"k8s.io/apimachinery/pkg/util/json"
 	"khalid.jobs/caserver/config"
 	"net/http"
 	"strings"
@@ -159,44 +159,55 @@ func verifyAuthorization(w http.ResponseWriter, r *http.Request) bool {
 	return true
 }
 
+type CertificateSigningRequest struct {
+	Request []byte `json:"request"`
+	Usages  []x509.ExtKeyUsage      `json:"usages"`
+}
+
 // signEdgeCert signs the CSR from EdgeCore
 func signEdgeCert(w http.ResponseWriter, r *http.Request) {
-	csrContent, err := ioutil.ReadAll(r.Body)
+	content, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		klog.Errorf("fail to read file when signing the cert for edgenode:%s! error:%v", "edge-node", err)
 	}
-	csr, err := x509.ParseCertificateRequest(csrContent)
+	var signingRequest CertificateSigningRequest
+	err = json.Unmarshal(content, &signingRequest)
+	// will delete in later
 	if err != nil {
-		klog.Errorf("fail to ParseCertificateRequest of edgenode: %s! error:%v","edge-node", err)
-	}
-	clientCertDER, err := signCerts(csr, csr.PublicKey)
-	if err != nil {
-		klog.Errorf("fail to signCerts for edgenode:%s! error:%v", "edge-node", err)
+		klog.Info("unmarshal failed, the signEdgeCert content is not a CertificateSigningRequest struct, " +
+			"please use the latest edgecore version. Now try to fetch x509.CertificateRequest struct")
+
+		signingRequest.Request = content
+		signingRequest.Usages = []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth}
 	}
 
+	clientCertDER, err := signCerts(&signingRequest)
+	if err != nil {
+		klog.Errorf("fail to signCerts for edgenode:%s! error:%v", "edge-node", err)
+		return
+	}
 	if _, err := w.Write(clientCertDER); err != nil {
 		klog.Errorf("wrire error %v", err)
 	}
+	return
 }
 
 // signCerts will create a certificate for EdgeCore
-func signCerts(csr *x509.CertificateRequest, pbKey crypto.PublicKey) ([]byte, error) {
+func signCerts(signingRequest *CertificateSigningRequest) ([]byte, error) {
+	csr, err := x509.ParseCertificateRequest(signingRequest.Request)
+	if err != nil {
+		return nil, fmt.Errorf("fail to ParseCertificateRequest of edgenode: %s! error:%v", "edge-node", err)
+	}
+	fmt.Println("xxxxx")
+	fmt.Println(signingRequest)
+	fmt.Println(csr)
+
 	cfgs := &certutil.Config{
 		CommonName:   csr.Subject.CommonName,
 		Organization: csr.Subject.Organization,
-		//Usages:       []x509.ExtKeyUsage{x509.ExtKeyUsageAny},
-		// TODO kubeedge 里面唯一需要变更的
-		Usages:       []x509.ExtKeyUsage{
-			x509.ExtKeyUsageServerAuth,
-			x509.ExtKeyUsageClientAuth,
-		},
-		// 这个可以不加
-		AltNames: certutil.AltNames{
-			DNSNames: csr.DNSNames,
-			IPs:      csr.IPAddresses,
-		},
+		Usages:       signingRequest.Usages,
 	}
-	clientKey := pbKey
+	clientKey := csr.PublicKey
 
 	ca := config.Config.Ca
 	caCert, err := x509.ParseCertificate(ca)
@@ -237,7 +248,7 @@ func PrepareAllCerts() error {
 			klog.Errorf("failed to convert an EC private key to SEC 1, ASN.1 DER form, error: %v", err)
 			return err
 		}
-		caCert, err  := x509.ParseCertificate(caDER)
+		caCert, err := x509.ParseCertificate(caDER)
 		if err != nil {
 			klog.Errorf("failed to parse Certificate %v", err)
 			return err
@@ -256,7 +267,7 @@ func PrepareAllCerts() error {
 			klog.Errorf("failed to sign a certificate, error: %v", err)
 			return err
 		}
-		key, err :=  x509.ParseECPrivateKey(keyDER)
+		key, err := x509.ParseECPrivateKey(keyDER)
 		if err != nil {
 			klog.Errorf("failed to ParseECPrivateKey, error: %v", err)
 			return err

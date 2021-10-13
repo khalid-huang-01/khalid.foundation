@@ -13,6 +13,8 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
+	"k8s.io/apimachinery/pkg/util/json"
+	"khalid.jobs/caserver/httpserver"
 	"net"
 	"strings"
 	"time"
@@ -173,11 +175,25 @@ func (cm *ACLManager) GetEdgeCert(url string, capem []byte, cert tls.Certificate
 	}
 
 	nodeName := "edge-node"
+	signingRequest := httpserver.CertificateSigningRequest{
+		Request: csr,
+		Usages: []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
+	}
 
+	jsonContent, err := json.Marshal(&signingRequest)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal signingReqeust:%v", err)
+	}
+
+	fmt.Println(jsonContent)
+
+	//req, err := http.BuildRequest("GET", url, bytes.NewReader(jsonContent), token, nodeName)
 	req, err := http.BuildRequest("GET", url, bytes.NewReader(csr), token, nodeName)
 	if err != nil {
 		return nil, nil, fmt.Errorf("failed to generate http request:%v", err)
 	}
+
+
 
 	res, err := http.SendRequest(req, client)
 	if err != nil {
