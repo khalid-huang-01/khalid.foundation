@@ -20,9 +20,15 @@ func main() {
 	//keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.key"
 
 	// fake
-	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\fake\\.crt"
-	certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\fake\\server.crt"
-	keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\fake\\server.key"
+	//caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\fake\\ca.crt"
+	//certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\fake\\server.crt"
+	//keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\fake\\server.key"
+
+	// real
+	caFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\real\\rootCA.crt"
+	certFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\real\\server.crt"
+	keyFile := "D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\fake-attack\\real\\server.key"
+
 
 	// openssl genrsa -out rsa_private.key 2048
 	//certBytes, err := ioutil.ReadFile("D:\\workspace\\gocode\\gomodule\\khalid.foundation\\little_project\\libp2p\\basic-echo-project-with-ca\\client\\client.key")
@@ -55,8 +61,8 @@ func main() {
 	//addr, err := multiaddr.NewMultiaddr(os.Args[1])
 	//addrStr := "/ip4/192.168.0.38/tcp/10001/p2p/QmbSUTgoPDgRqP5S1Zz2fJJhtg8MFiQna3XAQTQRk9nDSG"
 	//addrStr := "/ip4/119.8.58.38/tcp/10004/p2p/QmSBJ7pCB3SS7gQ3796j1q1DXhuz1VxQcHjDV67oHFxNzQ"
-	//addrStr := "/ip4/119.8.58.38/tcp/10004/p2p/QmSBJ7pCB3SS7gQ3796j1q1DXhuz1VxQcHjDV67oHFxNzQ"
-	addrStr := "/ip4/127.0.0.1/tcp/5533/p2p/QmSBJ7pCB3SS7gQ3796j1q1DXhuz1VxQcHjDV67oHFxNzQ"
+	addrStr := "/ip4/119.8.58.38/tcp/10004/p2p/QmTEZVRJYs3fSo1CXGztYjHayTdk66iESvhsHR1x7eDZmK"
+	//addrStr := "/ip4/127.0.0.1/tcp/5533/p2p/QmSBJ7pCB3SS7gQ3796j1q1DXhuz1VxQcHjDV67oHFxNzQ"
 	addr, err := multiaddr.NewMultiaddr(addrStr)
 	if err != nil {
 		panic(err)

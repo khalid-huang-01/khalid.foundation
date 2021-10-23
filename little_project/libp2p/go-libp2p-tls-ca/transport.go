@@ -64,7 +64,7 @@ func New(key libp2pcrypto.PrivKey) (*Transport, error) {
 	var clientCertPool *x509.CertPool
 	caCertBytes, err := ioutil.ReadFile(config.caFile)
 	if err != nil {
-		panic("unable to read client.pem")
+		panic("unable to read client.pem, err: " +  err.Error())
 	}
 	clientCertPool = x509.NewCertPool()
 	ok := clientCertPool.AppendCertsFromPEM(caCertBytes)

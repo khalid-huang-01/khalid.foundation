@@ -17,7 +17,7 @@ func main() {
 		panic(err)
 	}
 
-	addrStr := "/ip4/119.8.58.38/tcp/10004/p2p/QmSBJ7pCB3SS7gQ3796j1q1DXhuz1VxQcHjDV67oHFxNzQ"
+	addrStr := "/ip4/119.8.58.38/tcp/10004/p2p/QmTEZVRJYs3fSo1CXGztYjHayTdk66iESvhsHR1x7eDZmK"
 	addr, err := multiaddr.NewMultiaddr(addrStr)
 	if err != nil {
 		panic(err)

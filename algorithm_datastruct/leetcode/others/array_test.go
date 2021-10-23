@@ -66,6 +66,26 @@ func TestMaxDiff(t *testing.T) {
 	t.Log(maxDiff(nums))
 }
 
+// 找出数组里面的重复数字（无他）
+// 3 0 3 1 2 = > 3
+func duplicateList(nums []int) (bool, int) {
+	for i := 0; i < len(nums); i++ {
+		for nums[i] != i {
+			if nums[i] == nums[nums[i]] {
+				return true, nums[i]
+			}
+			nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
+		}
+	}
+	return false, -1
+}
+
+func TestDuplicateList(t *testing.T) {
+	nums := []int {2,3,1,1,2,5,3,0}
+	t.Log(duplicateList(nums))
+}
+
+
 
 
 func max(a, b int) int {

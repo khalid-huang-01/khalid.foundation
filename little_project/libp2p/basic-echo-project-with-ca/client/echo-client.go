@@ -6,7 +6,6 @@ import (
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/peer"
-
 	"github.com/multiformats/go-multiaddr"
 	"io/ioutil"
 	//libp2ptls "github.com/libp2p/go-libp2p-tls"
@@ -46,9 +45,9 @@ func main() {
 	node, err := libp2p.New(ctx,
 		libp2p.Identity(priv),
 		libp2p.Ping(false),
-		//libp2p.NoSecurity)
+		libp2p.NoSecurity)
 		//libp2p.Security(libp2ptls.ID, libp2ptls.New))
-		libp2p.Security(libp2ptlsca.ID, libp2ptlsca.New))
+		//libp2p.Security(libp2ptlsca.ID, libp2ptlsca.New))
 	if err != nil {
 		panic(err)
 	}
