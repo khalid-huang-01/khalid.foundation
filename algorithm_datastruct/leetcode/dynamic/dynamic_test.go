@@ -170,3 +170,47 @@ func PrintNode(node *Node) {
 		fmt.Println(neighbor.Val, " ")
 	}
 }
+
+// leetcode 1031:
+// 这个题目就是典型的控制变量法，把其中一个数组固定，另外一个动态找最大的
+func maxSumTwoNoOverlap(nums []int, firstLen int, secondLen int) int {
+	size := len(nums)
+	dpf := make([]int, size+1)
+	dps := make([]int, size+1)
+	dp := make([]int, size+1)
+
+	for i := firstLen - 1; i < size; i++ {
+		// i是最后一个位置
+		dpf[i+1] = max(accumulate(nums, i - firstLen + 1, firstLen), dpf[i])
+	}
+	for i := secondLen - 1; i < size; i++ {
+		dps[i+1] = max(accumulate(nums, i - secondLen + 1, secondLen), dps[i])
+	}
+
+	// dp的长度最少也要是firstLen+secondLen
+	for i := firstLen + secondLen - 1; i < size; i++ {
+		// 在0-i之间查早最大的不重叠和：
+		//		固定firstLen，动态使用最大的second
+		sum1 := accumulate(nums,i - firstLen + 1, firstLen) + dps[i-firstLen+1]
+		//		固定secondLen, 动态使用最大的first
+		sum2 := accumulate(nums,i - secondLen + 1, secondLen) + dpf[i-secondLen+1]
+		dp[i+1] = max(sum1, sum2)
+		dp[i+1] = max(dp[i], dp[i+1])
+	}
+	return dp[size]
+}
+
+func accumulate(nums []int, start, len int) int {
+	sum := 0
+	for i := 0; i < len; i++ {
+		sum += nums[start + i]
+	}
+	return sum
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
