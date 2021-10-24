@@ -103,3 +103,29 @@ func backtracking(graph map[string][]*Airport, from string, solution []string, r
 	}
 	return false
 }
+
+// leetcode 222
+func countNodes(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+	var cur *TreeNode
+	var rsl int
+	for len(queue) != 0 {
+		// 取头元素
+		cur = queue[0]
+		queue = queue[1:]
+		// 更新结果
+		rsl += 1
+		// 迭代
+		if cur.Left != nil {
+			queue = append(queue, cur.Left)
+		}
+		if cur.Right != nil {
+			queue = append(queue, cur.Right)
+		}
+	}
+	return rsl
+}
