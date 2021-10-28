@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -37,4 +38,17 @@ func TestError(t *testing.T)  {
 	constructMap["ni"] = "ki"
 	t.Log(constructMap["ni"])
 
+}
+
+const (
+	mutexLocked = 1 << iota
+	mutexWoken
+	mutexWaiterShift = iota
+)
+
+func TestIoTA(t *testing.T) {
+	fmt.Println(mutexLocked)
+	fmt.Println(mutexWoken)
+	fmt.Println(mutexWaiterShift)
+	fmt.Println(1 << mutexWaiterShift)
 }

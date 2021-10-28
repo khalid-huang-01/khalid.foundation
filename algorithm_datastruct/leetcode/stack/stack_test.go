@@ -128,6 +128,19 @@ func max(a, b int) int {
 
 }
 
+// leetcode 921
+func minAddToMakeValid(s string) int {
+	stack := make([]rune, 0)
+	for _, p := range s {
+		// 如果有匹配的话，就弹出
+		if p == ')' && len(stack) > 0 && stack[len(stack)-1] == '(' {
+			stack = stack[:len(stack)-1]
+		} else {
+			stack = append(stack, p)
+		}
+	}
+	return len(stack)
+}
 
 
 
