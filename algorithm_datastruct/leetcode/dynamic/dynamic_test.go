@@ -6,7 +6,7 @@ import (
 )
 
 func numTrees(n int) int {
-	dp := make([]int ,n+1)
+	dp := make([]int, n+1)
 	dp[0] = 1
 	for i := 1; i <= n; i++ {
 		for j := 0; j < i; j++ {
@@ -16,21 +16,20 @@ func numTrees(n int) int {
 	return dp[n]
 }
 
-
 // 最短路径问题
 
 func TestShortestPath(t *testing.T) {
-	graph := [][]int {
+	graph := [][]int{
 		{
-			0,10,-1,30,100,
+			0, 10, -1, 30, 100,
 		}, {
-			-1,0,50,-1,10,
+			-1, 0, 50, -1, 10,
 		}, {
-			-1,-1,0,-1,10,
+			-1, -1, 0, -1, 10,
 		}, {
-			-1,-1,20,0,-1,
+			-1, -1, 20, 0, -1,
 		}, {
-			-1,-1,-1,60,0,
+			-1, -1, -1, 60, 0,
 		},
 	}
 	//t.Log(floyd(graph))
@@ -58,7 +57,7 @@ func floyd(graph [][]int) [][]int {
 				if dist[i][k] == -1 || dist[k][j] == -1 {
 					continue
 				}
-				if dist[i][j] == -1 || dist[i][j] > dist[i][k] + dist[k][j] {
+				if dist[i][j] == -1 || dist[i][j] > dist[i][k]+dist[k][j] {
 					dist[i][j] = dist[i][k] + dist[k][j]
 				}
 			}
@@ -80,7 +79,7 @@ func dijkstra(graph [][]int, source int) []int {
 		// 找到有最小距离的点
 		minIndex, minValue := -1, -1 // 最大值
 		for j := 0; j < n; j++ {
-			if finished[j] || dist[j] == -1{ // 如果已经找到最小值的点，或者是无穷大的
+			if finished[j] || dist[j] == -1 { // 如果已经找到最小值的点，或者是无穷大的
 				continue
 			}
 			if minValue == -1 || minValue > dist[j] {
@@ -96,7 +95,7 @@ func dijkstra(graph [][]int, source int) []int {
 			if finished[j] || graph[minIndex][j] == -1 {
 				continue
 			}
-			if dist[j] == -1 || dist[j] > dist[minIndex] + graph[minIndex][j] {
+			if dist[j] == -1 || dist[j] > dist[minIndex]+graph[minIndex][j] {
 				dist[j] = dist[minIndex] + graph[minIndex][j]
 			}
 		}
@@ -106,7 +105,7 @@ func dijkstra(graph [][]int, source int) []int {
 
 // leetcode 133
 type Node struct {
-	Val int
+	Val       int
 	Neighbors []*Node
 }
 
@@ -120,9 +119,9 @@ func cloneGraph(node *Node) *Node {
 	queue = append(queue, node)
 	isVisited[node] = struct{}{}
 	start := &Node{
-		Val:       node.Val,
+		Val: node.Val,
 	}
-	queue1 := make([]*Node ,0)
+	queue1 := make([]*Node, 0)
 	queue1 = append(queue1, start)
 	var cur, newCur *Node
 	for len(queue) != 0 {
@@ -132,7 +131,7 @@ func cloneGraph(node *Node) *Node {
 		queue1 = queue1[1:]
 		for _, neighbor := range cur.Neighbors {
 			newNeighbor := &Node{
-				Val:       neighbor.Val,
+				Val: neighbor.Val,
 			}
 			newCur.Neighbors = append(newCur.Neighbors, newNeighbor)
 			if _, ok := isVisited[neighbor]; !ok {
@@ -146,15 +145,15 @@ func cloneGraph(node *Node) *Node {
 }
 
 func Test_Clone_Graph(t *testing.T) {
-	var n1 = Node{ Val : 1}
-	var n2 = Node{ Val : 2}
-	var n3 = Node{ Val : 3}
-	var n4 = Node{ Val : 4}
+	var n1 = Node{Val: 1}
+	var n2 = Node{Val: 2}
+	var n3 = Node{Val: 3}
+	var n4 = Node{Val: 4}
 
-	n1.Neighbors = []*Node{ &n2, &n4 }
-	n2.Neighbors = []*Node{ &n1, &n3 }
-	n3.Neighbors = []*Node{ &n2, &n4 }
-	n4.Neighbors = []*Node{ &n1, &n3 }
+	n1.Neighbors = []*Node{&n2, &n4}
+	n2.Neighbors = []*Node{&n1, &n3}
+	n3.Neighbors = []*Node{&n2, &n4}
+	n4.Neighbors = []*Node{&n1, &n3}
 
 	r := cloneGraph(&n1)
 	PrintNode(r)
@@ -165,7 +164,7 @@ func Test_Clone_Graph(t *testing.T) {
 
 func PrintNode(node *Node) {
 	fmt.Println("val: ", node.Val)
-	fmt.Println("neighbors: ",len(node.Neighbors))
+	fmt.Println("neighbors: ", len(node.Neighbors))
 	for _, neighbor := range node.Neighbors {
 		fmt.Println(neighbor.Val, " ")
 	}
@@ -181,19 +180,19 @@ func maxSumTwoNoOverlap(nums []int, firstLen int, secondLen int) int {
 
 	for i := firstLen - 1; i < size; i++ {
 		// i是最后一个位置
-		dpf[i+1] = max(accumulate(nums, i - firstLen + 1, firstLen), dpf[i])
+		dpf[i+1] = max(accumulate(nums, i-firstLen+1, firstLen), dpf[i])
 	}
 	for i := secondLen - 1; i < size; i++ {
-		dps[i+1] = max(accumulate(nums, i - secondLen + 1, secondLen), dps[i])
+		dps[i+1] = max(accumulate(nums, i-secondLen+1, secondLen), dps[i])
 	}
 
 	// dp的长度最少也要是firstLen+secondLen
 	for i := firstLen + secondLen - 1; i < size; i++ {
 		// 在0-i之间查早最大的不重叠和：
 		//		固定firstLen，动态使用最大的second
-		sum1 := accumulate(nums,i - firstLen + 1, firstLen) + dps[i-firstLen+1]
+		sum1 := accumulate(nums, i-firstLen+1, firstLen) + dps[i-firstLen+1]
 		//		固定secondLen, 动态使用最大的first
-		sum2 := accumulate(nums,i - secondLen + 1, secondLen) + dpf[i-secondLen+1]
+		sum2 := accumulate(nums, i-secondLen+1, secondLen) + dpf[i-secondLen+1]
 		dp[i+1] = max(sum1, sum2)
 		dp[i+1] = max(dp[i], dp[i+1])
 	}
@@ -203,7 +202,7 @@ func maxSumTwoNoOverlap(nums []int, firstLen int, secondLen int) int {
 func accumulate(nums []int, start, len int) int {
 	sum := 0
 	for i := 0; i < len; i++ {
-		sum += nums[start + i]
+		sum += nums[start+i]
 	}
 	return sum
 }
