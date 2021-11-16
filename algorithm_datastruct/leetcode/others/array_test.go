@@ -1,6 +1,7 @@
 package others
 
 import (
+	"sort"
 	"testing"
 	"time"
 )
@@ -93,4 +94,33 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+
+
+func minSetSize(arr []int) int {
+	// count map
+	countMap := make(map[int]int)
+	for _, val := range arr {
+		countMap[val] += 1
+	}
+	// fetch the count array
+	countList := make([]int, 0)
+	for _ ,v := range countMap {
+		countList = append(countList, v)
+	}
+
+	// sort the count value
+	sort.Sort(sort.Reverse(sort.IntSlice(countList)))
+
+	// acculate the count until bigger than half
+	count := 0
+	target := len(arr) / 2
+	for i, v := range countList {
+		count += v
+		if count >= target{
+			return i+1
+		}
+	}
+	return -1
 }

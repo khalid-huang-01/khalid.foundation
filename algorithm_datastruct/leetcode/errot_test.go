@@ -2,6 +2,7 @@ package leetcode
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -37,6 +38,8 @@ func TestError(t *testing.T)  {
 
 	constructMap["ni"] = "ki"
 	t.Log(constructMap["ni"])
+	delete(constructMap, "ki")
+	t.Log(constructMap["ni"])
 
 }
 
@@ -51,4 +54,15 @@ func TestIoTA(t *testing.T) {
 	fmt.Println(mutexWoken)
 	fmt.Println(mutexWaiterShift)
 	fmt.Println(1 << mutexWaiterShift)
+}
+
+type Student struct {
+	name string
+}
+
+func TestMap(t *testing.T) {
+	a := "mark."
+	b := strings.Split(a, ".")
+	fmt.Println(b)
+	fmt.Println(len(b))
 }
