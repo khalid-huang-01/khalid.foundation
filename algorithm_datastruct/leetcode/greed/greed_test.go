@@ -97,3 +97,30 @@ func TestStrWithout3a3b(t *testing.T) {
 	b := 1
 	t.Log(strWithout3a3b(a, b))
 }
+
+//  leetcode 421
+func findMaximumXOR(nums []int) int {
+	var rsl int
+	var mask int
+	for i := 31; i >= 0; i-- {
+		// 获取当前位置的mask
+		mask |= 1<<i 		
+
+		// 获取所有元素这个位置的前集合
+		set := make(map[int]bool)
+		for _, num := range nums {
+			set[num & mask] = true
+		}
+
+		// 假设这个位置是1 测试成不成立
+		temp := rsl | (1 << i)
+		for key, _ := range set {
+			target := temp ^ key
+			// 如果包含了，表示可以设置为1
+			if set[target] {
+				rsl = temp
+			}
+		}
+	}
+	return rsl
+}

@@ -3,14 +3,10 @@ package main
 import (
 	"bufio"
 	"context"
-	"encoding/pem"
 	"fmt"
 	"github.com/libp2p/go-libp2p"
-	"github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
-	libp2ptls "github.com/libp2p/go-libp2p-tls"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/signal"
@@ -18,34 +14,20 @@ import (
 )
 
 // https://docs.libp2p.io/tutorials/getting-started/go
+// 调用libp2p的库，实现一个一样的自动获取本地IP的函数
 
 func main() {
-	// openssl genrsa -out rsa_private.key 2048
-	certBytes, err := ioutil.ReadFile("./host-acl-with-connectiongater/server.key")
-	if err != nil {
-		log.Println("unable to read client.pem, error: ", err)
-		return
-	}
-	block, _ := pem.Decode(certBytes)
-
-	priv, err := crypto.UnmarshalRsaPrivateKey(block.Bytes)
-	if err != nil {
-		panic(err)
-	}
-
-
 	ctx := context.Background()
 	// 为了更好的知道ping服务，这里禁止了直接使用内置的ping protocol
 	node, err := libp2p.New(ctx, libp2p.Ping(false),
-		libp2p.Identity(priv),
-		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/10001"),
-		//libp2p.NoSecurity)
-		libp2p.Security(libp2ptls.ID, libp2ptls.New))
+		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/10001"))
 
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(node.ID().Pretty())
+	for _, v := range node.Addrs() {
+		fmt.Printf("%s : %v/p2p/%s\n", "Tunnel server addr", v, node.ID().Pretty())
+	}
 
 	node.SetStreamHandler("/echo/1.0.0", func(s network.Stream) {
 		log.Println("listener received new stream")
