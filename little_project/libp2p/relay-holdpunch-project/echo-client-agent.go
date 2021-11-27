@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/libp2p/go-libp2p"
 	circuit "github.com/libp2p/go-libp2p-circuit"
 	"github.com/libp2p/go-libp2p-core/peer"
@@ -14,7 +15,8 @@ func main()  {
 	ctx := context.Background()
 
 	node, err := libp2p.New(ctx, libp2p.Ping(false),
-		libp2p.EnableRelay(circuit.OptActive))
+		libp2p.EnableRelay(circuit.OptActive),
+		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/10003"))
 	if err != nil {
 		panic(err)
 	}
@@ -32,6 +34,11 @@ func main()  {
 	}
 	if err := node.Connect(ctx, *peer); err != nil {
 		panic(err)
+	}
+
+	conns := node.Network().ConnsToPeer(peer.ID)
+	for _, conn := range conns {
+		fmt.Printf("conn: %v\n", conn)
 	}
 
 	s, err := node.NewStream(ctx, peer.ID, "/echo/1.0.0")
@@ -58,4 +65,5 @@ func main()  {
 
 	if err := node.Close(); err != nil {
 		panic(err)
-	}}
+	}
+}

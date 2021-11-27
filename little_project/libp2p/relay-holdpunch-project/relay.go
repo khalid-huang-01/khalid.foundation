@@ -28,5 +28,4 @@ func main() {
 	log.Println("ID: ", host.ID())
 
 	select {}
-
 }
