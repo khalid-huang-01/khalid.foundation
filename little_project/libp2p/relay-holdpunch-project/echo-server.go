@@ -5,8 +5,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/libp2p/go-libp2p"
+	circuit "github.com/libp2p/go-libp2p-circuit"
+	"github.com/libp2p/go-libp2p-core/host"
 	"github.com/libp2p/go-libp2p-core/network"
 	"github.com/libp2p/go-libp2p-core/peer"
+	"github.com/multiformats/go-multiaddr"
 	"log"
 	"os"
 	"os/signal"
@@ -19,7 +22,9 @@ func main() {
 	ctx := context.Background()
 	// 为了更好的知道ping服务，这里禁止了直接使用内置的ping protocol
 	node, err := libp2p.New(ctx, libp2p.Ping(false),
-		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/10001"))
+		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/10002"),
+		libp2p.EnableRelay(circuit.OptActive),
+		libp2p.ForceReachabilityPrivate())
 
 	if err != nil {
 		panic(err)
@@ -35,6 +40,25 @@ func main() {
 			s.Close()
 		}
 	})
+	relayStr := "/ip4/192.168.0.10/tcp/10001/p2p/Qma57EzsaP5FyNpqduXpCgR9xUkWoXkkKoZurTH9rqPBgC"
+	relayAddr, err := multiaddr.NewMultiaddr(relayStr)
+	if err != nil {
+		fmt.Println("1")
+		panic(err)
+	}
+	relayPeer, err := peer.AddrInfoFromP2pAddr(relayAddr)
+	if err != nil {
+		fmt.Println("2")
+		panic(err)
+	}
+	if len(node.Network().ConnsToPeer(relayPeer.ID)) == 0 {
+		err := node.Connect(context.Background(), *relayPeer)
+		if err != nil {
+			fmt.Println("3")
+			panic(err)
+		}
+		fmt.Println(InfoFromHostAndRelay(node, relayPeer))
+	}
 
 
 
@@ -71,4 +95,22 @@ func doEcho(s network.Stream) error {
 	log.Printf("read: %s", str)
 	_, err = s.Write([]byte(str))
 	return err
+}
+
+func InfoFromHostAndRelay(host host.Host, relay *peer.AddrInfo) *peer.AddrInfo {
+	p2pProto := multiaddr.ProtocolWithCode(multiaddr.P_P2P)
+	circuitProto := multiaddr.ProtocolWithCode(multiaddr.P_CIRCUIT)
+	peerAddrInfo := &peer.AddrInfo{
+		ID:    host.ID(),
+		Addrs: host.Addrs(),
+	}
+	for _, v := range relay.Addrs {
+		circuitAddr, err := multiaddr.NewMultiaddr(v.String() + "/" + p2pProto.Name + "/" + relay.ID.String() + "/" + circuitProto.Name)
+		if err != nil {
+			fmt.Printf("New multi addr err: %v\n", err)
+			continue
+		}
+		peerAddrInfo.Addrs = append(peerAddrInfo.Addrs, circuitAddr)
+	}
+	return peerAddrInfo
 }
