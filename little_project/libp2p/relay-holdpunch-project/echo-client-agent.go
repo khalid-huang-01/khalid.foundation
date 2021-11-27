@@ -13,16 +13,13 @@ import (
 func main()  {
 	ctx := context.Background()
 
-	//relayID := ""
 	node, err := libp2p.New(ctx, libp2p.Ping(false),
 		libp2p.EnableRelay(circuit.OptActive))
 	if err != nil {
 		panic(err)
 	}
 
-
-
-	//addrStr := "/ip4/127.0.0.1/tcp/10001/p2p/QmRxm1pzaBhUpvBBNCUF13GpfndbmFzPNqoUjh4SHcxSEH"
+	// 拼凑出一个基于relay访问echo-client-agent的地址，{relay-agent-addr}/p2p-circuit/p2p/{echo-server-agent-id}
 	addrStr := "/ip4/192.168.0.10/tcp/10001/p2p/Qma57EzsaP5FyNpqduXpCgR9xUkWoXkkKoZurTH9rqPBgC/p2p-circuit/p2p/QmQxN4yj146YyXgEfYXD57HTPzmHugnXVuUAHE4HJ9FKzU"
 	//addrStr := "/ip4/192.168.0.10/tcp/10002/p2p/QmQxN4yj146YyXgEfYXD57HTPzmHugnXVuUAHE4HJ9FKzU"
 	addr, err := multiaddr.NewMultiaddr(addrStr)
