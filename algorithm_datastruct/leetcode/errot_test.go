@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 type timeout interface {
 	Timeout() bool
 }
@@ -27,17 +26,15 @@ func (t *TimeoutErr) Timeout() bool {
 	return true
 }
 
-
 var constructMap = make(map[string]string)
 
-func TestError(t *testing.T)  {
+func TestError(t *testing.T) {
 	//err := &TimeoutErr{err: "timeout for 4ms"}
 	//fmt.Println(err)
 	//fmt.Println(IsTimeout(err))
 
 	constructMap["ni"] = "ki"
 	t.Log(constructMap["ni"])
-
 }
 
 const (
@@ -51,4 +48,5 @@ func TestIoTA(t *testing.T) {
 	fmt.Println(mutexWoken)
 	fmt.Println(mutexWaiterShift)
 	fmt.Println(1 << mutexWaiterShift)
+	fmt.Print()
 }

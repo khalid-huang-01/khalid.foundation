@@ -24,7 +24,7 @@ func minOperations(nums []int) int {
 	for allZero == false {
 		allZero = true
 		for i := 0; i < len(nums); i++ {
-			if nums[i] % 2 == 1 {
+			if nums[i]%2 == 1 {
 				count += 1 //op 1
 			}
 			nums[i] /= 2
@@ -35,4 +35,12 @@ func minOperations(nums []int) int {
 		count += 1 // op 2
 	}
 	return count - 1 // 最后的（0,1）或者（0，0）会多算一次
+}
+
+// leetcode 1702
+func maximumBinaryString(binary string) string {
+	count0, count1 := 0, 0
+	for i := 0; i < len(binary); i++ {
+
+	}
 }
