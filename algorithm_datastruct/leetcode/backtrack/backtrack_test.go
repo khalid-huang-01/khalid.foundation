@@ -40,3 +40,38 @@ func TestBacktrack(t *testing.T) {
 	array := []int{2,3,6,7}
 	t.Log(combinationSum(array, 7))
 }
+
+
+
+// leetcode 1035
+// 动态规划，设dp(i, j) = nums[0:i] 和 nums[0:j]之间的最大uncrossed 连线数目
+// dp(i, j) 的转态转移方程如下：
+// if nums[i] == nums[j] then dp(i,j) = dp(i-1,j-1)+1
+// else dp(i,j) = max(dp(i,j-1), dp(i-1,j))
+// 为了方便处理，让dp(i+1,j+1) 对应nums[i]和nums[j]
+func maxUncrossedLines(nums1 []int, nums2 []int) int {
+	size1 := len(nums1)
+	size2 := len(nums2)
+	dp := make([][]int, size1+1)
+	for i := 0; i <= size1; i++ {
+		dp[i] = make([]int, size2+1)
+	}
+
+	for i := 1; i <= size1; i++ {
+		for j := 1; j <= size2; j++ {
+			if nums1[i-1] == nums2[j-1] {
+				dp[i][j] = dp[i-1][j-1]+1
+			} else {
+				dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+			}
+		}
+	}
+	return dp[size1][size2]
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}

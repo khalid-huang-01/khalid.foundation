@@ -142,5 +142,37 @@ func minAddToMakeValid(s string) int {
 	return len(stack)
 }
 
+// leetcode 1614
+type Item struct {
+	char rune
+	level int
+}
+func maxDepth(s string) int {
+	stack := make([]Item, 0)
+	rsl := 0
+	for i := 0; i < len(s); i++ {
+		// 判断符合
+		if s[i] != '(' 	&& s[i] != ')' {
+			continue
+		}
+		level := 0
+		if len(stack) != 0 {
+			level = stack[len(stack)-1].level
+		}
+		if s[i] == '(' {
+			stack = append(stack, Item{
+				char: '(',
+				level: level+1,
+			})
+		} else {
+			if level > rsl {
+				rsl = level
+			}
+			stack = stack[:len(stack)-1]
+		}
+	}
+	return rsl
+}
+
 
 

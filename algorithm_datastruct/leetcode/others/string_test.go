@@ -43,3 +43,54 @@ func canTransform(start string, end string) bool {
 	}
 	return true
 }
+
+// leetcode 1930
+// 这个题目比较直观，用双指针就可以了
+// 固定一个从头开始，然后第二个指针从后面找跟前面等值的，找到了，就看看这俩个指针之间有多少个不同的字符就可以了
+func countPalindromicSubsequence(s string) int {
+	size := len(s)
+	table1 := [26]bool{}
+	count := 0
+	for i := 0; i < size; i++ {
+		if table1[s[i]-'a'] == true {
+			continue
+		}
+		j := size - 1
+		table1[s[i]-'a'] = true
+		for j > i+1 {
+			if s[i] == s[j] {
+				break
+			}
+			j--
+		}
+		tables2 := [26]bool{}
+		for k := i+1; k < j; k++ {
+			if tables2[s[k]-'a'] == true {
+				continue
+			}
+			tables2[s[k]-'a'] = true
+			count += 1
+		}
+	}
+	return count
+}
+
+// leetcode 1529
+// 从左往右遍历，如果不匹配就切换一次
+func minFlips(target string) int {
+	cur := '0'
+	nums := 0
+	for i := 0; i < len(target); i++ {
+		if rune(target[i]) == cur {
+			continue
+		}
+		if cur == '0' {
+			cur = '1'
+		} else {
+			cur = '0'
+		}
+		nums++
+
+	}
+	return nums
+}
