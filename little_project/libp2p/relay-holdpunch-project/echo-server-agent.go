@@ -41,7 +41,8 @@ func main() {
 		}
 	})
 	// server与relay建立连接，方便其他client通过server访问进来（这里的server和client其实不是我们常说的那种，在libp2里面的都是agent，只是agent的功能不大一样）
-	relayStr := "/ip4/192.168.0.10/tcp/10001/p2p/Qma57EzsaP5FyNpqduXpCgR9xUkWoXkkKoZurTH9rqPBgC"
+	//relayStr := "/ip4/192.168.0.10/tcp/10001/p2p/Qma57EzsaP5FyNpqduXpCgR9xUkWoXkkKoZurTH9rqPBgC"
+    relayStr := "/ip4/119.13.84.169/tcp/10001/p2p/QmUJs7ut4U376MxopVf3qTxVAK1AcrLUHDMnr3nJobTsqU"
 	relayAddr, err := multiaddr.NewMultiaddr(relayStr)
 	if err != nil {
 		fmt.Println("1")

@@ -25,7 +25,7 @@ func main()  {
 	fmt.Println(rsl)
 
 	if _, _, localIPv6, err := r.Route(net.IPv6unspecified); err != nil {
-		fmt.Println(err)
+		fmt.Println("---\n", err)
 	} else if localIPv6.IsGlobalUnicast() {
 		rsl = append(rsl, localIPv6)
 	}
@@ -42,6 +42,7 @@ func main()  {
 			}
 		}
 	}
+   fmt.Println("result")
 
 	for _, ip := range rsl {
 		fmt.Println(ip.String())
