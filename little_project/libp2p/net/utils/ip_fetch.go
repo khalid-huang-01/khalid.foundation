@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/libp2p/go-netroute"
 	"net"
+	"strings"
 )
 
 func main()  {
@@ -36,8 +37,13 @@ func main()  {
 	} else {
 		fmt.Println(addrs)
 		for _, addr := range addrs {
-			ip := net.ParseIP(addr.String())
-			if !isIp6LinkLocal(ip) && ip.IsLoopback() {
+			// 127.0.0.1/8 去掉里面的/8
+			ipStr := strings.Split(addr.String(), "/")[0]
+			ip := net.ParseIP(ipStr)
+			//fmt.Println(ip, "   ", addr.String())
+			// if !isIp6LinkLocal(ip) && ip.IsLoopback() {
+			if ip.IsLoopback() {
+			// if !isIp6LinkLocal(ip) {
 				rsl = append(rsl, ip)
 			}
 		}
@@ -45,8 +51,9 @@ func main()  {
    fmt.Println("result")
 
 	for _, ip := range rsl {
-		fmt.Println(ip.String())
+		fmt.Print(ip.String(), "   ")
 	}
+	fmt.Println("")
 
 }
 
