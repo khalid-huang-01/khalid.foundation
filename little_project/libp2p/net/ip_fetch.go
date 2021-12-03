@@ -21,6 +21,7 @@ func main() {
 	// 为了更好的知道ping服务，这里禁止了直接使用内置的ping protocol
 	node, err := libp2p.New(ctx, libp2p.Ping(false),
 		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/10001"))
+		//libp2p.ListenAddrStrings("/ip4/192.168.0.10/tcp/10001"))
 
 	if err != nil {
 		panic(err)
@@ -73,4 +74,8 @@ func doEcho(s network.Stream) error {
 	log.Printf("read: %s", str)
 	_, err = s.Write([]byte(str))
 	return err
+}
+
+func temp() {
+
 }
