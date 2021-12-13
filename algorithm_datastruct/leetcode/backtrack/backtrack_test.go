@@ -1,6 +1,7 @@
 package backtrack
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -74,4 +75,62 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// leetcode 1514
+// eP是做跨path优化的，如果之前的path到这个节点的propobility比这个大的话，其实后续就可以不用走了
+// 使用剪枝加上回溯，也会超时，最大到n = 5000
+func backtrack2(visited []bool, eP []float64, curP float64, maxP *float64, graph [][]float64, cur, end, n int) {
+	// 判断终止条件, 已到达终点
+	if cur == end {
+		if curP > *maxP {
+			*maxP = curP
+		}
+		return
+	}
+	if eP[cur] > curP {
+		return
+	} else {
+		eP[cur] = curP
+	}
+	// 做递归
+	for i := 0; i < n; i++ {
+		if graph[cur][i] == 0 || visited[i] == true {
+			continue
+		}
+		visited[i] = true
+		backtrack2(visited, eP, curP * graph[cur][i], maxP, graph, i, end, n)
+		// 回溯
+		visited[i] = false
+	}
+}
+
+func maxProbability1(n int, edges [][]int, succProb []float64, start int, end int) float64 {
+	//简历邻接矩阵，值为0表示不存在连接，否则表示连接的权重
+	graph := make([][]float64, n)
+	for i := 0; i < n; i++ {
+		graph[i] = make([]float64, n)
+	}
+	for i, edge := range edges {
+		graph[edge[0]][edge[1]] = succProb[i]
+		graph[edge[1]][edge[0]] = succProb[i]
+	}
+
+	// 回溯
+	curP, maxP := 1.0, 0.0
+	visited := make([]bool, n)
+	eP := make([]float64, n)
+	visited[start] = true
+	backtrack2(visited,eP, curP, &maxP, graph, start, end, n)
+	return maxP
+}
+
+// 动态规划，也就是 Dijktra 算法
+func maxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
+}
+
+func TestMap(t *testing.T) {
+	graph := make([][]int, 2)
+	graph[0] = append(graph[0], 0)
+	fmt.Println(graph[0])
 }
