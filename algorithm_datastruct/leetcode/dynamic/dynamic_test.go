@@ -213,3 +213,56 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+// leetcode 1514
+// 动态规划，也就是 Dijktra 算法
+type Pair struct {
+	vertex int
+	prob float64
+}
+func maxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
+	// 构建邻接矩阵，就是一个n*n的矩阵，值可以表示权重，用矩阵太大，超过内存，
+	// 使用稀疏的表达方法，也就是邻接表的方式每个节点，接一个列表，列表里面时自己的连接端点的结合
+	graph := make([][]Pair, n)
+	for i, edge := range edges {
+		graph[edge[0]] = append(graph[edge[0]], Pair{vertex: edge[1], prob: succProb[i]})
+		graph[edge[1]] = append(graph[edge[1]], Pair{vertex: edge[0], prob: succProb[i]})
+	}
+
+	// 初始dijkstra参数
+	singleProb := make([]Pair, n)
+	finished := make([]bool, n)
+	copy(singleProb, graph[start])
+	finished[start] = true
+
+	// 迭代更新单源距离表
+	// 动规方程：p[i] = max(p[i], p[j]*p(start, j)) // 这个表示时一个迭代了
+	var maxIndex int
+	var maxPro float64
+	for i := 0; i < n ; i++ {
+		// 查找当前最大pro的endpoint
+		maxPro = 0
+		maxIndex = -1
+		for j := 0; j < len(); j++ {
+			if maxPro == 0 || (!finished[j] && maxPro < singleProb[j]) {
+				maxPro = singleProb[j]
+				maxIndex = j
+			}
+		}
+
+		if maxIndex == -1 || maxIndex == end {
+			break
+		}
+		finished[maxIndex] = true
+
+		// 基于这个endpoint来松弛其他的endpoint
+		for j := 0; j < n ; j++ {
+			if !finished[j] && singleProb[j] < singleProb[maxIndex] * graph[maxIndex][j] {
+				singleProb[j] = singleProb[maxIndex] * graph[maxIndex][j]
+			}
+		}
+	}
+
+	// 返回结果
+	return singleProb[end]
+}
