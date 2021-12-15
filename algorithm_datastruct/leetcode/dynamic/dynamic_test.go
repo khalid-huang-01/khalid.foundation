@@ -216,23 +216,26 @@ func max(a, b int) int {
 
 // leetcode 1514
 // 动态规划，也就是 Dijktra 算法
-type Pair struct {
-	vertex int
-	prob float64
-}
+// 如何使用链接表实现dijstriac
+// 算法没问题，在n = 10000 超时了
 func maxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
 	// 构建邻接矩阵，就是一个n*n的矩阵，值可以表示权重，用矩阵太大，超过内存，
 	// 使用稀疏的表达方法，也就是邻接表的方式每个节点，接一个列表，列表里面时自己的连接端点的结合
-	graph := make([][]Pair, n)
+	graph := make([]map[int]float64, n)
+	for i := 0; i < n; i++ {
+		graph[i] = make(map[int]float64)
+	}
 	for i, edge := range edges {
-		graph[edge[0]] = append(graph[edge[0]], Pair{vertex: edge[1], prob: succProb[i]})
-		graph[edge[1]] = append(graph[edge[1]], Pair{vertex: edge[0], prob: succProb[i]})
+		graph[edge[0]][edge[1]] = succProb[i]
+		graph[edge[1]][edge[0]] = succProb[i]
 	}
 
 	// 初始dijkstra参数
-	singleProb := make([]Pair, n)
+	singleProb := make([]float64, n)
 	finished := make([]bool, n)
-	copy(singleProb, graph[start])
+	for vertex, weight := range graph[start] {
+		singleProb[vertex] = weight
+	}
 	finished[start] = true
 
 	// 迭代更新单源距离表
@@ -243,13 +246,15 @@ func maxProbability(n int, edges [][]int, succProb []float64, start int, end int
 		// 查找当前最大pro的endpoint
 		maxPro = 0
 		maxIndex = -1
-		for j := 0; j < len(); j++ {
-			if maxPro == 0 || (!finished[j] && maxPro < singleProb[j]) {
+		// 这一块需要修改为优先队列，才能过估计
+		for j := 0; j < n; j++ {
+			if !finished[j] && (maxPro == 0 || maxPro < singleProb[j]) {
 				maxPro = singleProb[j]
 				maxIndex = j
 			}
 		}
 
+		// fmt.Println(maxIndex)
 		if maxIndex == -1 || maxIndex == end {
 			break
 		}
@@ -261,6 +266,8 @@ func maxProbability(n int, edges [][]int, succProb []float64, start int, end int
 				singleProb[j] = singleProb[maxIndex] * graph[maxIndex][j]
 			}
 		}
+
+		// fmt.Println(singleProb[end])
 	}
 
 	// 返回结果
