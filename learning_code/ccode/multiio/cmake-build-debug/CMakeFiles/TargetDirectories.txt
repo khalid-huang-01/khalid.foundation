@@ -1,0 +1,3 @@
+D:/workspace/ccode/multiio/cmake-build-debug/CMakeFiles/multiio.dir
+D:/workspace/ccode/multiio/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/workspace/ccode/multiio/cmake-build-debug/CMakeFiles/rebuild_cache.dir
