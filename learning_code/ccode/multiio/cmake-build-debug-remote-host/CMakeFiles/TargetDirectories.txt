@@ -1,0 +1,3 @@
+/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles/rebuild_cache.dir
+/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles/multiio.dir
+/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles/edit_cache.dir

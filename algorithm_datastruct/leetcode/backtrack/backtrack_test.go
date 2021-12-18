@@ -126,9 +126,7 @@ func maxProbability1(n int, edges [][]int, succProb []float64, start int, end in
 	return maxP
 }
 
-// 动态规划，也就是 Dijktra 算法
-func maxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
-}
+
 
 func TestMap(t *testing.T) {
 	graph := make([][]int, 2)

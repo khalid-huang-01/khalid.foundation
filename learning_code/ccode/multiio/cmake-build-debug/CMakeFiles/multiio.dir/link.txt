@@ -1,0 +1,3 @@
+"D:\programe-software\CLion 2021.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\multiio.dir/objects.a
+D:\programe-software\MinGW-64\mingw64\bin\ar.exe cr CMakeFiles\multiio.dir/objects.a @CMakeFiles\multiio.dir\objects1.rsp
+D:\programe-software\MinGW-64\mingw64\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\multiio.dir/objects.a -Wl,--no-whole-archive -o multiio.exe -Wl,--out-implib,libmultiio.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\multiio.dir\linklibs.rsp

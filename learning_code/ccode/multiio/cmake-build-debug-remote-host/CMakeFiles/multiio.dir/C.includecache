@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/root/workspace/ccode/multiio/server.c
+stdio.h
+-
+arpa/inet.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+
