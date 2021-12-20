@@ -2,7 +2,6 @@ package backtrack
 
 import (
 	"fmt"
-	"strings"
 	"testing"
 )
 
