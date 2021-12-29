@@ -1,6 +1,7 @@
 package dynamic
 
 import (
+	"container/heap"
 	"fmt"
 	"testing"
 )
@@ -216,9 +217,9 @@ func max(a, b int) int {
 
 // leetcode 1514
 // 动态规划，也就是 Dijktra 算法
-// 如何使用链接表实现dijstriac
+// dijkstra + 邻接表 （不可用矩阵）
 // 算法没问题，在n = 10000 超时了
-func maxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
+func maxProbability1(n int, edges [][]int, succProb []float64, start int, end int) float64 {
 	// 构建邻接矩阵，就是一个n*n的矩阵，值可以表示权重，用矩阵太大，超过内存，
 	// 使用稀疏的表达方法，也就是邻接表的方式每个节点，接一个列表，列表里面时自己的连接端点的结合
 	graph := make([]map[int]float64, n)
@@ -239,7 +240,9 @@ func maxProbability(n int, edges [][]int, succProb []float64, start int, end int
 	finished[start] = true
 
 	// 迭代更新单源距离表
-	// 动规方程：p[i] = max(p[i], p[j]*p(start, j)) // 这个表示时一个迭代了
+	// 动规方程：p[i] = max(p[i], p[j]*graph(j, i)) // 这个表示时一个迭代了
+	//      p[i]表示start到i的最大概率
+	//		start节点到i的最大概率是：等于自己本身当前的值与start到j的概率与j到i的概率积；就是先到start到j，然后从j到i
 	var maxIndex int
 	var maxPro float64
 	for i := 0; i < n ; i++ {
@@ -273,3 +276,117 @@ func maxProbability(n int, edges [][]int, succProb []float64, start int, end int
 	// 返回结果
 	return singleProb[end]
 }
+
+// https://blog.csdn.net/Ratina/article/details/86774613
+// leetcode 1514
+// Dijkstra + 优先队列优化
+// 动规方程：p[i] = max(p[i], p[j]*graph(j, i)) // 这个表示时一个迭代了
+//      p[i]表示start到i的最大概率
+//		start节点到i的最大概率是：等于自己本身当前的值与start到j的概率与j到i的概率积；就是先到start到j，然后从j到i
+func maxProbability(n int, edges [][]int, succProb []float64, start int, end int) float64 {
+	// 稀疏，构建邻接表
+	graph := make([]map[int]float64, n)// 第一个map是节点，每个节点对于一个map，map是一个连接节点和概率的kv
+	for i := 0; i < n; i++ {
+		graph[i] = make(map[int]float64, 0)
+	}
+
+	for i, edge := range edges {
+		graph[edge[0]][edge[1]] = succProb[i]
+		graph[edge[1]][edge[0]] = succProb[i]
+	}
+
+	// 初始化dijkstra参数
+	h := &Infos{
+		Info{
+			node: start,
+			pro:  1,
+		},
+	}
+	heap.Init(h)
+	finished := make([]bool, n)
+
+	// 执行迭代
+	for h.Len() > 0 {
+		cur := heap.Pop(h).(Info)
+
+		if cur.node == end {
+			return cur.pro
+		}
+
+		// 这里不断迭代，会把相同的节点里面，不是大得过滤掉
+		if finished[cur.node] {
+			continue
+		}
+		finished[cur.node] = true
+
+		//p[i] = max(p[i], p[j]*graph(j, i)), 这里不用比较都放入到优先队列里面，通过317行过滤就可以了
+		// 针对cur的边做松弛
+		for neighbor, pro := range graph[cur.node] {
+			if finished[neighbor] {
+				continue
+			}
+			heap.Push(h, Info{
+				node: neighbor,
+				pro: cur.pro * pro,
+			})
+		}
+	}
+	return 0
+}
+
+type Info struct {
+	node int
+	pro float64
+}
+
+type Infos []Info
+func (p *Infos) Push(x interface{}) {
+	*p = append(*p, x.(Info))
+}
+
+
+func (p *Infos) Pop() interface{} {
+	old := *p
+	popped := old[len(old)-1]
+	*p = old[:len(old)-1]
+
+	return popped
+}
+
+func (p Infos) Len() int {
+	return len(p)
+}
+func (p Infos) Less(i, j int) bool {
+	return p[i].pro > p[j].pro
+}
+
+// Swap swaps the elements with indexes i and j.
+func (p Infos) Swap(i, j int) {
+	p[i], p[j] = p[j], p[i]
+}
+
+func TestM(t *testing.T)  {
+	p := Infos{}
+	p = append(p, Info{
+		node: 2,
+		pro:  0.2,
+	})
+	p = append(p, Info{
+		node: 1,
+		pro:  0.1,
+	})
+	p = append(p, Info{
+		node: 4,
+		pro:  0.3,
+	})
+	p = append(p, Info{
+		node: 5,
+		pro:  0.1,
+	})
+
+	heap.Init(&p)
+	temp := heap.Pop(&p).(Info)
+	fmt.Println(temp)
+
+}
+
