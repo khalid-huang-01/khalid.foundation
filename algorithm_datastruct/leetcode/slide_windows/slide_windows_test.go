@@ -114,3 +114,28 @@ func equalSubstring(s string, t string, maxCost int) int {
 	}
 	return rsl
 }
+
+// 双端队列解决
+func maxSlidingWindow(nums []int, k int) []int {
+	var result []int
+	var window []int // 保存下标
+
+	for index, value := range nums {
+		// 维护双端队列的属性
+		// 1. 判断队头是否超过区间（从队头出列）
+		if index >= k && index-window[0] == k {
+			window = window[1:]
+		}
+		// 2. 判断即将入队元素的位置，把比当前数字小的都从尾部出队，通过出队其他元素的方式（从队尾出队）
+		for len(window) > 0 && nums[window[len(window)-1]] < value {
+			window = window[:len(window)-1]
+		}
+		//入队
+		window = append(window, index)
+		//获取当前位置的结果
+		if index >= k-1 {
+			result = append(result, nums[window[0]])
+		}
+	}
+	return result
+}
