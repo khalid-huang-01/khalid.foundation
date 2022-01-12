@@ -1,9 +1,6 @@
 package greed
 
-import (
-	"sort"
-	"testing"
-)
+import "sort"
 
 // leetcode 1833
 func maxIceCream(costs []int, coins int) int {
@@ -43,93 +40,35 @@ func minOperations(nums []int) int {
 // leetcode 1702
 func maximumBinaryString(binary string) string {
 	count0, count1 := 0, 0
-	for i := 0; i < len(binary); i++ {
-
-	}
-}
-
-// leetcode 984
-// 使用贪心的策略，通过不断组合aa 和 一个b，来让a 和 b剩余的长度趋同
-func strWithout3a3b(a int, b int) string {
-	rsl := make([]byte, a+b)
-	first := byte('a')
-	second := byte('b')
-	if a < b {
-		first, second = second, first
-		a, b = b, a
-	}
+	rsl := make([]byte, len(binary))
 	i := 0
-	for a != b && a >= 2 && b >= 1 {
-		rsl[i] = first
-		rsl[i+1] = first
-		rsl[i+2] = second
-		a -= 2
-		b -= 1
-		i += 3
+	j := 0
+	for j < len(binary) && binary[j] == '1' {
+		rsl[i] = '1'
+		j += 1
+		i += 1
 	}
-	// 这里面包含了三个情况：1 经过上上面的处理后剩下的数字是相等的就隔着放； 2 剩下1个或2个a; 3 剩下1 个或2个b
-	for a != 0 || b != 0 {
-		if a != 0 {
-			rsl[i] = first
-			i+=1
-			a -= 1
-		}
-		if b != 0 {
-			rsl[i] = second
-			i+=1
-			b-=1
+	for ; j < len(binary); j++ {
+		if binary[j] == '0' {
+			count0 += 1
+		} else {
+			count1 += 1
 		}
 	}
-	// 把相同的数字没隔一个放一个数字
-	//for a == b && a != 0 {
-	//	rsl[i] = first
-	//	rsl[i+1] = second
-	//	i += 2
-	//	a -= 1
-	//	b -= 1
-	//}
-	// 如果不是相同的话，就把剩下的数字都放入
-	//for ;a != 0;a-=1 {
-	//	rsl[i] = first
-	//	i += 1
-	//}
-	//for ;b != 0;b-=1 {
-	//	rsl[i] = second
-	//	i += 1
-	//}
+
+	for count0 > 1 {
+		rsl[i] = '1'
+		i += 1
+		count0 -= 1
+	}
+	if count0 == 1 {
+		rsl[i] = '0'
+		i += 1
+	}
+	for count1 > 0 {
+		rsl[i] = '1'
+		i += 1
+		count1 -= 1
+	}
 	return string(rsl)
 }
-
-func TestStrWithout3a3b(t *testing.T) {
-	a := 4
-	b := 1
-	t.Log(strWithout3a3b(a, b))
-}
-
-//  leetcode 421
-func findMaximumXOR(nums []int) int {
-	var rsl int
-	var mask int
-	for i := 31; i >= 0; i-- {
-		// 获取当前位置的mask
-		mask |= 1<<i 		
-
-		// 获取所有元素这个位置的前集合
-		set := make(map[int]bool)
-		for _, num := range nums {
-			set[num & mask] = true
-		}
-
-		// 假设这个位置是1 测试成不成立
-		temp := rsl | (1 << i)
-		for key, _ := range set {
-			target := temp ^ key
-			// 如果包含了，表示可以设置为1
-			if set[target] {
-				rsl = temp
-			}
-		}
-	}
-	return rsl
-}
->>>>>>> fe172aefa6156ca5315526a07ea292cf982afa3c
