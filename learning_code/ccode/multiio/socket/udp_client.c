@@ -32,7 +32,6 @@ int main(int argc, char* argv[])
     len = sizeof(struct sockaddr_in);
 
     while(1){
-
         //2.sendto
         memset(sendbuf, 0, sizeof(sendbuf));
         fgets(sendbuf,128,stdin);

@@ -123,32 +123,32 @@ multiio/fast:
 	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/build
 .PHONY : multiio/fast
 
-server.o: server.c.o
+epoll/server.o: epoll/server.c.o
 
-.PHONY : server.o
+.PHONY : epoll/server.o
 
 # target to build an object file
-server.c.o:
-	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/server.c.o
-.PHONY : server.c.o
+epoll/server.c.o:
+	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/epoll/server.c.o
+.PHONY : epoll/server.c.o
 
-server.i: server.c.i
+epoll/server.i: epoll/server.c.i
 
-.PHONY : server.i
+.PHONY : epoll/server.i
 
 # target to preprocess a source file
-server.c.i:
-	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/server.c.i
-.PHONY : server.c.i
+epoll/server.c.i:
+	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/epoll/server.c.i
+.PHONY : epoll/server.c.i
 
-server.s: server.c.s
+epoll/server.s: epoll/server.c.s
 
-.PHONY : server.s
+.PHONY : epoll/server.s
 
 # target to generate assembly for a file
-server.c.s:
-	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/server.c.s
-.PHONY : server.c.s
+epoll/server.c.s:
+	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/epoll/server.c.s
+.PHONY : epoll/server.c.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... multiio"
 	@echo "... edit_cache"
-	@echo "... server.o"
-	@echo "... server.i"
-	@echo "... server.s"
+	@echo "... epoll/server.o"
+	@echo "... epoll/server.i"
+	@echo "... epoll/server.s"
 .PHONY : help
 
 

@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/multiio.dir/server.c.o"
+  "CMakeFiles/multiio.dir/epoll/server.c.o"
   "multiio.pdb"
   "multiio"
 )

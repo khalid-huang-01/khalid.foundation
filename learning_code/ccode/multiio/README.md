@@ -12,5 +12,3 @@ yu@ubuntu:~/qtProjects/echo_selectserv$ ./client 127.0.0.1 8899
 
 ### 连接
 https://blog.csdn.net/y396397735/article/details/55004775
-
-### tst

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/root/workspace/ccode/multiio/server.c" "/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles/multiio.dir/server.c.o"
+  "/root/workspace/ccode/multiio/epoll/server.c" "/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles/multiio.dir/epoll/server.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -57,38 +57,38 @@ include CMakeFiles/multiio.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/multiio.dir/flags.make
 
-CMakeFiles/multiio.dir/server.c.o: CMakeFiles/multiio.dir/flags.make
-CMakeFiles/multiio.dir/server.c.o: ../server.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/multiio.dir/server.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/multiio.dir/server.c.o   -c /root/workspace/ccode/multiio/server.c
+CMakeFiles/multiio.dir/epoll/server.c.o: CMakeFiles/multiio.dir/flags.make
+CMakeFiles/multiio.dir/epoll/server.c.o: ../epoll/server.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/multiio.dir/epoll/server.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/multiio.dir/epoll/server.c.o   -c /root/workspace/ccode/multiio/epoll/server.c
 
-CMakeFiles/multiio.dir/server.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/multiio.dir/server.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/workspace/ccode/multiio/server.c > CMakeFiles/multiio.dir/server.c.i
+CMakeFiles/multiio.dir/epoll/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/multiio.dir/epoll/server.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /root/workspace/ccode/multiio/epoll/server.c > CMakeFiles/multiio.dir/epoll/server.c.i
 
-CMakeFiles/multiio.dir/server.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/multiio.dir/server.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/workspace/ccode/multiio/server.c -o CMakeFiles/multiio.dir/server.c.s
+CMakeFiles/multiio.dir/epoll/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/multiio.dir/epoll/server.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /root/workspace/ccode/multiio/epoll/server.c -o CMakeFiles/multiio.dir/epoll/server.c.s
 
-CMakeFiles/multiio.dir/server.c.o.requires:
+CMakeFiles/multiio.dir/epoll/server.c.o.requires:
 
-.PHONY : CMakeFiles/multiio.dir/server.c.o.requires
+.PHONY : CMakeFiles/multiio.dir/epoll/server.c.o.requires
 
-CMakeFiles/multiio.dir/server.c.o.provides: CMakeFiles/multiio.dir/server.c.o.requires
-	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/server.c.o.provides.build
-.PHONY : CMakeFiles/multiio.dir/server.c.o.provides
+CMakeFiles/multiio.dir/epoll/server.c.o.provides: CMakeFiles/multiio.dir/epoll/server.c.o.requires
+	$(MAKE) -f CMakeFiles/multiio.dir/build.make CMakeFiles/multiio.dir/epoll/server.c.o.provides.build
+.PHONY : CMakeFiles/multiio.dir/epoll/server.c.o.provides
 
-CMakeFiles/multiio.dir/server.c.o.provides.build: CMakeFiles/multiio.dir/server.c.o
+CMakeFiles/multiio.dir/epoll/server.c.o.provides.build: CMakeFiles/multiio.dir/epoll/server.c.o
 
 
 # Object files for target multiio
 multiio_OBJECTS = \
-"CMakeFiles/multiio.dir/server.c.o"
+"CMakeFiles/multiio.dir/epoll/server.c.o"
 
 # External object files for target multiio
 multiio_EXTERNAL_OBJECTS =
 
-multiio: CMakeFiles/multiio.dir/server.c.o
+multiio: CMakeFiles/multiio.dir/epoll/server.c.o
 multiio: CMakeFiles/multiio.dir/build.make
 multiio: CMakeFiles/multiio.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/workspace/ccode/multiio/cmake-build-debug-remote-host/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable multiio"
@@ -99,7 +99,7 @@ CMakeFiles/multiio.dir/build: multiio
 
 .PHONY : CMakeFiles/multiio.dir/build
 
-CMakeFiles/multiio.dir/requires: CMakeFiles/multiio.dir/server.c.o.requires
+CMakeFiles/multiio.dir/requires: CMakeFiles/multiio.dir/epoll/server.c.o.requires
 
 .PHONY : CMakeFiles/multiio.dir/requires
 
