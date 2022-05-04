@@ -2,7 +2,6 @@ package leetcode
 
 import (
 	"fmt"
-	"strings"
 	"testing"
 )
 
@@ -59,9 +58,6 @@ type Student struct {
 }
 
 func TestMap(t *testing.T) {
-	a := "mark."
-	b := strings.Split(a, ".")
-	fmt.Println(b)
-	fmt.Println(len(b))
->>>>>>> fe172aefa6156ca5315526a07ea292cf982afa3c
+	size := 3
+	var tmp [size][size]int
 }

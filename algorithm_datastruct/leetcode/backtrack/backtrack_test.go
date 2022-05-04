@@ -132,3 +132,34 @@ func TestMap(t *testing.T) {
 	graph[0] = append(graph[0], 0)
 	fmt.Println(graph[0])
 }
+
+// leetcode 46
+func permute(nums []int) [][]int {
+	rsl := make([][]int, 0)
+	chosen := make([]int, 0)
+	visited := make([]bool, len(nums))
+	backtrack3(chosen, nums, visited, &rsl)
+	return rsl
+}
+
+func backtrack3(chosen, nums []int,visited []bool, rsl *[][]int) {
+	if len(chosen) == len(nums) {
+		tmp := make([]int, len(nums))
+		copy(tmp, chosen)
+		*rsl = append(*rsl, tmp)
+		return
+	}
+
+	for i := 0; i < len(nums); i++ {
+		if visited[i] == true {
+			continue
+		}
+
+		chosen = append(chosen, nums[i])
+		visited[i] = true
+		backtrack3(chosen, nums, visited, rsl)
+		visited[i] = false
+		chosen = chosen[:len(chosen)-1]
+	}
+
+}

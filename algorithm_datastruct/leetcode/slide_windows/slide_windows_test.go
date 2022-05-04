@@ -1,6 +1,10 @@
 package slide_windows
 
-import "math"
+import (
+	"fmt"
+	"math"
+	"testing"
+)
 
 // leetcode 209
 func minSubArrayLen(target int, nums []int) int {
@@ -26,6 +30,67 @@ func minSubArrayLen(target int, nums []int) int {
 		ans = 0
 	}
 	return ans
+}
+
+func minSubArrayLen1(target int, nums []int) int {
+	right, left, curSum := 0, 0, 0
+	size := len(nums)
+	ans := math.MaxInt64
+	for right < size {
+		// 加入right
+		curSum += nums[right]
+
+		// 维护条件，并更新结果
+		for curSum >= target {
+			if ans > right - left + 1 {
+				ans = right - left + 1
+			}
+			curSum -= nums[left]
+			left += 1
+		}
+		// 移动right
+		right += 1
+	}
+	return ans
+}
+
+// leetcode 340
+func lengthOfLongestSubstringKDistinct(s string, k int) int {
+	count := make(map[byte]int, 26)
+	left, right := 0, 0
+	size := len(s)
+	ans := 0
+	for right < size {
+		count[s[right]] += 1
+		for countCharacters(count) > k {
+			count[s[left]] -= 1
+			left += 1
+		}
+		if countCharacters(count) == k && ans < right - left + 1{
+			ans = right - left + 1
+		}
+		right += 1
+	}
+	return ans
+}
+
+
+
+func countCharacters(countMap map[byte]int) int {
+	count := 0
+	for _, v := range countMap {
+		if v > 0 {
+			count += 1
+		}
+	}
+	return count
+}
+
+func TestLengthOfLongestSubstringKDistinct(t *testing.T) {
+	s := "aa"
+	k := 1
+	count := lengthOfLongestSubstringKDistinct(s, k)
+	fmt.Println(count)
 }
 
 // leedcode 3

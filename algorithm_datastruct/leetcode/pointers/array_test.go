@@ -1,8 +1,56 @@
 package pointers
 
 import (
+	"sort"
 	"testing"
 )
+
+// leetcode 15
+// 这个题目是求三个数，所以我们可以定一个数，然后使用异向双指针找另外两个数字；
+// 这个遍历第一个数字的所有可能情况就可以了
+func threeSum(nums []int) [][]int {
+	ans := make([][]int, 0)
+	size,targetSum := len(nums), 0
+	left, right := 0, 0
+	sort.Ints(nums)
+	for i := 0; i < size - 2; i++ {
+		targetSum = -nums[i]
+		left = i + 1
+		right = size - 1
+		for left < right {
+			if nums[left] + nums[right] == targetSum {
+				ans = append(ans, []int{nums[i], nums[left], nums[right]})
+				// fmt.Println(nums[i], " ", nums[left], " ", nums[right])
+				left += 1
+				right -= 1
+				// 不能包含相同的组合，把left与right前进到与已经计算过的不一样的数字
+				for left < right && nums[left] == nums[left-1] {
+					left += 1
+				}
+				for left < right && nums[right] == nums[right+1] {
+					right -= 1
+				}
+			} else if nums[left] + nums[right] < targetSum {
+				left += 1
+				for left < right && nums[left] == nums[left-1] {
+					left += 1
+				}
+			} else {
+				right -= 1
+				for left < right && nums[right] == nums[right+1] {
+					right -= 1
+				}
+			}
+		}
+		// 相同数字过滤掉，只算一次
+		for i < size - 2 && nums[i+1] == nums[i] {
+			i+=1
+		}
+	}
+	return ans
+}
+
+
 
 // 使用双指针来做
 // leetcode 88
@@ -100,6 +148,60 @@ func reverseKGroup(head *ListNode, k int) *ListNode {
 	tail.Next = reverseKGroup(next, k)
 	head = pre // 返回本段的头
 	return head
+}
+
+func pairWithTargetSum(arr []int, target int) (int, int) {
+	left, right := 0, len(arr)-1
+	for left < right {
+		if arr[left] + arr[right] > target {
+			right -= 1
+		} else if arr[left] + arr[right] < target {
+			left += 1
+		} else {
+			break
+		}
+	}
+	if arr[left] + arr[right] == target {
+		return left, right
+	}
+	return -1, -1
+}
+
+// leetcode 26
+// 用同向的快慢指针，left保持左边都是不重复的，如果发现nums[left] != nums[right]，就把nums[right]移动到left右边一个
+func removeDuplicates(nums []int) int {
+	left, right := 0, 0
+	size := len(nums)
+	for right < size {
+		if nums[left] == nums[right] {
+			right += 1
+			continue
+		}
+		nums[left+1] = nums[right]
+		left += 1
+	}
+	return left + 1
+}
+
+// leetcode 977
+func sortedSquares(nums []int) []int {
+	size := len(nums)
+	ans := make([]int, size)
+	left, right, ansIndex := 0, size-1, size - 1
+	leftSquare, rightSquare := 0, 0
+	for left < right {
+		leftSquare = nums[left] * nums[left]
+		rightSquare = nums[right] * nums[right]
+		if leftSquare > rightSquare {
+			ans[ansIndex] = leftSquare
+			left += 1
+		} else {
+			ans[ansIndex] = rightSquare
+			right -= 1
+		}
+		ansIndex -= 1
+	}
+	return ans
 }
 
 func TestMerge1(t *testing.T) {
