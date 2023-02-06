@@ -7,9 +7,9 @@ require (
 	github.com/gorilla/mux v1.7.3
 	github.com/kubeedge/kubeedge v1.6.2
 	github.com/pkg/errors v0.9.1
-	k8s.io/apimachinery v0.19.10
-	k8s.io/client-go v0.19.10
-	k8s.io/klog/v2 v2.2.0
+	k8s.io/apimachinery v0.20.0
+	k8s.io/client-go v0.20.0
+	k8s.io/klog/v2 v2.4.0
 )
 
 replace (
