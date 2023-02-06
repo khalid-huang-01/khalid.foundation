@@ -98,7 +98,7 @@ github.com/go-mesh/openlogging
 github.com/gogo/protobuf/gogoproto
 github.com/gogo/protobuf/proto
 github.com/gogo/protobuf/protoc-gen-gogo/descriptor
-# github.com/golang/protobuf v1.4.2
+# github.com/golang/protobuf v1.4.3
 github.com/golang/protobuf/proto
 # github.com/google/gopacket v1.1.19
 github.com/google/gopacket/routing
@@ -131,6 +131,7 @@ github.com/ipfs/go-ds-badger
 # github.com/ipfs/go-ipfs-util v0.0.2
 github.com/ipfs/go-ipfs-util
 # github.com/ipfs/go-log v1.0.5
+## explicit
 github.com/ipfs/go-log
 github.com/ipfs/go-log/tracer
 github.com/ipfs/go-log/tracer/wire
@@ -212,10 +213,7 @@ github.com/libp2p/go-libp2p-core/sec/insecure/pb
 github.com/libp2p/go-libp2p-core/test
 github.com/libp2p/go-libp2p-core/transport
 # github.com/libp2p/go-libp2p-discovery v0.5.0
-## explicit
 github.com/libp2p/go-libp2p-discovery
-# github.com/libp2p/go-libp2p-kad-dht v0.12.2
-## explicit
 # github.com/libp2p/go-libp2p-loggables v0.1.0
 github.com/libp2p/go-libp2p-loggables
 # github.com/libp2p/go-libp2p-mplex v0.4.1
@@ -256,6 +254,7 @@ github.com/libp2p/go-msgio/protoio
 # github.com/libp2p/go-nat v0.0.5
 github.com/libp2p/go-nat
 # github.com/libp2p/go-netroute v0.1.6
+## explicit
 github.com/libp2p/go-netroute
 # github.com/libp2p/go-openssl v0.0.7
 github.com/libp2p/go-openssl
@@ -303,6 +302,7 @@ github.com/multiformats/go-multiaddr-net
 # github.com/multiformats/go-multibase v0.0.3
 github.com/multiformats/go-multibase
 # github.com/multiformats/go-multihash v0.0.15
+## explicit
 github.com/multiformats/go-multihash
 github.com/multiformats/go-multihash/core
 github.com/multiformats/go-multihash/register/all
@@ -413,7 +413,7 @@ golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-# google.golang.org/protobuf v1.24.0
+# google.golang.org/protobuf v1.25.0
 google.golang.org/protobuf/encoding/prototext
 google.golang.org/protobuf/encoding/protowire
 google.golang.org/protobuf/internal/descfmt
@@ -424,12 +424,11 @@ google.golang.org/protobuf/internal/encoding/messageset
 google.golang.org/protobuf/internal/encoding/tag
 google.golang.org/protobuf/internal/encoding/text
 google.golang.org/protobuf/internal/errors
-google.golang.org/protobuf/internal/fieldnum
 google.golang.org/protobuf/internal/fieldsort
 google.golang.org/protobuf/internal/filedesc
 google.golang.org/protobuf/internal/filetype
 google.golang.org/protobuf/internal/flags
-google.golang.org/protobuf/internal/genname
+google.golang.org/protobuf/internal/genid
 google.golang.org/protobuf/internal/impl
 google.golang.org/protobuf/internal/mapsort
 google.golang.org/protobuf/internal/pragma
@@ -445,14 +444,14 @@ google.golang.org/protobuf/runtime/protoimpl
 gopkg.in/alecthomas/kingpin.v2
 # gopkg.in/yaml.v2 v2.3.0
 gopkg.in/yaml.v2
-# k8s.io/apimachinery v0.19.10
+# k8s.io/apimachinery v0.20.0
 ## explicit
 k8s.io/apimachinery/pkg/util/net
 k8s.io/apimachinery/pkg/util/sets
-# k8s.io/client-go v0.19.10
+# k8s.io/client-go v0.20.0
 ## explicit
 k8s.io/client-go/util/cert
 k8s.io/client-go/util/keyutil
-# k8s.io/klog/v2 v2.2.0
+# k8s.io/klog/v2 v2.4.0
 ## explicit
 k8s.io/klog/v2
