@@ -4,15 +4,20 @@ github.com/btcsuite/btcd/btcec
 github.com/davidlazar/go-crypto/salsa20
 # github.com/flynn/noise v0.0.0-20180327030543-2492fe189ae6
 github.com/flynn/noise
-# github.com/go-chassis/go-archaius v0.20.0
-## explicit
-# github.com/go-chassis/go-chassis v1.7.1
-## explicit
 # github.com/gogo/protobuf v1.3.2
+## explicit
 github.com/gogo/protobuf/proto
+# github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e
+## explicit
+# github.com/golang/protobuf v1.4.3
+## explicit
+# github.com/google/go-cmp v0.5.2
+## explicit
 # github.com/google/gopacket v1.1.18
+## explicit
 github.com/google/gopacket/routing
 # github.com/google/uuid v1.2.0
+## explicit
 github.com/google/uuid
 # github.com/gorilla/websocket v1.4.2
 github.com/gorilla/websocket
@@ -29,10 +34,6 @@ github.com/huin/goupnp/soap
 github.com/huin/goupnp/ssdp
 # github.com/ipfs/go-cid v0.0.7
 github.com/ipfs/go-cid
-# github.com/ipfs/go-datastore v0.4.5
-## explicit
-# github.com/ipfs/go-ds-badger v0.2.6
-## explicit
 # github.com/ipfs/go-ipfs-util v0.0.2
 github.com/ipfs/go-ipfs-util
 # github.com/ipfs/go-log v1.0.4
@@ -41,6 +42,7 @@ github.com/ipfs/go-log/tracer
 github.com/ipfs/go-log/tracer/wire
 github.com/ipfs/go-log/writer
 # github.com/ipfs/go-log/v2 v2.1.3
+## explicit
 github.com/ipfs/go-log/v2
 # github.com/jackpal/go-nat-pmp v1.0.2
 github.com/jackpal/go-nat-pmp
@@ -111,10 +113,7 @@ github.com/libp2p/go-libp2p-core/sec/insecure
 github.com/libp2p/go-libp2p-core/sec/insecure/pb
 github.com/libp2p/go-libp2p-core/transport
 # github.com/libp2p/go-libp2p-discovery v0.5.0
-## explicit
 github.com/libp2p/go-libp2p-discovery
-# github.com/libp2p/go-libp2p-kad-dht v0.11.1
-## explicit
 # github.com/libp2p/go-libp2p-loggables v0.1.0
 github.com/libp2p/go-libp2p-loggables
 # github.com/libp2p/go-libp2p-mplex v0.4.1
@@ -141,8 +140,6 @@ github.com/libp2p/go-libp2p-tls
 github.com/libp2p/go-libp2p-transport-upgrader
 # github.com/libp2p/go-libp2p-yamux v0.5.1
 github.com/libp2p/go-libp2p-yamux
-# github.com/libp2p/go-libp2p/examples v0.0.0-20210531210754-f0d89c2770c7
-## explicit
 # github.com/libp2p/go-maddr-filter v0.1.0
 github.com/libp2p/go-maddr-filter
 # github.com/libp2p/go-mplex v0.3.0
@@ -173,7 +170,6 @@ github.com/libp2p/go-tcp-transport
 # github.com/libp2p/go-ws-transport v0.4.0
 github.com/libp2p/go-ws-transport
 # github.com/libp2p/go-yamux/v2 v2.0.0
-## explicit
 github.com/libp2p/go-yamux/v2
 # github.com/miekg/dns v1.1.31
 github.com/miekg/dns
@@ -212,14 +208,10 @@ github.com/opentracing/opentracing-go/ext
 github.com/opentracing/opentracing-go/log
 # github.com/pkg/errors v0.9.1
 github.com/pkg/errors
-# github.com/prometheus/common v0.2.0
-## explicit
 # github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572
 github.com/spacemonkeygo/spacelog
 # github.com/spaolacci/murmur3 v1.1.0
 github.com/spaolacci/murmur3
-# github.com/wangjia184/sortedset v0.0.0-20160527075905-f5d03557ba30
-## explicit
 # github.com/whyrusleeping/mdns v0.0.0-20190826153040-b9b60ed33aa9
 github.com/whyrusleeping/mdns
 # github.com/whyrusleeping/multiaddr-filter v0.0.0-20160516205228-e903e4adabd7
@@ -244,7 +236,8 @@ go.uber.org/zap/internal/bufferpool
 go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
-# golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
+# golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0
+## explicit
 golang.org/x/crypto/blake2b
 golang.org/x/crypto/blake2s
 golang.org/x/crypto/chacha20
@@ -256,7 +249,10 @@ golang.org/x/crypto/internal/subtle
 golang.org/x/crypto/poly1305
 golang.org/x/crypto/salsa20/salsa
 golang.org/x/crypto/sha3
+# golang.org/x/lint v0.0.0-20200302205851-738671d3881b
+## explicit
 # golang.org/x/net v0.0.0-20201110031124-69a78807bb2b
+## explicit
 golang.org/x/net/bpf
 golang.org/x/net/html
 golang.org/x/net/html/atom
@@ -267,11 +263,13 @@ golang.org/x/net/ipv4
 golang.org/x/net/ipv6
 golang.org/x/net/route
 # golang.org/x/sys v0.0.0-20201112073958-5cba982894dd
+## explicit
 golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/text v0.3.3
+# golang.org/x/text v0.3.4
+## explicit
 golang.org/x/text/encoding
 golang.org/x/text/encoding/charmap
 golang.org/x/text/encoding/htmlindex
@@ -289,9 +287,7 @@ golang.org/x/text/internal/utf8internal
 golang.org/x/text/language
 golang.org/x/text/runes
 golang.org/x/text/transform
-# k8s.io/apimachinery v0.19.10
+# google.golang.org/protobuf v1.25.0
 ## explicit
-# k8s.io/client-go v0.19.10
-## explicit
-# k8s.io/klog/v2 v2.2.0
+# honnef.co/go/tools v0.0.1-2020.1.3
 ## explicit
