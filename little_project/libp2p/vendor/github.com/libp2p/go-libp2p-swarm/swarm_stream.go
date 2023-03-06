@@ -33,7 +33,6 @@ type Stream struct {
 
 func (s *Stream) ID() string {
 	// format: <first 10 chars of peer id>-<global conn ordinal>-<global stream ordinal>
-	fmt.Println("I am swarm stream")
 	return fmt.Sprintf("%s-%d", s.conn.ID(), s.id)
 }
 

@@ -325,10 +325,6 @@ func (h *BasicHost) updateLocalIpAddr() {
 		}
 	}
 
-	fmt.Println("-----", h.filteredInterfaceAddrs)
-	fmt.Println("-----", h.allInterfaceAddrs)
-
-
 	// If netroute failed to get us any interface addresses, use all of
 	// them.
 	if len(h.filteredInterfaceAddrs) == 0 {
@@ -343,7 +339,6 @@ func (h *BasicHost) updateLocalIpAddr() {
 			}
 		}
 	}
-	fmt.Println(h.filteredInterfaceAddrs)
 }
 
 // New constructs and sets up a new *BasicHost with given Network and options.
